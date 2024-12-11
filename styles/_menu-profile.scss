@@ -1,0 +1,60 @@
+@use "variables" as vars;
+
+.menu_and_profile {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    height: 26px;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 4px 3px 3px;
+    transition: hover 3s ease-in-out;
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &:hover {
+      .first_line,
+      .second_line {
+        background-color: vars.$rose200;
+      }
+      p {
+        color: vars.$rose200;
+      }
+    }
+
+    .first_line {
+      height: 1.6px;
+      width: 24px;
+      background-color: vars.$lightRose1;
+    }
+    .second_line {
+      height: 1.6px;
+      width: 24px;
+      background-color: vars.$lightRose1;
+    }
+
+    p {
+      font-size: 8px;
+      line-height: 7.1px;
+    }
+  }
+
+  .profile {
+    font-size: larger;
+    transition: active 3s ease-out;
+
+    &:hover {
+      color: vars.$rose200;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}

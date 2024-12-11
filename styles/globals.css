@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: extrabold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/fonts/Protest_Revolution/ProtestRevolution-Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: Nunito, sans-serif;
+}
+
+.h2-custom-font {
+  font-family: "MyCustomFont", sans-serif;
+}
+
+.h1-custom-font {
+  font-family: "Montserrat", sans-serif;
+}
+
+
