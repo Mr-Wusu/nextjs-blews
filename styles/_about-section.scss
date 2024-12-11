@@ -31,18 +31,26 @@
     position: relative;
     padding: 1rem;
 
-    .swiper-slide {
+    .left-angle,
+    .right-angle {
+      font-size: larger;
       background-color: blue;
+      width: 24px;
+      height: 24px;
+      color: vars.$darkRose1;
+      z-index: 50;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
     }
 
     .left-angle {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background-color: vars.$darkRose1;
-      position: absolute;
-      z-index: 20;
-      top: 50%;
+      left: 10px;
+    }
+
+    .right-angle {
+      right: 10px;
     }
   }
 }
