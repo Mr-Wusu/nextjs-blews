@@ -1,5 +1,19 @@
 @use "variables" as vars;
 
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Mixins
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .about {
   background-color: vars.$lightRose1;
   padding: 3.5rem 1.8rem;
@@ -24,33 +38,42 @@
     }
   }
 
-  .swiper {
-    width: 400px;
-    height: 300px;
-    background-color: vars.$rose200;
-    position: relative;
-    padding: 1rem;
+  .slider {
+    width: 80vw;
+    margin: 1rem auto 0;
+    @include center-flex;
 
-    .left-angle,
-    .right-angle {
-      font-size: larger;
-      background-color: blue;
-      width: 24px;
-      height: 24px;
-      color: vars.$darkRose1;
-      z-index: 50;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
+    .slide {
+      position: relative;
 
-    .left-angle {
-      left: 10px;
-    }
+      .blockQuote {
+        padding: 20px 10px 16px 24px;
+        font-family: Nunito, sans-serif;
+        background-color: vars.$rose300;
+        border-radius: 0.9rem;
+        margin-bottom: 2rem;     
 
-    .right-angle {
-      right: 10px;
+        .quote {
+          font-size: 22px;
+          position: absolute;
+          top: 5px;
+          left: 8px;
+          color: vars.$darkRose2;
+        }
+      }
+      
     }
+    .prev {
+        position: absolute;
+        height: 24px;
+        width: 24px;
+        background-color: vars.$darkRose1;
+        color: vars.$lightRose1;
+        z-index: 5;
+        top: 33.33%;
+        left: -10px;
+        @include center-flex;
+        border-radius: 50%;
+      } 
   }
 }

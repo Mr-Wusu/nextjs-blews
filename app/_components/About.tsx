@@ -1,24 +1,24 @@
 "use client";
 
-import { BiBullseye } from "react-icons/bi";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { FaBullseye, FaQuoteLeft, FaAngleLeft } from "react-icons/fa6";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+
 import { Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useSwiper } from "swiper/react";
+
+
 import styles from "@/styles/components.module.scss";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import testimonies from "@/data/testimonies";
 
 export default function About() {
-  const swiper = useSwiper();
-
+  const swiper = useSwiper()
+  
   return (
     <div className={styles.about}>
       <div className={styles.heading}>
-        <BiBullseye className={styles.bull} />
+        <FaBullseye className={styles.bull} />
         <h3>What we promise you at blews stitches</h3>
       </div>
       <p>
@@ -29,35 +29,27 @@ export default function About() {
         more... Take our clients&lsquo; words also!
       </p>
       <Swiper
-        className={styles.swiper}
-        // install Swiper modules
         modules={[Pagination]}
         pagination={{ clickable: true }}
         spaceBetween={20}
         slidesPerView={1}
-        onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+        className={styles.slider}
       >
         {testimonies.map((testimony, i) => (
-          <SwiperSlide key={i} className={`swiper-slide swiper-${i + 1}`}>
-            {testimony.quote}
+          <SwiperSlide key={i + 1} className={styles.slide}>
+            <blockquote className={styles.blockQuote}>
+              <FaQuoteLeft className={styles.quote} />
+              {testimony.quote}
+            </blockquote>
+            <div></div>
           </SwiperSlide>
         ))}
-        <button
-          className={styles.leftAngle}
-          type="button"
-          onClick={() => swiper.slidePrev()}
-        >
-          <FaAngleLeft />
-        </button>
-        <button
-          className={styles.rightAngle}
-          type="button"
-          onClick={() => swiper.slideNext()}
-        >
-          <FaAngleRight />
-        </button>
       </Swiper>
+      <button className={styles.prev} onClick={() => swiper.slidePrev}>
+        <FaAngleLeft />
+      </button>
     </div>
   );
 }
