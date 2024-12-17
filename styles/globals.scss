@@ -1,4 +1,9 @@
 @use "variables" as vars;
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @tailwind base;
 @tailwind components;
@@ -39,6 +44,13 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.swiper-pagination-bullet {
+  background-color: vars.$darkRose1 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: vars.$rose300 !important;
+}
+
 .comment {
   background-color: vars.$rose300;
   width: 70px;
@@ -49,5 +61,3 @@ body {
   left: 18%;
   z-index: 10;
 }
-
-

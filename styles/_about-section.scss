@@ -98,5 +98,11 @@
     .next {
       right: 0;
     }
+    .swiper-pagination-bullet {
+      background-color: vars.$darkRose1 !important; // Custom background color for pagination bullets
+    }
+    .swiper-pagination-bullet-active {
+      background-color: vars.$rose300 !important; // Custom background color for active pagination bullet
+    }
   }
 }
