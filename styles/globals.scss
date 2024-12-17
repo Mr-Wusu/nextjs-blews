@@ -1,3 +1,5 @@
+@use "variables" as vars;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,6 +37,17 @@ body {
 
 .h1-custom-font {
   font-family: "Montserrat", sans-serif;
+}
+
+.comment {
+  background-color: vars.$rose300;
+  width: 70px;
+  height: 70px;
+  clip-path: polygon(0 0, 100% 0, 100% 74%, 65% 74%, 40% 100%, 44% 75%, 0 75%);
+  position: absolute;
+  top: 27.8%;
+  left: 18%;
+  z-index: 10;
 }
 
 

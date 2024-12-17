@@ -16,7 +16,7 @@
 
 .about {
   background-color: vars.$lightRose1;
-  padding: 3.5rem 1.8rem;
+  padding: 3.5rem 0rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -27,9 +27,11 @@
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
+    padding: 0 1.7rem;
 
     .bull {
       font-size: 24px;
+      color: vars.$darkRose1;
     }
 
     h3 {
@@ -38,42 +40,63 @@
     }
   }
 
+  .about_intro {
+    padding: 0 1.7rem;
+  }
+
   .slider {
-    width: 80vw;
+    max-width: 356px;
     margin: 1rem auto 0;
     @include center-flex;
 
     .slide {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
 
       .blockQuote {
-        padding: 20px 10px 16px 24px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 18px 10px 16px 24px;
         font-family: Nunito, sans-serif;
         background-color: vars.$rose300;
         border-radius: 0.9rem;
-        margin-bottom: 2rem;     
+        z-index: 20;
+        box-shadow: 3px 0px 3px vars.$rose500, -3px 0px 3px vars.$rose500;
 
         .quote {
           font-size: 22px;
           position: absolute;
-          top: 5px;
-          left: 8px;
+          top: 7px;
+          left: 25px;
           color: vars.$darkRose2;
         }
       }
-      
     }
-    .prev {
-        position: absolute;
-        height: 24px;
-        width: 24px;
+
+    .prev,
+    .next {
+      position: absolute;
+      z-index: 70;
+      width: 32px;
+      height: 32px;
+      background-color: vars.$rose100;
+      border-radius: 50%;
+      @include center-flex();
+      top: 51.5%;
+
+      &:hover {
         background-color: vars.$darkRose1;
         color: vars.$lightRose1;
-        z-index: 5;
-        top: 33.33%;
-        left: -10px;
-        @include center-flex;
-        border-radius: 50%;
-      } 
+      }
+    }
+    .prev {
+      left: 0;
+    }
+    .next {
+      right: 0;
+    }
   }
 }

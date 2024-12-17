@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
 import Footer from "./_components/Footer";
 import MenuAndProfile from "./_components/MenuAndProfile";
 

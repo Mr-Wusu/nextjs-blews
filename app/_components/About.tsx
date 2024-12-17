@@ -1,27 +1,45 @@
 "use client";
 
-import { FaBullseye, FaQuoteLeft, FaAngleLeft } from "react-icons/fa6";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-
-import { Pagination } from "swiper/modules";
-
-
+import { FaBullseye, FaQuoteLeft, FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
 import styles from "@/styles/components.module.scss";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import testimonies from "@/data/testimonies";
+import Image from "next/image";
+
+interface Testimony {
+  fullName: string;
+  image: string;
+  alt: string;
+  quote: string;
+  skill: string;
+  link: string;
+}
+
+function trimQuotes(testimonies: Testimony[]): Testimony[] {
+  return testimonies.map((testimony) => {
+    const words = testimony.quote.split(" ");
+    if (words.length > 16) {
+      testimony.quote = words.slice(0, 16).join(" ") + " ...";
+    }
+    return testimony;
+  });
+}
+
+const trimmedTestimonies = trimQuotes(testimonies);
 
 export default function About() {
-  const swiper = useSwiper()
-  
   return (
     <div className={styles.about}>
       <div className={styles.heading}>
         <FaBullseye className={styles.bull} />
         <h3>What we promise you at blews stitches</h3>
       </div>
-      <p>
+      <p className={styles.about_intro}>
         You have come to a place where what you order is what you get. Stay at
         the comfort of your home and get that killer dress tailored for your
         body size and uniqueness. We are keen on the inches - on specificity, on
@@ -29,27 +47,48 @@ export default function About() {
         more... Take our clients&lsquo; words also!
       </p>
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination, Navigation]}
         pagination={{ clickable: true }}
+        navigation={{
+          nextEl: `.${styles.next}`,
+          prevEl: `.${styles.prev}`,
+        }}
         spaceBetween={20}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
         className={styles.slider}
       >
-        {testimonies.map((testimony, i) => (
+        {trimmedTestimonies.map((testimony, i) => (
           <SwiperSlide key={i + 1} className={styles.slide}>
             <blockquote className={styles.blockQuote}>
               <FaQuoteLeft className={styles.quote} />
               {testimony.quote}
             </blockquote>
-            <div></div>
+            <div className="comment" />
+            <div className="flex gap-3 items-center ml-[3rem] mt-[-.5rem]">
+              <div className="relative w-16 h-16 overflow-hidden">
+                <Image
+                  className="object-cover rounded-full"
+                  src={testimony.image}
+                  alt={testimony.alt}
+                  fill
+                />
+              </div>
+              <cite className="flex flex-col">
+                <p className="">{testimony.fullName}</p>
+                <p className="text-sm">{testimony.skill}</p>
+              </cite>
+            </div>
           </SwiperSlide>
         ))}
+        <button type="button" className={styles.prev}>
+          <FaAngleLeft />
+        </button>
+        <button type="button" className={styles.next}>
+          <FaAngleRight />
+        </button>
       </Swiper>
-      <button className={styles.prev} onClick={() => swiper.slidePrev}>
-        <FaAngleLeft />
-      </button>
     </div>
   );
 }
