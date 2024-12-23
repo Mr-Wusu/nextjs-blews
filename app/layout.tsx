@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "@/styles/globals.scss";
+import "@/styles/globals.css";
 import Footer from "./_components/Footer";
 import MenuAndProfile from "./_components/MenuAndProfile";
 
@@ -21,10 +21,12 @@ export default function RootLayout({
   const isAdmin = false;
   return (
     <html lang="en">
-      <body className={``}>
+      <body className="">
         <nav className="justify-between items-center p-3  fixed w-full z-50 flex text-lightRose1">
           <MenuAndProfile />
-          <h2 className="h2-custom-font text-xl ml-[-5rem]">Blews&apos; Stitches</h2>
+          <h2 className="h2-custom-font text-xl ml-[-5rem]">
+            Blews&apos; Stitches
+          </h2>
           {isSignedOut ? <button>Sign In</button> : isAdmin ? admin : users}
         </nav>
         <div className="">{children}</div>

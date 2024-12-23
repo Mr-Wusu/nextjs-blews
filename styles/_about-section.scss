@@ -26,12 +26,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     padding: 0 1.7rem;
 
     .bull {
       font-size: 24px;
-      color: vars.$darkRose1;
+      color: vars.$darkRose2;
     }
 
     h3 {
@@ -65,6 +65,10 @@
         border-radius: 0.9rem;
         z-index: 20;
         box-shadow: 3px 0px 3px vars.$rose500, -3px 0px 3px vars.$rose500;
+        
+        &:hover {
+          cursor: pointer;
+        }
 
         .quote {
           font-size: 22px;
@@ -86,6 +90,8 @@
       border-radius: 50%;
       @include center-flex();
       top: 51.5%;
+      transition-duration: .35s;
+
 
       &:hover {
         background-color: vars.$darkRose1;

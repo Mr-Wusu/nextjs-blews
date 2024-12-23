@@ -1,6 +1,11 @@
 "use client";
 
-import { FaBullseye, FaQuoteLeft, FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import {
+  FaBullseye,
+  FaQuoteLeft,
+  FaAngleLeft,
+  FaAngleRight,
+} from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import styles from "@/styles/components.module.scss";
@@ -37,7 +42,9 @@ export default function About() {
     <div className={styles.about}>
       <div className={styles.heading}>
         <FaBullseye className={styles.bull} />
-        <h3>What we promise you at blews stitches</h3>
+        <h3 className="font-semibold text-darkRose2">
+          Our promise to you at blews stitches
+        </h3>
       </div>
       <p className={styles.about_intro}>
         You have come to a place where what you order is what you get. Stay at
@@ -67,7 +74,7 @@ export default function About() {
             </blockquote>
             <div className="comment" />
             <div className="flex gap-3 items-center ml-[3rem] mt-[-.5rem]">
-              <div className="relative w-16 h-16 overflow-hidden">
+              <div className="relative w-[72px] h-[72px] overflow-hidden">
                 <Image
                   className="object-cover rounded-full"
                   src={testimony.image}
@@ -76,8 +83,8 @@ export default function About() {
                 />
               </div>
               <cite className="flex flex-col">
-                <p className="">{testimony.fullName}</p>
-                <p className="text-sm">{testimony.skill}</p>
+                <p className="text-sm">{testimony.fullName}</p>
+                <p className="text-xs">{testimony.skill}</p>
               </cite>
             </div>
           </SwiperSlide>

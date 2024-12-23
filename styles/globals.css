@@ -1,13 +1,7 @@
-@use "variables" as vars;
-@mixin center-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @font-face {
   font-family: "Montserrat";
@@ -45,14 +39,22 @@ body {
 }
 
 .swiper-pagination-bullet {
-  background-color: vars.$darkRose1 !important;
+  background-color: #881337 !important;
 }
 .swiper-pagination-bullet-active {
-  background-color: vars.$rose300 !important;
+  background-color: #fb7185 !important;
+}
+.hero {
+  height: 450px;
+  width: 100%;
+  position: relative;
+  background: url("/images/appPhotos/photo-8.jpg") no-repeat center center;
+  background-size: cover;
 }
 
+
 .comment {
-  background-color: vars.$rose300;
+  background-color: #fb7185;
   width: 70px;
   height: 70px;
   clip-path: polygon(0 0, 100% 0, 100% 74%, 65% 74%, 40% 100%, 44% 75%, 0 75%);
@@ -60,4 +62,8 @@ body {
   top: 27.8%;
   left: 18%;
   z-index: 10;
+}
+
+.radius {
+  border-radius: .9rem;
 }
