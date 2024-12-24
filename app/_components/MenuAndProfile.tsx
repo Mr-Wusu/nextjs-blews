@@ -34,22 +34,38 @@ export default function MenuAndProfile() {
           </button>
           <ul className="flex flex-col text-lightRose2 text-2xl font-semibold h-max gap-8 tracking-wide">
             <li>
-              <Link onClick={toggleMenu} href="/">
+              <Link
+                className="border-b-[3px] px-1 rounded-[.3rem] border-transparent hover:border-rose-950 hover:text-rose-950 duration-300 transition-all "
+                onClick={toggleMenu}
+                href="/"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link onClick={toggleMenu} href="/about-us">
+              <Link
+                className="border-b-[3px] px-1 rounded-[.3rem] border-transparent hover:border-rose-950 hover:text-rose-950 duration-300 transition-all "
+                onClick={toggleMenu}
+                href="/about-us"
+              >
                 About Us
               </Link>
             </li>
             <li>
-              <Link onClick={toggleMenu} href="/contact-us">
+              <Link
+                className="border-b-[3px] px-1 rounded-[.3rem] border-transparent hover:border-rose-950 hover:text-rose-950 duration-300 transition-all "
+                onClick={toggleMenu}
+                href="/contact-us"
+              >
                 Contact Us
               </Link>
             </li>
             <li>
-              <Link onClick={toggleMenu} href="/measurements">
+              <Link
+                className="border-b-[3px] px-1 rounded-[.3rem] border-transparent hover:border-rose-950 hover:text-rose-950 duration-300 transition-all "
+                onClick={toggleMenu}
+                href="/measurements"
+              >
                 Measurements
               </Link>
             </li>

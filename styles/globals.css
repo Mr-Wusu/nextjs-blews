@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
   font-family: "Montserrat";
   src: url("/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
@@ -52,7 +51,6 @@ body {
   background-size: cover;
 }
 
-
 .comment {
   background-color: #fb7185;
   width: 70px;
@@ -65,5 +63,5 @@ body {
 }
 
 .radius {
-  border-radius: .9rem;
+  border-radius: 0.9rem;
 }
