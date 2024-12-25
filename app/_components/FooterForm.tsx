@@ -11,7 +11,7 @@ export default function FooterForm() {
         <label className="text-sm font-bold tracking-wide ">
           Upload image here:
         </label>
-        <input className="text-sm cursor-pointer" type="file" />
+        <input className="text-sm cursor-pointer w-48" type="file" />
       </div>
       <button
         type="submit"

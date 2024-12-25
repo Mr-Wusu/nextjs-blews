@@ -1,3 +1,3 @@
 export default function Clothes() {
-  return <div className="center min-h-screen">Clothes</div>;
+  return <div className="min-h-screen flex flex-col items-center justify-center">Clothes</div>;
 }

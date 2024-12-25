@@ -45,7 +45,7 @@ export default function Cloth({ cloth }: ClothProps) {
           </div>
           <Link
             className="transition-all bg-rose-400 px-2 py-1 rounded text-sm shadow-sm hover:bg-rose-500"
-            href="/id"
+            href="/clothes/id"
           >
             Sew me
           </Link>
