@@ -1,17 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import styles from "@/styles/components.module.scss";
 import Link from "next/link";
+import ScrollContext from "@/contexts/scrollContext";
 
-interface MenuAndProfileProps {
-  isScrolled: boolean;
-}
-
-export default function MenuAndProfile({ isScrolled }: MenuAndProfileProps) {
+export default function MenuAndProfile() {
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(isScrolled);
+  const { scrolled } = useContext(ScrollContext);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -24,23 +21,23 @@ export default function MenuAndProfile({ isScrolled }: MenuAndProfileProps) {
           className={`${
             styles.first_line
           } h-[1.6px] w-[24px] transition-all duration-300 ${
-            isScrolled ? "bg-darkRose2" : "bg-lightRose2"
+            scrolled ? "bg-darkRose2" : "bg-lightRose2"
           }`}
         />
         <div
           className={`${styles.second_line} h-[1.6px] w-[24px]  ${
-            isScrolled ? "bg-darkRose2" : "bg-lightRose2"
+            scrolled ? "bg-darkRose2" : "bg-lightRose2"
           }`}
         />
         <p
           className={`${styles.menu_p} ${
-            isScrolled ? "text-darkRose2 font-semibold " : "text-lightRose1"
+            scrolled ? "text-darkRose2 font-semibold " : "text-lightRose1"
           }`}
         >
           MENU
         </p>
       </div>
-      <button className={styles.profile}>
+      <button className={`${styles.profile} ${scrolled ? "text-darkRose2" : ""}`}>
         <FaRegUser />
       </button>
 
