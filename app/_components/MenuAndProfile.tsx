@@ -1,12 +1,19 @@
 "use client";
 import { useState, useContext } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { FaRegUser } from "react-icons/fa";
+import { LuMenu } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import styles from "@/styles/components.module.scss";
 import Link from "next/link";
 import ScrollContext from "@/contexts/scrollContext";
 
-export default function MenuAndProfile() {
+interface MenuAndProfileProps {
+  isHomePage: boolean;
+   setIsHomePage: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function MenuAndProfile({ isHomePage, setIsHomePage }: MenuAndProfileProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrolled } = useContext(ScrollContext);
 
@@ -16,29 +23,31 @@ export default function MenuAndProfile() {
 
   return (
     <div className={`${styles.menu_and_profile} `}>
-      <div className={`${styles.menu}`} onClick={toggleMenu}>
-        <div
-          className={`${
-            styles.first_line
-          } h-[1.6px] w-[24px] transition-all duration-300 ${
-            scrolled ? "bg-darkRose2" : "bg-lightRose2"
+      <div className="" onClick={toggleMenu}>
+        <LuMenu
+          className={`text-2xl cursor-pointer ${
+            isHomePage && !scrolled
+              ? "hover:text-rose200 transition-all duration-200"
+              : isHomePage && scrolled
+              ? "hover:text-rose-600 transition-all duration-200"
+              : !isHomePage
+              ? "hover:text-rose-600 transition-all duration-200"
+              : ""
           }`}
         />
-        <div
-          className={`${styles.second_line} h-[1.6px] w-[24px]  ${
-            scrolled ? "bg-darkRose2" : "bg-lightRose2"
-          }`}
-        />
-        <p
-          className={`${styles.menu_p} ${
-            scrolled ? "text-darkRose2 font-semibold " : "text-lightRose1"
-          }`}
-        >
-          MENU
-        </p>
       </div>
-      <button className={`${styles.profile} ${scrolled ? "text-darkRose2" : ""}`}>
-        <FaRegUser />
+      <button>
+        <FaRegUser
+          className={`text-lg ${
+            isHomePage && !scrolled
+              ? "hover:text-rose200 transition-all duration-200"
+              : isHomePage && scrolled
+              ? "hover:text-rose-600 transition-all duration-200"
+              : !isHomePage
+              ? "hover:text-rose-600 transition-all duration-200"
+              : ""
+          }`}
+        />
       </button>
 
       <div
@@ -54,7 +63,10 @@ export default function MenuAndProfile() {
             <li>
               <Link
                 className="border-b-[3px] px-1 rounded-[.3rem] border-transparent hover:border-rose-950 hover:text-rose-950 hover:scale-110 duration-300 transition-all "
-                onClick={toggleMenu}
+                onClick={(prev) => {
+                  setMenuOpen(!prev);
+                  setIsHomePage(true);
+                }}
                 href="/"
               >
                 Home
