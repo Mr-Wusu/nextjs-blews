@@ -1,6 +1,7 @@
 "use client";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+
 import ScrollContext from "@/contexts/scrollContext";
 
 import MenuAndProfile from "./MenuAndProfile";

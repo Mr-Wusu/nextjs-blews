@@ -1,24 +1,55 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
+import { signIn, signOut,  getProviders, ClientSafeProvider } from "next-auth/react";
 import { FaRegUser } from "react-icons/fa";
 import { LuMenu } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import styles from "@/styles/components.module.scss";
 import Link from "next/link";
 import ScrollContext from "@/contexts/scrollContext";
+import Image from "next/image";
 
 interface MenuAndProfileProps {
   isHomePage: boolean;
-   setIsHomePage: Dispatch<SetStateAction<boolean>>;
+  setIsHomePage: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function MenuAndProfile({ isHomePage, setIsHomePage }: MenuAndProfileProps) {
+export default function MenuAndProfile({
+  isHomePage,
+  setIsHomePage,
+}: MenuAndProfileProps) {
+  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
+  const [openProfile, setOpenProfile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrolled } = useContext(ScrollContext);
 
+  const isUserLoggedIn = false;
+
+  useEffect(() => {
+      const fetchProviders = async () => {
+        const response = await getProviders();
+        setProviders(response);
+      };
+      fetchProviders();
+    }, []);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const signOut = () => {
+    // signOut();
+    setOpenProfile(!openProfile);
+  };
+
+  const signIn = (providerId: string) => {
+    // signIn(providerId);
+    console.log(providerId);
+  };
+
+  const toggleProfile = () => {
+    setOpenProfile(!openProfile);
   };
 
   return (
@@ -36,19 +67,58 @@ export default function MenuAndProfile({ isHomePage, setIsHomePage }: MenuAndPro
           }`}
         />
       </div>
-      <button>
+      {isUserLoggedIn ? (
+        <div className="relative " onClick={toggleProfile}>
+          <div className="relative h-6 w-6 rounded-full overflow-hidden cursor-pointer">
+            <Image
+              src="/images/testifiers/prince1.jpg"
+              alt="profile"
+              className="object-cover"
+              fill
+            />
+          </div>
+          <div
+            className={`h-20 w-44 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${
+              openProfile
+                ? "translate-y-[8px] opacity-100 transition-all duration-150 ease-linear"
+                : "-translate-y-[40%] opacity-0"
+            }`}
+          >
+            <button
+              type="button"
+              className="bg-black text-sm px-2 py-1 rounded-[.4rem] translate-x-24 text-lightRose1 translate-y-10"
+              onClick={signOut}
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      ) : (
         <FaRegUser
           className={`text-lg ${
             isHomePage && !scrolled
-              ? "hover:text-rose200 transition-all duration-200"
+              ? "hover:text-rose200 transition-all duration-200" 
               : isHomePage && scrolled
               ? "hover:text-rose-600 transition-all duration-200"
               : !isHomePage
               ? "hover:text-rose-600 transition-all duration-200"
               : ""
           }`}
-        />
-      </button>
+        >
+          {providers &&
+            Object.values(providers).map((provider: ClientSafeProvider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className=""
+                >
+                  Sign In
+                </button>
+              )
+            )}
+        </FaRegUser>
+      )}
 
       <div
         className={`${styles.menu_content} ${
