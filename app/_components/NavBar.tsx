@@ -1,10 +1,12 @@
 "use client";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-
+import { useSession } from "next-auth/react";
 import ScrollContext from "@/contexts/scrollContext";
+import { CgSearch } from "react-icons/cg";
 
 import MenuAndProfile from "./MenuAndProfile";
+
 
 // Define prop types
 interface NavbarProps {
@@ -13,18 +15,29 @@ interface NavbarProps {
 }
 
 export default function Navbar({ admin, users }: NavbarProps) {
+  const { data: session, status } = useSession()
   const [isHomePage, setIsHomePage] = useState(true);
-  const [isSignedOut, setIsSignedOut] = useState(false);
+  const [isSignedOut, setIsSignedOut] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const { scrolled } = useContext(ScrollContext);
     const pathname = usePathname();
-    console.log(pathname);    
+    console.log(session, status);
+       
 
   useEffect(() => {
     if(pathname !== "/") {
       setIsHomePage(false);
     }
   }, [pathname]);
+
+  useEffect(()=> {
+    if (session) {
+      setIsSignedOut(false);
+      setIsAdmin(session.user?.email === "wusu_prince@yahoo.com");
+    } else {
+      setIsSignedOut(true);
+    }
+  }, [session])
 
   return (
     <nav
@@ -46,7 +59,7 @@ export default function Navbar({ admin, users }: NavbarProps) {
       >
         Blews&apos; Stitches
       </h2>
-      {isSignedOut ? <button>Sign In</button> : isAdmin ? admin : users}
+      {isSignedOut ? <button><CgSearch className="text-2xl"/></button> : isAdmin ? admin : users}
     </nav>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Dispatch, SetStateAction } from "react";
-import { signIn, signOut,  getProviders, ClientSafeProvider } from "next-auth/react";
-import { FaRegUser } from "react-icons/fa";
+import { useSession } from "next-auth/react";
+// import { FaRegUser } from "react-icons/fa";
 import { LuMenu } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import styles from "@/styles/components.module.scss";
@@ -19,34 +19,19 @@ export default function MenuAndProfile({
   isHomePage,
   setIsHomePage,
 }: MenuAndProfileProps) {
-  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
   const [openProfile, setOpenProfile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const {data: session} = useSession();
   const { scrolled } = useContext(ScrollContext);
 
-  const isUserLoggedIn = false;
 
-  useEffect(() => {
-      const fetchProviders = async () => {
-        const response = await getProviders();
-        setProviders(response);
-      };
-      fetchProviders();
-    }, []);
+
+  console.log(session);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const signOut = () => {
-    // signOut();
-    setOpenProfile(!openProfile);
-  };
-
-  const signIn = (providerId: string) => {
-    // signIn(providerId);
-    console.log(providerId);
-  };
 
   const toggleProfile = () => {
     setOpenProfile(!openProfile);
@@ -67,7 +52,7 @@ export default function MenuAndProfile({
           }`}
         />
       </div>
-      {isUserLoggedIn ? (
+      {session ? (
         <div className="relative " onClick={toggleProfile}>
           <div className="relative h-6 w-6 rounded-full overflow-hidden cursor-pointer">
             <Image
@@ -78,46 +63,40 @@ export default function MenuAndProfile({
             />
           </div>
           <div
-            className={`h-20 w-44 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${
+            className={`h-[86px] w-min pr-2 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${
               openProfile
-                ? "translate-y-[8px] opacity-100 transition-all duration-150 ease-linear"
+                ? "translate-y-[8px] opacity-100 transition-all duration-150 ease-linear" 
                 : "-translate-y-[40%] opacity-0"
             }`}
           >
-            <button
+            <p className="text-darkRose2 text-sm pl-2 pt-1">{session.user?.name}</p>
+            <p className="text-sm text-darkRose2 pl-2">{session.user?.email}</p>
+            <Link
+              href="/auth/signout"
               type="button"
-              className="bg-black text-sm px-2 py-1 rounded-[.4rem] translate-x-24 text-lightRose1 translate-y-10"
-              onClick={signOut}
+              className="absolute bg-darkRose1 text-sm px-2 py-1 rounded-[.4rem]  text-lightRose1 bottom-2 right-2"
             >
               Sign Out
-            </button>
+            </Link>
           </div>
         </div>
       ) : (
-        <FaRegUser
-          className={`text-lg ${
-            isHomePage && !scrolled
-              ? "hover:text-rose200 transition-all duration-200" 
-              : isHomePage && scrolled
-              ? "hover:text-rose-600 transition-all duration-200"
-              : !isHomePage
-              ? "hover:text-rose-600 transition-all duration-200"
-              : ""
-          }`}
-        >
-          {providers &&
-            Object.values(providers).map((provider: ClientSafeProvider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className=""
-                >
-                  Sign In
-                </button>
-              )
-            )}
-        </FaRegUser>
+        <div className="relative">
+          <Link
+            href="/api/auth/signin"
+            className={`text-sm px-2 py-[3px] rounded-[.4rem] active:scale-[0.9] border-2 ${
+              isHomePage && !scrolled
+                ? "bg-rose-100 text-darkRose2 hover:bg-rose-300 transition-all duration-200"
+                : isHomePage && scrolled
+                ? "bg-darkRose2 text-lightRose1  hover:bg-darkRose1 transition-all duration-200"
+                : !isHomePage
+                ? "bg-darkRose2 text-lightRose1 hover:bg-darkRose1 transition-all duration-200"
+                : ""
+            }`}
+          >
+            Sign In
+          </Link>
+        </div>
       )}
 
       <div

@@ -1,6 +1,7 @@
 import { Schema, model, models } from 'mongoose';
 
 interface IUser {
+  _id: string;
   name: string;
   email: string;
   image?: string;
