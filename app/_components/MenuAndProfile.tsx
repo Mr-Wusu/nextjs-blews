@@ -63,18 +63,18 @@ export default function MenuAndProfile({
             />
           </div>
           <div
-            className={`h-[86px] w-min pr-2 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${
+            className={`h-max w-max p-3 flex flex-col gap-1 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${
               openProfile
                 ? "translate-y-[8px] opacity-100 transition-all duration-150 ease-linear" 
                 : "-translate-y-[40%] opacity-0"
             }`}
           >
-            <p className="text-darkRose2 text-sm pl-2 pt-1">{session.user?.name}</p>
-            <p className="text-sm text-darkRose2 pl-2">{session.user?.email}</p>
+            <p className="text-darkRose2 text-sm">{session.user?.name}</p>
+            <p className="text-sm text-darkRose2">{session.user?.email}</p>
             <Link
               href="/auth/signout"
               type="button"
-              className="absolute bg-darkRose1 text-sm px-2 py-1 rounded-[.4rem]  text-lightRose1 bottom-2 right-2"
+              className="bg-darkRose1 text-sm grid place-content-center py-1 rounded-[.4rem]  text-lightRose1 bottom-2 right-2"
             >
               Sign Out
             </Link>
