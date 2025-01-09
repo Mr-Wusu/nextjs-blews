@@ -8,8 +8,8 @@ export default function Clothes() {
   return (
     <section className="flex flex-col gap-6 bg-lightRose1 px-6 pt-4 pb-12 ">
       <div className="flex gap-[1rem] items-center justify-center ">
-        <GiClothes className="text-[24px] text-darkRose2" />
-        <h2 className="capitalize text-[1.125em] font-semibold text-darkRose2">
+        <GiClothes className="text-[24px] text-rose-800" />
+        <h2 className="capitalize text-[1.125em] font-semibold text-rose-800">
           A glance at some of our clothes
         </h2>
       </div>

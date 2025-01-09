@@ -2,7 +2,7 @@
 import { useState, useContext } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { useSession } from "next-auth/react";
-// import { FaRegUser } from "react-icons/fa";
+
 import { LuMenu } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import styles from "@/styles/components.module.scss";
@@ -12,18 +12,19 @@ import Image from "next/image";
 
 interface MenuAndProfileProps {
   isHomePage: boolean;
+  isSigninPage: boolean;
   setIsHomePage: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function MenuAndProfile({
   isHomePage,
+
   setIsHomePage,
 }: MenuAndProfileProps) {
   const [openProfile, setOpenProfile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const {data: session} = useSession();
+  const { data: session } = useSession();
   const { scrolled } = useContext(ScrollContext);
-
 
 
   console.log(session);
@@ -43,9 +44,9 @@ export default function MenuAndProfile({
         <LuMenu
           className={`text-2xl cursor-pointer ${
             isHomePage && !scrolled
-              ? "hover:text-rose200 transition-all duration-200"
+              ? "text-lightRose1 hover:text-rose200 transition-all duration-200"
               : isHomePage && scrolled
-              ? "hover:text-rose-600 transition-all duration-200"
+              ? "text-rose-800 hover:text-rose-600 transition-all duration-200"
               : !isHomePage
               ? "hover:text-rose-600 transition-all duration-200"
               : ""
@@ -65,7 +66,7 @@ export default function MenuAndProfile({
           <div
             className={`h-max w-max p-3 flex flex-col gap-1 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${
               openProfile
-                ? "translate-y-[8px] opacity-100 transition-all duration-150 ease-linear" 
+                ? "translate-y-[8px] opacity-100 transition-all duration-150 ease-linear"
                 : "-translate-y-[40%] opacity-0"
             }`}
           >
@@ -74,7 +75,7 @@ export default function MenuAndProfile({
             <Link
               href="/auth/signout"
               type="button"
-              className="bg-darkRose1 text-sm grid place-content-center py-1 rounded-[.4rem]  text-lightRose1 bottom-2 right-2"
+              className="bg-gradient-to-r from-rose-700 to-rose-400 text-sm grid place-content-center py-1 rounded-[.4rem]  text-lightRose1 bottom-2 right-2"
             >
               Sign Out
             </Link>
@@ -88,9 +89,9 @@ export default function MenuAndProfile({
               isHomePage && !scrolled
                 ? "bg-rose-100 text-darkRose2 hover:bg-rose-300 transition-all duration-200"
                 : isHomePage && scrolled
-                ? "bg-darkRose2 text-lightRose1  hover:bg-darkRose1 transition-all duration-200"
+                ? "bg-gradient-to-r from-rose-700 to-rose-400 text-lightRose1 hover:bg-gradient-to-r hover:from-rose-500 hover:to-rose-300 transition-all duration-200"
                 : !isHomePage
-                ? "bg-darkRose2 text-lightRose1 hover:bg-darkRose1 transition-all duration-200"
+                ? "bg-gradient-to-r from-rose-700 to-rose-400 text-lightRose1 hover:bg-gradient-to-r hover:from-rose-500 hover:to-rose-300 transition-all duration-300 ease-in-out"
                 : ""
             }`}
           >

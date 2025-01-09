@@ -7,7 +7,6 @@ import { CgSearch } from "react-icons/cg";
 
 import MenuAndProfile from "./MenuAndProfile";
 
-
 // Define prop types
 interface NavbarProps {
   admin: ReactNode;
@@ -15,29 +14,28 @@ interface NavbarProps {
 }
 
 export default function Navbar({ admin, users }: NavbarProps) {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession();
   const [isHomePage, setIsHomePage] = useState(true);
+
   const [isSignedOut, setIsSignedOut] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const { scrolled } = useContext(ScrollContext);
-    const pathname = usePathname();
-    console.log(session, status);
-       
+  const pathname = usePathname();
 
   useEffect(() => {
-    if(pathname !== "/") {
+    if (pathname !== "/") {
       setIsHomePage(false);
     }
   }, [pathname]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (session) {
       setIsSignedOut(false);
       setIsAdmin(session.user?.email === "wusu_prince@yahoo.com");
     } else {
       setIsSignedOut(true);
     }
-  }, [session])
+  }, [session]);
 
   return (
     <nav
@@ -45,21 +43,27 @@ export default function Navbar({ admin, users }: NavbarProps) {
         isHomePage && !scrolled
           ? "bg-transparent text-lightRose1"
           : !isHomePage && !scrolled
-          ? "bg-lightRose1 text-darkRose2 shadow-md"
+          ? "bg-lightRose1 text-rose-800 shadow-md"
+          : !isHomePage && scrolled
+          ? "bg-lightRose1 text-rose-800 shadow-md z-50"
           : isHomePage && scrolled
-          ? "bg-lightRose1 text-darkRose2 shadow-md"
-          : "bg-lightRose1 text-darkRose2 shadow-md"
+          ? "bg-lightRose1 text-rose-800 shadow-md"
+          : "text-rose-800 shadow-md "
       }`}
     >
       <MenuAndProfile isHomePage={isHomePage} setIsHomePage={setIsHomePage} />
-      <h2
-        className={`h2-custom-font text-xl ml-[-5rem] ${
-          scrolled ? "text-darkRose2" : ""
-        }`}
-      >
+      <h2 className={`h2-custom-font text-xl ml-[-5rem]`}>
         Blews&apos; Stitches
       </h2>
-      {isSignedOut ? <button><CgSearch className="text-2xl"/></button> : isAdmin ? admin : users}
+      {isSignedOut ? (
+        <button>
+          <CgSearch className="text-2xl" />
+        </button>
+      ) : isAdmin ? (
+        admin
+      ) : (
+        users
+      )}
     </nav>
   );
 }
