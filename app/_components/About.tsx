@@ -63,7 +63,6 @@ export default function About() {
         spaceBetween={20}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
         className={styles.slider}
       >
         {trimmedTestimonies.map((testimony, i) => (

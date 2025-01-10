@@ -27,8 +27,6 @@ export default function MenuAndProfile({
   const { scrolled } = useContext(ScrollContext);
 
 
-  console.log(session);
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };

@@ -1,12 +1,14 @@
 "use client";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import toast, {Toaster} from "react-hot-toast";
 
 export default function Logout() {
   const router = useRouter();
 
   function handleSignOut() {
-    signOut({ callbackUrl: "/" }); 
+    signOut({ callbackUrl: "/" });
+    toast("You have successfully signed out😒!") 
   }
 
   function goBack() {
@@ -28,6 +30,7 @@ export default function Logout() {
       >
         Sign Out
       </button>
+      <Toaster/>
     </div>
   );
 }

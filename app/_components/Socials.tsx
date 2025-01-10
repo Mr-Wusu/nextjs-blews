@@ -9,13 +9,13 @@ export default function Socials() {
       action={loginWithProvider}
     >
       <button
-        className="border-2 border-rose-500 text-rose-800 flex items-center justify-center pl-3 pr-5 py-1 rounded gap-3 bg-white hover:bg-gradient-to-r from-slate-300 to-slate-100 transition-all duration-300 ease-in-out"
+        className="border-2 border-rose-500 text-rose-900 flex items-center justify-center pl-3 pr-5 py-1 rounded gap-3 bg-white hover:bg-gradient-to-r from-slate-300 to-slate-100 transition-all duration-300 ease-in-out"
         type="submit"
         name="action"
         value="google"
       >
         <FcGoogle className="text-[16px]" />
-        <h2>Google</h2>
+        <h2 className="tracking-wide">Google</h2>
       </button>
 
       <button
@@ -25,7 +25,7 @@ export default function Socials() {
         value="facebook"
       >
         <FaFacebookF className="text-[16px] text-[#5a65c1]" />
-        <h2>Facebook</h2>
+        <h2 className="tracking-wide">Facebook</h2>
       </button>
     </form>
   );

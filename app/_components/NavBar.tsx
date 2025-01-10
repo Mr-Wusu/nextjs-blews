@@ -25,6 +25,8 @@ export default function Navbar({ admin, users }: NavbarProps) {
   useEffect(() => {
     if (pathname !== "/") {
       setIsHomePage(false);
+    } else {
+      setIsHomePage(true);
     }
   }, [pathname]);
 
