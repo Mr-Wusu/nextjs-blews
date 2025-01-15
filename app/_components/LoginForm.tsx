@@ -22,7 +22,11 @@ function LoginForm() {
         router.push("/");
         toast.success("Signed in successfully👌!");
       } else {
-        toast.error(response.error);
+        toast.error(response.error, {
+          duration: 4000,
+          position: "bottom-right",
+          onClick: () => toast.dismiss(),
+        });
       }
     } catch (error) {
       toast.error(error.message);

@@ -6,10 +6,10 @@ import Hero from "./_components/Hero";
 export default async function Home() {
 
   return (
-    <div className="min-h-screen flex flex-col menu_class">
+    <div className="min-h-screen flex flex-col"> 
       <Hero/>
       <About/>
-      <Clothes/>
+      <Clothes/>      
     </div>
   );
 }
