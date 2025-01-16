@@ -1,8 +1,9 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models } from "mongoose";
 
 interface IUser {
   _id: string;
-  name: string;
+  firstName: string;
+  surname: string;
   email: string;
   image?: string;
   createdAt?: Date;
@@ -10,13 +11,22 @@ interface IUser {
 }
 
 const UserSchema = new Schema<IUser>({
-  name: {
+  firstName: {
     type: String,
-    required: [true, "Users must have a name"],
+    required: [true, "Users must have a firstname"],
     trim: true,
     match: [
-      /^[a-zA-Z0-9!@#$%^&*()_+\[\]{};':"\\|,.<>\/?`~\-]{8,20}$/,
-      "Username is invalid, it should contain 8 - 20 alphanumeric letters, special characters and be unique",
+      /^[a-zA-Z-]{1,18}$/,
+      "First name is invalid, it should contain 1 - 18 alphabetic characters",
+    ],
+  },
+  surname: {
+    type: String,
+    required: [true, "Users must have a firstname"],
+    trim: true,
+    match: [
+      /^[a-zA-Z-]{1,18}$/,
+      "First name is invalid, it should contain 1 - 18 alphabetic characters",
     ],
   },
   email: {
@@ -37,6 +47,6 @@ const UserSchema = new Schema<IUser>({
   },
 });
 
-const User = models.User || model<IUser>('User', UserSchema);
+const User = models.User || model<IUser>("User", UserSchema);
 
 export default User;

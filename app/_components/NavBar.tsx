@@ -6,6 +6,7 @@ import ScrollContext from "@/contexts/scrollContext";
 import { CgSearch } from "react-icons/cg";
 
 import MenuAndProfile from "./MenuAndProfile";
+import { useHomePage } from "@/contexts/HomePageContext";
 
 // Define prop types
 interface NavbarProps {
@@ -15,7 +16,7 @@ interface NavbarProps {
 
 export default function Navbar({ admin, users }: NavbarProps) {
   const { data: session } = useSession();
-  const [isHomePage, setIsHomePage] = useState(true);
+const { isHomePage, setIsHomePage } = useHomePage();
 
   const [isSignedOut, setIsSignedOut] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -53,7 +54,7 @@ export default function Navbar({ admin, users }: NavbarProps) {
           : "text-rose-800 shadow-md "
       }`}
     >
-      <MenuAndProfile isHomePage={isHomePage} setIsHomePage={setIsHomePage} />
+      <MenuAndProfile />
       <h2 className={`h2-custom-font text-xl ml-[-5rem]`}>
         Blews&apos; Stitches
       </h2>

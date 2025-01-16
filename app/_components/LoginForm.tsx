@@ -1,14 +1,21 @@
 "use client";
 import Socials from "@/app/_components/Socials";
 import { loginWithCredentials } from "@/app/actions/index";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useHomePage } from "@/contexts/HomePageContext";
+import Link from "next/link";
 
 function LoginForm() {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { setIsHomePage } = useHomePage();
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const pathname = usePathname();
 
   async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -16,35 +23,42 @@ function LoginForm() {
     try {
       setIsLoading(true);
       const formData = new FormData(event.currentTarget);
+      console.log(formData);
       const response = await loginWithCredentials(formData);
+
       if (!response.error) {
         await getSession();
         router.push("/");
         toast.success("Signed in successfully👌!");
+
+        // Clear form data
+        if (formRef.current) {
+          formRef.current.reset();
+        }
       } else {
         toast.error(response.error, {
           duration: 4000,
           position: "bottom-right",
-          onClick: () => toast.dismiss(),
         });
       }
     } catch (error) {
-      toast.error(error.message);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
   }
 
   useEffect(() => {
-    if (router.pathname === "/") {
+    if (pathname === "/") {
       setIsHomePage(true);
     }
-  }, [router.pathname]);
+  }, [pathname, setIsHomePage]);
 
   return (
     <div className="relative w-max flex flex-col items-center gap-4">
       <form
-        className="flex flex-col gap-4 py-4 rounded-md"
+        ref={formRef}
+        className="flex flex-col gap-5 py-4 rounded-md"
         onSubmit={handleFormSubmit}
       >
         <h1 className="tracking-wider text-2xl text-rose-700 uppercase font-semibold self-center mb-3">
@@ -55,12 +69,15 @@ function LoginForm() {
           type="text"
           name="email"
           placeholder="Email"
+          required
         />
         <input
           className="h-9 bg-white border-2 rounded px-2 border-rose-500"
           type="password"
           name="password"
           placeholder="Password"
+          autoComplete="off"
+          required
         />
         <button
           className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 mt-2 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out"
@@ -68,6 +85,17 @@ function LoginForm() {
         >
           Login
         </button>
+        <p className="text-sm self-center text-darkRose1 pt-1">
+          Not registered yet?
+          <span className="ml-1">
+            <Link
+              className="border-b border-rose-700 px-1 hover:text-rose-600 hover:border-rose-500 transition-all duration-300 ease-in"
+              href="/signup"
+            >
+              Sign up
+            </Link>
+          </span>
+        </p>
         {isLoading && (
           <div className="text-xs absolute bottom-28 left-[140px]">
             Loading ...

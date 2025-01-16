@@ -1,6 +1,5 @@
 "use client";
 import { useState, useContext } from "react";
-import { Dispatch, SetStateAction } from "react";
 import { useSession } from "next-auth/react";
 
 import { LuMenu } from "react-icons/lu";
@@ -9,28 +8,18 @@ import styles from "@/styles/components.module.scss";
 import Link from "next/link";
 import ScrollContext from "@/contexts/scrollContext";
 import Image from "next/image";
+import { useHomePage } from "@/contexts/HomePageContext";
 
-interface MenuAndProfileProps {
-  isHomePage: boolean;
-  isSigninPage: boolean;
-  setIsHomePage: Dispatch<SetStateAction<boolean>>;
-}
-
-export default function MenuAndProfile({
-  isHomePage,
-
-  setIsHomePage,
-}: MenuAndProfileProps) {
+export default function MenuAndProfile() {
   const [openProfile, setOpenProfile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session } = useSession();
   const { scrolled } = useContext(ScrollContext);
-
+  const {isHomePage, setIsHomePage} = useHomePage()
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
 
   const toggleProfile = () => {
     setOpenProfile(!openProfile);
