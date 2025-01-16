@@ -5,6 +5,7 @@ interface IUser {
   firstName: string;
   surname: string;
   email: string;
+  password: string;
   image?: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -35,6 +36,10 @@ const UserSchema = new Schema<IUser>({
     required: [true, "Users must have an email"],
     trim: true,
     lowercase: true,
+  },
+  password: {
+    type: String,
+    required: [true, "Users must have a password!"]
   },
   image: String,
   createdAt: {
