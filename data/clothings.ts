@@ -1,5 +1,6 @@
 const clothes = [
   {
+    id: 1,
     image: "/images/clothings/cloth-1.jpg",
     alt: "Cloth-1",
     description:
@@ -7,6 +8,7 @@ const clothes = [
     price: 10000,
   },
   {
+    id: 2,
     image: "/images/clothings/cloth-2.jpg",
     alt: "Cloth-2",
     description:
@@ -14,6 +16,7 @@ const clothes = [
     price: 10000,
   },
   {
+    id: 3,
     image: "/images/clothings/cloth-3.jpg",
     alt: "Cloth-3",
     description:
@@ -21,6 +24,7 @@ const clothes = [
     price: 10000,
   },
   {
+    id: 4,
     image: "/images/clothings/cloth-1.jpg",
     alt: "Cloth-4",
     description:
@@ -28,6 +32,7 @@ const clothes = [
     price: 10000,
   },
   {
+    id: 5,
     image: "/images/clothings/cloth-1.jpg",
     alt: "Cloth-5",
     description:
@@ -35,6 +40,7 @@ const clothes = [
     price: 10000,
   },
   {
+    id: 6,
     image: "/images/clothings/cloth-1.jpg",
     alt: "Cloth-6",
     description:

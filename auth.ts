@@ -3,25 +3,32 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getSession } from "next-auth/react";
-import { checkUser } from "@/data/users";
+import bcrypt from "bcryptjs";
+import User from "./models/user";
+import { authConfig } from "./auth.config";
 
 const authOptions = {
-  session: {
-    strategy: "jwt",
-  },
+  ...authConfig,
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
         if (credentials === null) return null;
         try {
-          const user = checkUser(credentials.email);
+          const user = await User.findOne({
+            email: credentials?.email
+          });
           if (user) {
-            const correctPassword = user.password === credentials.password;
-            if (correctPassword) return user;
-            else throw new Error("Incorrect password");
+            if (typeof user.password === 'string') {
+              const correctPassword = await bcrypt.compare(credentials.password as string, user.password);
+              if (correctPassword) return user;
+              else throw new Error("Incorrect password");
+            } else {
+              throw new Error("Password is not a string");
+            }            
+          
           } else throw new Error("User not found");
         } catch (error) {
-          throw new Error(error);
+          throw new Error(error instanceof Error ? error.message : String(error));
         }
       },
     }),
@@ -58,6 +65,7 @@ export const {
   handlers: { GET, POST },
   signIn,
   signOut,
+  auth
 } = NextAuth(authOptions);
 
 export function getSessionData() {

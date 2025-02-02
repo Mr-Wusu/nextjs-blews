@@ -43,13 +43,6 @@ body {
 .swiper-pagination-bullet-active {
   background-color: #fb7185 !important;
 }
-.hero {
-  height: 450px;
-  width: 100%;
-  position: relative;
-  background: url("/images/appPhotos/photo-8.jpg") no-repeat center center;
-  background-size: cover;
-}
 
 .comment {
   background-color: #fb7185;
@@ -73,5 +66,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-

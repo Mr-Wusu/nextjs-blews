@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { RiFileEditFill } from "react-icons/ri";
 
 interface Clothing {
+  id: number,
   image: string;
   alt: string;
   description: string;
@@ -45,7 +46,7 @@ export default function Cloth({ cloth }: ClothProps) {
           </div>
           <Link
             className="transition-all bg-rose-400 px-2 py-1 rounded text-sm shadow-sm hover:bg-rose-500"
-            href="/clothes/id"
+            href={`/clothes/${cloth.id}`}
           >
             Sew me
           </Link>

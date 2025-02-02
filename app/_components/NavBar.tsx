@@ -29,7 +29,7 @@ const { isHomePage, setIsHomePage } = useHomePage();
     } else {
       setIsHomePage(true);
     }
-  }, [pathname]);
+  }, [pathname, setIsHomePage]);
 
   useEffect(() => {
     if (session) {

@@ -1,13 +1,14 @@
 "use client";
 import { useState, useContext } from "react";
 import { useSession } from "next-auth/react";
-
+import Image from "next/image";
+import Link from "next/link";
 import { LuMenu } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
+import { FaRegCircleUser } from "react-icons/fa6";
+
 import styles from "@/styles/components.module.scss";
-import Link from "next/link";
 import ScrollContext from "@/contexts/scrollContext";
-import Image from "next/image";
 import { useHomePage } from "@/contexts/HomePageContext";
 
 export default function MenuAndProfile() {
@@ -16,6 +17,7 @@ export default function MenuAndProfile() {
   const { data: session } = useSession();
   const { scrolled } = useContext(ScrollContext);
   const {isHomePage, setIsHomePage} = useHomePage()
+  
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -43,12 +45,26 @@ export default function MenuAndProfile() {
       {session ? (
         <div className="relative " onClick={toggleProfile}>
           <div className="relative h-6 w-6 rounded-full overflow-hidden cursor-pointer">
-            <Image
-              src="/images/testifiers/prince1.jpg"
-              alt="profile"
-              className="object-cover"
-              fill
-            />
+            {session.user && typeof session.user?.image === "string" ? (
+              <Image
+                src={session.user?.image}
+                alt="profile"
+                className="object-cover"
+                fill
+              />
+            ) : (
+              <FaRegCircleUser
+                className={`text-[1.4rem] ${
+                  isHomePage && !scrolled
+                    ? "text-lightRose1 hover:text-rose200 transition-all duration-200"
+                    : isHomePage && scrolled
+                    ? "text-rose-800 hover:text-rose-600 transition-all duration-200"
+                    : !isHomePage
+                    ? "hover:text-rose-600 transition-all duration-200"
+                    : ""
+                }`}
+              />
+            )}
           </div>
           <div
             className={`h-max w-max p-3 flex flex-col gap-1 bg-lightRose1 rounded-[.4rem] absolute translate-x-3 shadow-lg ${

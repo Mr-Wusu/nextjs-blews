@@ -7,7 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { HomePageProvider } from "@/contexts/HomePageContext";
 
 export const metadata: Metadata = {
-  title: "Blews Stitches",
+  title: "Home | Blews Stitches",
   description:
     "A website where you get clothes tailored inch-perfect from your desires!",
 };
@@ -21,7 +21,6 @@ export default async function RootLayout({
   admin: React.ReactNode;
   users: React.ReactNode;
 }>) {
-  
   return (
     <SessionProvider>
       <HomePageProvider>

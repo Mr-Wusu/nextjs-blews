@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,6 +10,7 @@ import Socials from "../_components/Socials";
 
 export default function Page() {
   const [userCreated, setUserCreated] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
 
   const validateEmail = (email: string) => {
@@ -24,11 +26,11 @@ export default function Page() {
   const closePopup = () => {
     setUserCreated(false);
     router.push("/auth/signin");
-
-  }
+  };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitting(true);
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -64,15 +66,18 @@ export default function Page() {
         }),
       });
 
+      if (response.status === 400) toast.error("User already exists. Login instead!");
       if (response.status === 201) {
         setUserCreated(true);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setSubmitting(false);
     }
   }
   return (
-    <div className="relative min-h-screen w-max flex flex-col items-center justify-center gap-4 mx-auto">
+    <div className="relative min-h-screen w-max flex flex-col items-center justify-center gap-4 mx-auto pb-6">
       {userCreated && (
         <div className="relative bg-white text-darkRose1  py-3 pl-3 pr-4 top-14 rounded-[.5rem] shadow-lg">
           <p>You have been registered successfully👌!</p>
@@ -86,7 +91,7 @@ export default function Page() {
         </div>
       )}
       <form
-        className="flex flex-col gap-5 py-4 mt-7 rounded-md"
+        className="relative flex flex-col gap-5 py-4 mt-7 rounded-md"
         onSubmit={handleSubmit}
       >
         <h1 className="tracking-wider text-2xl text-rose-700 uppercase font-semibold self-center">
@@ -130,10 +135,16 @@ export default function Page() {
         <button
           className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 mt-2 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out"
           type="submit"
+          disabled={submitting || userCreated}
         >
           Sign Up
         </button>
-        <p className="text-sm self-center text-darkRose1 pt-1">
+        {submitting && (
+          <p className="absolute bottom-12 left-24 text-xs ">
+            We are signing you up!
+          </p>
+        )}
+        <p className="text-sm self-center text-darkRose1 pt-4">
           Already Registered?
           <span className="ml-1">
             <Link

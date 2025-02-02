@@ -1,26 +1,37 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { createUser } from "@/users/queries";
-import connectToDB  from "@/settings/database";
+import connectToDB from "@/settings/database";
+import User from "@/models/user";
 
 interface SignupRequest {
-  firstName: string,
-  surname: string,
+  firstName: string;
+  surname: string;
   email: string;
   password: string;
 }
 
 export const POST = async (request: Request): Promise<NextResponse> => {
-  const { firstName, surname, email, password }: SignupRequest = await request.json();
+  const { firstName, surname, email, password }: SignupRequest =
+    await request.json();
 
   console.log(firstName, surname, email, password);
 
   // Create a DB Connection
   await connectToDB();
 
+  // Check if user already exists
+  const alreadyExists = await User.findOne({ email });
+  if (alreadyExists) {
+    console.log("Already exists!");
+    return new NextResponse("User already exists! Click Sign in instead!", {
+      status: 400,
+    });
+  }
+
   // Encrypt the password
   const hashedPassword = await bcrypt.hash(password, 5);
-  console.log(hashedPassword)
+  console.log(hashedPassword);
 
   // Form a DB payload
   const newUser = {
