@@ -9,10 +9,6 @@ export async function loginWithProvider(formData: FormData) {
   await signIn(action, { redirectTo: "/" });
 }
 
-export async function logout() {
-  await signOut({ redirect: true });
-}
-
 export async function loginWithCredentials(formData: FormData) {
   const user = {
     email: formData.get("email"),
@@ -21,16 +17,16 @@ export async function loginWithCredentials(formData: FormData) {
 
   try {
     await connectToDB();
-    const isRegistered = await User.findOne({ email: user.email });
-    if (!isRegistered) {
-      console.log(isRegistered);
-      return isRegistered;
+    const isFound = await User.findOne({ email: user.email });
+    if (!isFound) {
+      console.log("User not found!");
+      return false;
     }
-    
-    
+    console.log("User found!");
     const response = await signIn("credentials", {
       email: user.email,
       password: user.password,
+      callbackUrl: "/",
       redirect: false,
     });
 
@@ -43,4 +39,8 @@ export async function loginWithCredentials(formData: FormData) {
     console.error("Error during login:", error);
     throw new Error("Incorrect email or password 🙄!");
   }
+}
+
+export async function logout() {
+  await signOut({ redirect: true });
 }

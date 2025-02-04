@@ -15,20 +15,24 @@ const authOptions = {
         if (credentials === null) return null;
         try {
           const user = await User.findOne({
-            email: credentials?.email
+            email: credentials?.email,
           });
           if (user) {
-            if (typeof user.password === 'string') {
-              const correctPassword = await bcrypt.compare(credentials.password as string, user.password);
+            if (typeof user.password === "string") {
+              const correctPassword = await bcrypt.compare(
+                credentials.password as string,
+                user.password
+              );
               if (correctPassword) return user;
               else throw new Error("Incorrect password");
             } else {
               throw new Error("Password is not a string");
-            }            
-          
+            }
           } else throw new Error("User not found");
         } catch (error) {
-          throw new Error(error instanceof Error ? error.message : String(error));
+          throw new Error(
+            error instanceof Error ? error.message : String(error)
+          );
         }
       },
     }),
@@ -65,7 +69,7 @@ export const {
   handlers: { GET, POST },
   signIn,
   signOut,
-  auth
+  auth,
 } = NextAuth(authOptions);
 
 export function getSessionData() {

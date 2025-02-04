@@ -24,6 +24,15 @@ function LoginForm() {
       console.log(formData);
       const response = await loginWithCredentials(formData);
 
+      if (response === false) {
+        toast.error("User not found! 😕 Sign Up!", {
+          duration: 4000,
+          position: "bottom-right",
+        });
+        router.push("/signup");
+        return;
+      }
+
       if (!response.error) {
         await getSession();
         router.push("/");

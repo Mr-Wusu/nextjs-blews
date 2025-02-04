@@ -6,6 +6,7 @@ import Link from "next/link";
 import { LuMenu } from "react-icons/lu";
 import { MdOutlineClose } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
 
 import styles from "@/styles/components.module.scss";
 import ScrollContext from "@/contexts/scrollContext";
@@ -73,6 +74,11 @@ export default function MenuAndProfile() {
                 : "-translate-y-[40%] opacity-0"
             }`}
           >
+            <div className="grid place-items-center bg-rose-600 text-lightRose1 rounded-full w-5 h-5 cursor-pointer absolute top-[-11px] right-[-11px]  shadow-lg"
+            onClick={toggleProfile}
+            >
+              <IoClose className="shadow-md"/>
+            </div>
             <p className="text-darkRose2 text-sm">{session.user?.name}</p>
             <p className="text-sm text-darkRose2">{session.user?.email}</p>
             <Link
