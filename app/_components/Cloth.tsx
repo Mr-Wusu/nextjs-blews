@@ -1,8 +1,10 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdDelete } from "react-icons/md";
 import { RiFileEditFill } from "react-icons/ri";
+import * as motion from "motion/react-client";
 
 interface Clothing {
   id: number,
@@ -17,10 +19,21 @@ interface ClothProps {
 }
 
 export default function Cloth({ cloth }: ClothProps) {
-  const isAdmin = true;
+  const {data}= useSession();
+  const isAdmin = data?.user?.email === "wusu_prince@yahoo.com";
+  
 
   return (
-    <figure className="relative radius flex flex-col w-[245px] mx-auto h-[24rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black">
+    <motion.figure 
+     initial={{ opacity: 0, y: 100 }}
+     whileInView={{ opacity: 1, y: 0 }}
+     transition={{
+      duration: 0.2,
+      delay: 0.5,
+      type: "spring",
+      stiffness: 100,
+     }}
+    className="relative radius flex flex-col w-[245px] mx-auto h-[24rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black">
       {isAdmin && (
         <RiFileEditFill className="absolute z-10  text-2xl text-rose-300 top-3 left-2 cursor-pointer hover:text-rose-600 transition-all" />
       )}
@@ -52,6 +65,6 @@ export default function Cloth({ cloth }: ClothProps) {
           </Link>
         </div>
       </figcaption>
-    </figure>
+    </motion.figure>
   );
 }
