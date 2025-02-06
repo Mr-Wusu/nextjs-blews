@@ -4,8 +4,7 @@ interface ClothIdProps {
   clothId: string;
 }
 
-export default async function ClothId({ clothId }: ClothIdProps) {
-
+export default function ClothId({ clothId }: ClothIdProps) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <h1>You are viewing the page for cloth with id: {clothId}</h1>
