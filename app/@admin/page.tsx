@@ -1,7 +1,8 @@
+import Dashboard from "../_components/Dashboard"
 
 function AdminDashboard() {
   return (
-    <div>AdminDashboard</div>
+    <Dashboard />
   )
 }
 

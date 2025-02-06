@@ -1,7 +1,7 @@
 "use client";
 import Socials from "@/app/_components/Socials";
 import { loginWithCredentials } from "@/app/actions/index";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { getSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -14,6 +14,8 @@ function LoginForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const pathname = usePathname();
+   const searchParams = useSearchParams();
+   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,7 +37,7 @@ function LoginForm() {
 
       if (!response.error) {
         await getSession();
-        router.push("/");
+        router.push(callbackUrl);
         toast.success("Signed in successfully👌!");
 
         // Clear form data

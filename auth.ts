@@ -62,6 +62,14 @@ const authOptions = {
   pages: {
     signIn: "/auth/signin",
     signOut: "/auth/signout",
+    error: "/auth/error",
+  },
+  callbacks: {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
   },
 };
 
