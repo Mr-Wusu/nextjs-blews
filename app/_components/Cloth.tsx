@@ -6,8 +6,9 @@ import { MdDelete } from "react-icons/md";
 import { RiFileEditFill } from "react-icons/ri";
 import * as motion from "motion/react-client";
 
+
 interface Clothing {
-  id: number;
+  _id: string;
   image: string;
   alt: string;
   description: string;
@@ -22,6 +23,9 @@ export default function Cloth({ cloth }: ClothProps) {
   const { data } = useSession();
   const isAdmin = data?.user?.email === "wusu_prince@yahoo.com";
 
+  // Convert base64 image data to a data URL
+  const imageUrl = `data:image/jpeg;base64,${cloth.image}`;
+
   return (
     <motion.figure
       initial={{ opacity: 0, y: 100 }}
@@ -35,18 +39,19 @@ export default function Cloth({ cloth }: ClothProps) {
       className="relative radius flex flex-col w-[245px] mx-auto h-[24rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black"
     >
       {isAdmin && (
-        <RiFileEditFill className="absolute z-10 text-2xl text-rose-300 top-3 left-2 cursor-pointer hover:text-rose-600 transition-all" />
+        <RiFileEditFill
+          className="absolute z-10 text-rose-700 text-2xl top-[10px] left-2 hover:text-rose-600 transition-text duration-300 ease-in-out cursor-pointer"
+          onClick={() => console.log("Deleted!")}
+        />
       )}
       {isAdmin && (
-        <MdDelete className="absolute z-10 text-3xl text-rose-300 top-2 right-3 cursor-pointer hover:text-rose-600 transition-all" />
+        <MdDelete
+          className="absolute z-10 text-rose-700 text-3xl top-2 right-2 hover:text-rose-600 transition-text duration-300 ease-in-out cursor-pointer"
+          onClick={() => console.log("Deleted!")}
+        />
       )}
       <div className="relative h-[52%] bg-slate-400">
-        <Image
-          src={cloth.image}
-          alt={cloth.alt}
-          fill
-          className="object-cover"
-        />
+        <Image src={imageUrl} alt={cloth.alt} fill className="object-cover" />
       </div>
       <figcaption className="flex flex-col py-3 px-4 gap-2 text-[15px]">
         <h3 className="">Description</h3>
@@ -57,8 +62,8 @@ export default function Cloth({ cloth }: ClothProps) {
             <p className="text-[14px]">NGN{cloth.price}</p>
           </div>
           <Link
-            className="transition-all bg-rose-400 px-2 py-1 rounded text-sm shadow-sm hover:bg-rose-500"
-            href="/"
+            className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 text-lightRose1 py-1 px-2 tracking-wide rounded self-center transition-bg duration-300 ease-in-out"
+            href={`/clothes/${cloth._id}`}
           >
             Sew me
           </Link>

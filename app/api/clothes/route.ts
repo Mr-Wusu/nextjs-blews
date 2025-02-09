@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
 import connectToDB from "@/settings/database";
-import Cloth from "@/models/cloth";
+import Clothe from "@/models/clothe";
 
-export async function GET(req: NextRequest): Promise<NextResponse> {
-  console.log(req.url, req.text);
-  
+export async function GET() {
   await connectToDB();
-  
-
-  const res = await Cloth.find().select(["-createdAt", "-updatedAt"]);
-  console.log(res);
-
-  return NextResponse.json(res);
+  const clothes = await Clothe.find().select(["-createdAt", "-updatedAt"]);
+  return NextResponse.json(clothes);
 }
+
+

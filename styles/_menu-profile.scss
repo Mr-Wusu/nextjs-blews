@@ -3,7 +3,7 @@
 .menu_and_profile {
   display: flex;
   gap: 14px;
-  align-items: center; 
+  align-items: center;
   color: vars.$rose600;
 
   .profile {
@@ -28,7 +28,7 @@
     top: 0;
     right: 0;
     height: 100%;
-    width: 350px;
+    width: 300px;
     background: url("/images/appPhotos/photo-10.jpg") no-repeat center center;
     background-size: cover;
     color: vars.$darkRose1;

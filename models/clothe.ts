@@ -1,23 +1,30 @@
 import { Schema, model, models } from "mongoose";
 
-interface ICloth {
+interface IClothe {
   _id: string;
   description: string;
+  alt: string;
   price: number;
   image: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-const ClothSchema = new Schema<ICloth>({
+const ClotheSchema = new Schema<IClothe>({
   description: {
     type: String,
     required: [true, "Clothes must be described"],
     trim: true,
-    match: [
-      /^[a-zA-Z-]{1,18}$/,
-      "Descriptions should not be more than 50 words",
-    ],
+     validate: {
+      validator: function (v: string) {
+        return v.trim().split(/\s+/).length <= 50;
+      },
+      message: "Descriptions should not be more than 50 words",
+    },
+  },
+  alt: {
+    type: String,
+    required: [true, "Cloth must have an alt text"],
   },
   price: {
     type:Number,
@@ -28,16 +35,8 @@ const ClothSchema = new Schema<ICloth>({
     type: String,
     required: [true, "Cloth must have a picture"],
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
-const Cloth = models.Cloth || model<ICloth>("Cloth", ClothSchema);
+const Clothe = models.Clothe || model<IClothe>("Clothe", ClotheSchema);
 
-export default Cloth;
+export default Clothe;

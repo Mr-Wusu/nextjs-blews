@@ -1,14 +1,15 @@
 "use client";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import toast, {Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import { Button } from "./Button";
 
 export default function Logout() {
   const router = useRouter();
 
   function handleSignOut() {
     signOut({ callbackUrl: "/" });
-    toast("You have successfully signed out😒!") 
+    toast("You have successfully signed out😒!");
   }
 
   function goBack() {
@@ -17,20 +18,13 @@ export default function Logout() {
 
   return (
     <div className="flex gap-4 items-center justify-center">
-      <button
-        className="bg-gradient-to-r from-rose-700 to-rose-500 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-400 border-2 border-rose-600 text-sm tracking-wider font-bold py-1 px-4 rounded-[.5rem] text-lightRose1"
-        onClick={goBack}
-      >
+      <Button className="px-4" onClick={goBack} type="button">
         Back
-      </button>
-      <button
-        className="border-2 border-rose-600 text-sm tracking-wide font-bold py-1 px-2 rounded-[.5rem] text-rose-800 hover:bg-rose-100 transition-all duration-100 ease-in-out"
-        type="button"
-        onClick={handleSignOut}
-      >
+      </Button>
+      <Button className="px-2" onClick={handleSignOut} type="button">
         Sign Out
-      </button>
-      <Toaster/>
+      </Button>
+      <Toaster />
     </div>
   );
 }

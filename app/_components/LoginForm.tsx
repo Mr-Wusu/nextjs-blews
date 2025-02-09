@@ -2,11 +2,13 @@
 import Socials from "@/app/_components/Socials";
 import { loginWithCredentials } from "@/app/actions/index";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { getSession } from "next-auth/react";
+
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useHomePage } from "@/contexts/HomePageContext";
 import Link from "next/link";
+import { Button } from "./Button";
+import { getSession } from "next-auth/react";
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +38,7 @@ function LoginForm() {
       }
 
       if (!response.error) {
-        await getSession();
+        await getSession()
         router.push(callbackUrl);
         toast.success("Signed in successfully👌!");
 
@@ -88,12 +90,9 @@ function LoginForm() {
           autoComplete="off"
           required
         />
-        <button
-          className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 mt-2 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out"
-          type="submit"
-        >
+        <Button type="submit" className="min-w-fit px-2">
           Login
-        </button>
+        </Button>
         <p className="text-sm self-center text-darkRose1 pt-1">
           Not registered yet?
           <span className="ml-1">

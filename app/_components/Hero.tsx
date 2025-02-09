@@ -1,10 +1,10 @@
-import { auth } from "@/auth";
+
 import Image from "next/image";
 const heroImage = "/images/appPhotos/photo-8.jpg";
 
 export default async function Hero() {
-  const session = await auth();
-  console.log(session);
+
+
 
   return (
     <div className="h-[450px] w-full relative">
