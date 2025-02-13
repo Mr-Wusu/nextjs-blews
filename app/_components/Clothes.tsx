@@ -14,7 +14,7 @@ export default async function Clothes() {
   try {
     const response = await fetch("http://localhost:3000/api/clothes");
     if (!response.ok) {
-      const errorText = await response.text();
+      const errorText = response.text();
       console.error("Error fetching clothes:", errorText);
       return;
     }
