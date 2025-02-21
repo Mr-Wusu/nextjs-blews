@@ -14,22 +14,25 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  admin,
-  users,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
-  admin: React.ReactNode;
-  users: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <SessionProvider>
       <HomePageProvider>
         <html lang="en">
-          <body className="">
+          <body>
             <ScrollProvider>
-              <Navbar admin={admin} users={users} />
-              <div className="bg-lightRose1 text-darkRose2">{children}</div>
+              <Navbar />
+
+              <div className="bg-lightRose1 text-darkRose2">
+                {modal}
+                {children}
+              </div>
               <Footer />
+              <div id="root-modal" />
             </ScrollProvider>
           </body>
         </html>

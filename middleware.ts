@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { authConfig } from "./auth.config";
+import { authConfig } from "@/auth.config";
 import NextAuth from "next-auth";
 import * as urls from "@/lib/routes";
 
@@ -25,6 +25,7 @@ export default async function blewsMiddleware(
     const regex = new RegExp(`^${url.replace(/\[.*?\]/g, "[^/]+")}$`);
     return regex.test(nextUrl.pathname);
   });
+ 
 
   // Ensure /clothes/${cloth.id} routes are public
   const isClothDetailRoute = /^\/clothes\/[^/]+$/.test(nextUrl.pathname);

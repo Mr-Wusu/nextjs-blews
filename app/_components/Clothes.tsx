@@ -1,25 +1,26 @@
 import { GiClothes } from "react-icons/gi";
 import Cloth from "./Cloth";
+import clothes from "@/data/clothings";
 import Link from "next/link";
 
-interface ClothType {
-  _id: string;
-  description: string;
-  price: number;
-  image: string;
-  alt: string;
-}
+// interface ClothType {
+//   _id: string;
+//   description: string;
+//   price: number;
+//   image: string;
+//   alt: string;
+// }
 
 export default async function Clothes() {
-  try {
-    const response = await fetch("http://localhost:3000/api/clothes");
-    if (!response.ok) {
-      const errorText = response.text();
-      console.error("Error fetching clothes:", errorText);
-      return;
-    }
-    const clothesData: ClothType[] = await response.json();
-    console.log(clothesData);
+  
+    // const response = await fetch("http://localhost:3000/api/clothes");
+    // if (!response.ok) {
+    //   const errorText = response.text();
+    //   console.error("Error fetching clothes:", errorText);
+    //   return;
+    // }
+    // const clothesData: ClothType[] = await response.json();
+    // console.log(clothesData);
 
     return (
       <section className="flex flex-col gap-6 bg-lightRose1 px-6 pt-4 pb-12 ">
@@ -30,7 +31,7 @@ export default async function Clothes() {
           </h2>
         </div>
         <div className="flex flex-col gap-12">
-          {clothesData.map((cloth) => (
+          {clothes.map((cloth) => (
             <Cloth key={cloth._id} cloth={cloth} />
           ))}
         </div>
@@ -42,7 +43,5 @@ export default async function Clothes() {
         </Link>
       </section>
     );
-  } catch (error) {
-    console.error("Error fetching clothes:", error);
-  }
+  
 }

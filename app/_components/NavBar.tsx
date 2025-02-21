@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ScrollContext from "@/contexts/scrollContext";
@@ -7,14 +7,11 @@ import { CgSearch } from "react-icons/cg";
 
 import MenuAndProfile from "./MenuAndProfile";
 import { useHomePage } from "@/contexts/HomePageContext";
+import Dashboard from "./Dashboard";
+import UserProfile from "./UserProfile";
 
-// Define prop types
-interface NavbarProps {
-  admin: ReactNode;
-  users: ReactNode;
-}
 
-export default function Navbar({ admin, users }: NavbarProps) {
+export default function Navbar() {
   const { data: session } = useSession();
 const { isHomePage, setIsHomePage } = useHomePage();
 
@@ -63,9 +60,9 @@ const { isHomePage, setIsHomePage } = useHomePage();
           <CgSearch className="text-2xl" />
         </button>
       ) : isAdmin ? (
-        admin
+        <Dashboard/>
       ) : (
-        users
+        <UserProfile/>
       )}
     </nav>
   );

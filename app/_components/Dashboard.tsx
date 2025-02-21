@@ -5,10 +5,10 @@ import { RiDashboardLine, RiCloseFill } from "react-icons/ri";
 
 export default function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
- 
+
   function handleClick() {
-   setIsOpen(!isOpen);
- }
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div className="relative">
@@ -28,11 +28,14 @@ export default function Dashboard() {
         >
           <RiCloseFill />
         </div>
-        <Link href="/upload-cloth" onClick={handleClick}>
+        <Link href="/dashboard/upload-cloth" onClick={handleClick}>
           Upload cloth
         </Link>
-        <Link href="/cloth-orders" onClick={handleClick}>
+        <Link href="/dashboard/cloth-orders" onClick={handleClick}>
           Cloth Orders
+        </Link>
+        <Link href="/dashboard" onClick={handleClick}>
+          Dashboard
         </Link>
       </div>
     </div>

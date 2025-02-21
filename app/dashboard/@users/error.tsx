@@ -1,5 +1,6 @@
-"use client"; 
-import { useEffect} from "react";
+"use client";
+import { useEffect } from "react";
+import { Button } from "@/app/_components/Button";
 
 interface ErrorProps {
   error: Error;
@@ -17,7 +18,9 @@ export default function Error({ error, reset }: ErrorProps) {
         <h1>Oops! Something went wrong 😢!</h1>
         <p>{error.message}</p>
       </div>
-      <button onClick={reset}>Reset</button>
+      <Button type="button" onClick={reset}>
+        Reset
+      </Button>
     </div>
   );
 }

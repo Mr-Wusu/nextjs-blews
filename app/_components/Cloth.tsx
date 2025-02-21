@@ -8,7 +8,7 @@ import * as motion from "motion/react-client";
 
 
 interface Clothing {
-  _id: string;
+  _id: number;
   image: string;
   alt: string;
   description: string;
@@ -22,9 +22,6 @@ interface ClothProps {
 export default function Cloth({ cloth }: ClothProps) {
   const { data } = useSession();
   const isAdmin = data?.user?.email === "wusu_prince@yahoo.com";
-
-  // Convert base64 image data to a data URL
-  const imageUrl = `data:image/jpeg;base64,${cloth.image}`;
 
   return (
     <motion.figure
@@ -51,7 +48,7 @@ export default function Cloth({ cloth }: ClothProps) {
         />
       )}
       <div className="relative h-[52%] bg-slate-400">
-        <Image src={imageUrl} alt={cloth.alt} fill className="object-cover" />
+        <Image src={cloth.image} alt={cloth.alt} fill className="object-cover" />
       </div>
       <figcaption className="flex flex-col py-3 px-4 gap-2 text-[15px]">
         <h3 className="">Description</h3>

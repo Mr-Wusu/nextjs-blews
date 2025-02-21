@@ -1,39 +1,54 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectToDB from "@/settings/database";
 import Clothe from "@/models/clothe";
+import multer from "multer";
 
-export async function POST(req: Request) {
-  await connectToDB();
-  const formData = await req.formData();
-  const description = formData.get("description") as string;
-  const price = parseFloat(formData.get("price") as string);
-  const alt = formData.get("alt") as string;
-  const image = formData.get("image") as File;
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-  if (!description || !price || !image) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
+const storage = multer.diskStorage({
+  destination: "./public/uploads",
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
-  const imageBuffer = await image.arrayBuffer();
-  const imageBase64 = Buffer.from(imageBuffer).toString("base64");
+const upload = multer({ storage });
 
-  const newClothe = new Clothe({
-    description,
-    price,
-    image: imageBase64,
-    alt,
+export async function POST(req: NextRequest, res: NextResponse) {
+  const multerUpload = upload.single("image");
+
+  await new Promise<void>((resolve, reject) => {
+    multerUpload(req as any, res as any, (err: unknown) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
   });
 
+  await connectToDB();
+
+  const form = await req.formData();
+  const name = form.get("name") as string;
+  const description = form.get("description") as string;
+  const file = (req as any).file;
+  const imageUrl = `/uploads/${file.filename}`;
+
+  const newCloth = new Clothe({ name, description, imageUrl });
+
   try {
-    await newClothe.save();
-    return NextResponse.json({ message: "Cloth uploaded successfully" });
+    const savedCloth = await newCloth.save();
+    return NextResponse.json(savedCloth, { status: 201 });
   } catch (error) {
-    console.error(error);
+    console.log(error);
+
     return NextResponse.json(
-      { error: "Failed to upload cloth" },
+      { error: "Failed to create the resource" },
       { status: 500 }
     );
   }
