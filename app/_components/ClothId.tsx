@@ -34,11 +34,11 @@ export default function ClothId({ slug }: { slug: string }) {
           {`${cloth.description} ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.`}
         </p>
       </div>
-      <div className="flex gap-5 w-4/5 ml-auto items-center ">
-        <button className="border-2 h-fit leading-none border-rose-800 rounded-[.3rem] px-3 py-[6px] mb-[-10px] flex hover:bg-gradient-to-l hover:from-rose-400 hover:to-rose-100 transition-all duration-300 ease-linear" onClick={handleClick}>
+      <div className="flex gap-7 w-4/5 ml-auto items-center ">
+        <button className="border-2 h-fit leading-none border-rose-500 rounded-[.3rem] px-3 py-[6px] mb-[-10px] flex hover:bg-gradient-to-l hover:from-rose-400 hover:to-rose-100 transition-all duration-300 ease-linear tracking-wide" onClick={handleClick}>
          &larr; Back
         </button>
-        <Button onClick={handleClick}>Checkout</Button>
+        <Button className="tracking-wider" onClick={handleClick}>Checkout</Button>
       </div>
     </div>
   );
