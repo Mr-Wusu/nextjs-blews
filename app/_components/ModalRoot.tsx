@@ -34,7 +34,7 @@ export default function ModalRoot({
       ref={modalRef}
       onClose={handleCloseModal}
     >
-      <div className="bg-rose-600 h-7 w-7 flex items-center justify-center  absolute -top-1 -right-1">
+      <div className="bg-rose-600 h-7 w-7 flex items-center justify-center  absolute top-0 right-0 rounded-bl-[.7rem]">
         <IoClose
           className="cursor-pointer text-2xl text-lightRose1"
           onClick={handleCloseModal}

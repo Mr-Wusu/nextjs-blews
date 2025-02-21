@@ -3,6 +3,8 @@ export default function ClothOrders() {
     <div className="min-h-screen flex flex-col items-center justify-center px-4">
       This page is only accessible to the administrator, and it is for viewing all
       orders made by customers.
+      <br/>
+      The page is currently under maintenance. Try again later!
     </div>
   );
 }
