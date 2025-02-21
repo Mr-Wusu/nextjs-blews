@@ -47,7 +47,7 @@ export default function Cloth({ cloth }: ClothProps) {
           onClick={() => console.log("Deleted!")}
         />
       )}
-      <div className="relative h-[52%] bg-slate-400">
+      <div className="relative h-[52%] ">
         <Image src={cloth.image} alt={cloth.alt} fill className="object-cover" />
       </div>
       <figcaption className="flex flex-col py-3 px-4 gap-2 text-[15px]">

@@ -2,7 +2,7 @@ const clothes = [
   {
     _id: 1,
     image: "/images/clothings/cloth-1.jpg",
-    alt: "Cloth-1",
+    alt: "Silky sleek Agbada",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.",
     price: 10000,
@@ -10,7 +10,7 @@ const clothes = [
   {
     _id: 2,
     image: "/images/clothings/cloth-2.jpg",
-    alt: "Cloth-2",
+    alt: "Classy semi-formal calm Short-sleeve",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.",
     price: 10000,
@@ -18,7 +18,7 @@ const clothes = [
   {
     _id: 3,
     image: "/images/clothings/cloth-3.jpg",
-    alt: "Cloth-3",
+    alt: "An array or tray of Stylish Caps",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.",
     price: 10000,
@@ -26,7 +26,7 @@ const clothes = [
   {
     _id: 4,
     image: "/images/clothings/cloth-4.jpg",
-    alt: "Cloth-4",
+    alt: "Stock jeans and Jack Bauer Jacket",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.",
     price: 10000,
@@ -34,7 +34,7 @@ const clothes = [
   {
     _id: 5,
     image: "/images/clothings/cloth-5.jpg",
-    alt: "Cloth-5",
+    alt: "Classic Suit",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.",
     price: 10000,
@@ -42,7 +42,7 @@ const clothes = [
   {
     _id: 6,
     image: "/images/clothings/cloth-6.jpg",
-    alt: "Cloth-6",
+    alt: "Odogwu or Cultist",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.",
     price: 10000,

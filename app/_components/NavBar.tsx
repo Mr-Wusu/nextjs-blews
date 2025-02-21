@@ -10,10 +10,9 @@ import { useHomePage } from "@/contexts/HomePageContext";
 import Dashboard from "./Dashboard";
 import UserProfile from "./UserProfile";
 
-
 export default function Navbar() {
   const { data: session } = useSession();
-const { isHomePage, setIsHomePage } = useHomePage();
+  const { isHomePage, setIsHomePage } = useHomePage();
 
   const [isSignedOut, setIsSignedOut] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -31,7 +30,10 @@ const { isHomePage, setIsHomePage } = useHomePage();
   useEffect(() => {
     if (session) {
       setIsSignedOut(false);
-      setIsAdmin(session.user?.email === "wusu_prince@yahoo.com");
+      setIsAdmin(
+        session.user?.email === "wusu_prince@yahoo.com" ||
+          session.user?.email === "test.paws1234@gmail.com"
+      );
     } else {
       setIsSignedOut(true);
     }
@@ -60,9 +62,9 @@ const { isHomePage, setIsHomePage } = useHomePage();
           <CgSearch className="text-2xl" />
         </button>
       ) : isAdmin ? (
-        <Dashboard/>
+        <Dashboard />
       ) : (
-        <UserProfile/>
+        <UserProfile />
       )}
     </nav>
   );
