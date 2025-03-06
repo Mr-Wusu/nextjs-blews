@@ -17,12 +17,12 @@ export default async function Hero() {
       <div className="h-[450px] w-full relative sm:hidden">
         <div className="absolute w-full h-full bg-gradient-to-r from-darkRose1 to-darkRose1 z-10 top-0 opacity-[.50] left-0" />
         <div className="absolute w-full h-full z-5 top-0 left-0">
-          <Image fill src={heroImage1} alt="The Hero image" />
+          <Image fill src={heroImage2} alt="The Hero image" />
         </div>
-        <div className="flex gap-3 absolute top-[67%] left-0 pl-5 z-20">
-          <h1 className="h1-custom-font text-3xl font-extrabold w-[90%] capitalize text-transparent bg-clip-text bg-gradient-to-r from-lightRose1 to-rose200">
+        <div className="flex gap-3 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center z-20">
+          <h1 className="h1-custom-font text-3xl font-extrabold w-max capitalize text-transparent bg-clip-text bg-gradient-to-r from-lightRose1 to-rose200">
             With Blews&apos; Stitches <br />
-            your wears fit inch-perfect!
+            your wears fit <br /> inch-perfect!
           </h1>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default async function Hero() {
           />
         </div>
         <div className="flex gap-3 h-[35rem] left-0 right-0 bottom-0 absolute md:w-[43.7rem] md:mx-auto md+:w-[52.2rem] lg:w-[59rem] lg:mx-auto lg+:w-[64.125rem] xl:w-[72.25rem] z-30">
-          <div className="flex flex-col gap-5 z-40 h-1/2 absolute sm:left-1/2 sm:-translate-x-1/2 sm:translate-y-2/5 sm:bottom-1/2 sm:w-[25rem] sm:text-center md:w-max md:text-left md:translate-x-0 md:translate-y-0 md:left-0 md:bottom-10 md+:bottom-[4.5rem] xl:bottom-[5rem]">
+          <div className="flex flex-col gap-5 z-40 h-1/2 absolute sm:left-1/2 sm:-translate-x-1/2 sm:translate-y-1/2 sm:bottom-1/2 sm:w-[25rem] sm:text-center md:w-max md:text-left md:translate-x-0 md:translate-y-0 md:left-0 md:bottom-10 md+:bottom-[4.5rem] xl:bottom-[5rem]">
             <h1 className="h1-custom-font font-extrabold capitalize text-transparent bg-clip-text bg-gradient-to-r from-lightRose1 to-rose200 leading-10 sm:text-4xl md:text-[2.05rem] md+:text-[2.4rem] md+:leading-[2.6rem] lg:text-[2.75rem]  lg:leading-[3rem] xl:text-5xl">
               With Blews&apos; Stitches <br />
               your wears fit <br /> inch-perfect!
