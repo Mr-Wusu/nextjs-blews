@@ -6,11 +6,14 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-
   const slug = (await params).slug;
   return (
-    <ModalRoot className="h-fit rounded-[.7rem] w-[90%] flex flex-col items-center justify-center px-4">
-      <ClothId slug={slug}/>
+    <ModalRoot className="h-[85%] w-[90%] bg-rose-200">
+      <ClothId
+        className="px-5 pb-none"
+        bg="bg-rose-200 border-2 border-darkRose2 rounded-[.7rem] overflow-hidden"
+        slug={slug}
+      />
     </ModalRoot>
   );
 }

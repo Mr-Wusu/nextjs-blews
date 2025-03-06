@@ -10,6 +10,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        "md+": "940px",
+        "lg+": "1140px",        
+      },
       colors: {
         rose100: "#fecdd3",
         rose200: "#fda4af",

@@ -30,11 +30,11 @@ export default function ModalRoot({
 
   return createPortal(
     <dialog
-      className={`${className} overflow-x-hidden`}
+      className={`${className} overflow-hidden rounded-[.7rem]`}
       ref={modalRef}
       onClose={handleCloseModal}
     >
-      <div className="bg-rose-600 h-7 w-7 flex items-center justify-center  absolute top-0 right-0 rounded-bl-[.7rem]">
+      <div className=" bg-rose-600 hover:bg-rose-500 transition-all duration-300 h-7 w-7 flex items-center justify-center  absolute top-0 right-0 rounded-tr-[.7rem] rounded-bl-[.7rem] z-40">
         <IoClose
           className="cursor-pointer text-2xl text-lightRose1"
           onClick={handleCloseModal}
