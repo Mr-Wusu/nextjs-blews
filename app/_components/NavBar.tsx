@@ -20,7 +20,7 @@ export default function Navbar() {
   const { isHomePage, setIsHomePage } = useHomePage();
   const [isProfileOpen, setProfileOpen] = useState(false);
   const [isSignedOut, setIsSignedOut] = useState(true);
-  
+
   const [isAdmin, setIsAdmin] = useState(false);
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
@@ -34,7 +34,6 @@ export default function Navbar() {
   }, [pathname, setIsHomePage]);
 
   useEffect(() => {
-  
     if (session) {
       setIsSignedOut(false);
       setIsAdmin(
@@ -61,7 +60,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`lg:hidden justify-between items-center p-3  fixed w-full z-50 flex  ${
+        className={`md:hidden justify-between items-center p-3  fixed w-full z-50 flex  ${
           isHomePage && !scrolled
             ? "bg-transparent text-lightRose1"
             : !isHomePage && !scrolled
@@ -88,7 +87,13 @@ export default function Navbar() {
         )}
       </nav>
       <nav
-        className={`hidden lg:flex justify-between items-center h-16 px-4 fixed w-full z-50 bg-transparent text-lightRose1 shadow-md ${isHomePage && scrolled ? "!bg-lightRose1 text-darkRose2" : !isHomePage ? "bg-lightRose1 text-darkRose2" : "bg-lightRose1 text-darkRose2"}`}
+        className={`hidden md:flex justify-between items-center h-16 px-4 fixed w-full z-50  shadow-md ${
+          isHomePage && !scrolled
+            ? "bg-transparent text-lightRose1"
+            : isHomePage && scrolled
+              ? "bg-lightRose1 text-darkRose2"
+              : !isHomePage && !scrolled ? "bg-lightRose1 text-darkRose2":""
+        }`}
       >
         <div>
           <h2
@@ -142,14 +147,11 @@ export default function Navbar() {
                 <Button className="mt-0 text-[1.125rem]">Sign In</Button>
               </Link>
             </div>
-          )  : (
+          ) : (
             <div>
               {isAdmin ? (
-                <div
-                  onMouseEnter={() => setProfileOpen(true)}
-                  className="relative"
-                >
-                  <div className="h-9 w-9 relative rounded-full overflow-hidden">
+                <div onClick={() => setProfileOpen(true)} className="relative">
+                  <div className="h-9 w-9 relative rounded-full overflow-hidden cursor-pointer">
                     {session?.user?.image ? (
                       <Image
                         src={session?.user?.image}
@@ -199,7 +201,7 @@ export default function Navbar() {
                       </Link>
                       <Link className="ml-auto" href="/auth/signout">
                         <Button
-                          className="mt-0 "
+                          className="mt-2 "
                           onClick={(e) => handleProfileOpen(e)}
                         >
                           Sign Out
