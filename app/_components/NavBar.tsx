@@ -91,20 +91,20 @@ export default function Navbar() {
           isHomePage && !scrolled
             ? "bg-transparent text-lightRose1"
             : isHomePage && scrolled
-              ? "bg-lightRose1 text-darkRose2"
-              : !isHomePage && !scrolled ? "bg-lightRose1 text-darkRose2":""
+              ? "bg-lightRose1 text-darkRose1"
+              : !isHomePage && !scrolled ? "bg-lightRose1 text-darkRose1":""
         }`}
       >
         <div>
           <h2
-            className={`h2-custom-font text-2xl ${isHomePage && scrolled ? "text-darkRose2" : !isHomePage ? "text-darkRose2" : ""}`}
+            className={`h2-custom-font md:text-xl lg:text-2xl ${isHomePage && scrolled ? "text-darkRose2" : !isHomePage ? "text-darkRose2" : ""}`}
           >
             Blews&apos; Stitches
           </h2>
         </div>
         <div>
           <ul
-            className={`flex space-x-5 text-xl -ml-12 ${isHomePage && scrolled ? "text-darkRose2" : !isHomePage ? "text-darkRose2" : ""}`}
+            className={`flex space-x-5 md:text-lg lg:text-xl -ml-12 ${isHomePage && scrolled ? "text-darkRose2" : !isHomePage ? "text-darkRose2" : ""}`}
           >
             <li>
               <Link
