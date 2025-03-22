@@ -48,7 +48,13 @@ export default function Cloth({ cloth }: ClothProps) {
         />
       )}
       <div className="relative h-[52%] ">
-        <Image src={cloth.image} alt={cloth.alt} fill className="object-cover" />
+        <Image
+          src={cloth.image}
+          alt={cloth.alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
       <figcaption className="flex flex-col py-3 px-4 gap-2 text-[15px]">
         <h3 className="">Description</h3>

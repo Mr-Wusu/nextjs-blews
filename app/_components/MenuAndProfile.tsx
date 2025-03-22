@@ -36,10 +36,10 @@ export default function MenuAndProfile() {
             isHomePage && !scrolled
               ? "text-lightRose1 hover:text-rose200 transition-all duration-200"
               : isHomePage && scrolled
-              ? "text-rose-800 hover:text-rose-600 transition-all duration-200"
-              : !isHomePage
-              ? "hover:text-rose-600 transition-all duration-200"
-              : ""
+                ? "text-rose-800 hover:text-rose-600 transition-all duration-200"
+                : !isHomePage
+                  ? "hover:text-rose-600 transition-all duration-200"
+                  : ""
           }`}
         />
       </div>
@@ -52,6 +52,7 @@ export default function MenuAndProfile() {
                 alt="profile"
                 className="object-cover"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             ) : (
               <FaRegCircleUser
@@ -59,10 +60,10 @@ export default function MenuAndProfile() {
                   isHomePage && !scrolled
                     ? "text-lightRose1 hover:text-rose200 transition-all duration-200"
                     : isHomePage && scrolled
-                    ? "text-rose-800 hover:text-rose-600 transition-all duration-200"
-                    : !isHomePage
-                    ? "hover:text-rose-600 transition-all duration-200"
-                    : ""
+                      ? "text-rose-800 hover:text-rose-600 transition-all duration-200"
+                      : !isHomePage
+                        ? "hover:text-rose-600 transition-all duration-200"
+                        : ""
                 }`}
               />
             )}
@@ -74,10 +75,11 @@ export default function MenuAndProfile() {
                 : "-translate-y-[40%] opacity-0"
             }`}
           >
-            <div className="grid place-items-center bg-rose-600 text-lightRose1 rounded-full w-5 h-5 cursor-pointer absolute top-[-11px] right-[-11px]  shadow-lg"
-            onClick={toggleProfile}
+            <div
+              className="grid place-items-center bg-rose-600 text-lightRose1 rounded-full w-5 h-5 cursor-pointer absolute top-[-11px] right-[-11px]  shadow-lg"
+              onClick={toggleProfile}
             >
-              <IoClose className="shadow-md"/>
+              <IoClose className="shadow-md" />
             </div>
             <p className="text-darkRose2 text-sm">{session.user?.name}</p>
             <p className="text-sm text-darkRose2">{session.user?.email}</p>
@@ -98,10 +100,10 @@ export default function MenuAndProfile() {
               isHomePage && !scrolled
                 ? "bg-rose-100 text-darkRose2 hover:bg-rose-300 transition-all duration-200"
                 : isHomePage && scrolled
-                ? "bg-gradient-to-r from-rose-700 to-rose-400 text-lightRose1 hover:bg-gradient-to-r hover:from-rose-500 hover:to-rose-300 transition-all duration-200"
-                : !isHomePage
-                ? "bg-gradient-to-r from-rose-700 to-rose-400 text-lightRose1 hover:bg-gradient-to-r hover:from-rose-500 hover:to-rose-300 transition-all duration-300 ease-in-out"
-                : ""
+                  ? "bg-gradient-to-r from-rose-700 to-rose-400 text-lightRose1 hover:bg-gradient-to-r hover:from-rose-500 hover:to-rose-300 transition-all duration-200"
+                  : !isHomePage
+                    ? "bg-gradient-to-r from-rose-700 to-rose-400 text-lightRose1 hover:bg-gradient-to-r hover:from-rose-500 hover:to-rose-300 transition-all duration-300 ease-in-out"
+                    : ""
             }`}
           >
             Sign In

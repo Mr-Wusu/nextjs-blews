@@ -1,0 +1,54 @@
+export const testimony = [
+  {
+    company: "Globacom Nig Ltd",
+    field: "Web Developer",
+    position: "Senior Frontend Developer",
+    name: "Prince Wusu",
+    image: "/images/testifiers/testifier-2.jpg",
+    captionOne: "Services showing",
+    captionTwoA: "endemic",
+    captionTwoB: "pure quality!",
+    commentMajor:
+      "What a wonderful place for my feet to have been guided to! I was styled so elegantly that the bride kept stealing passes at me",
+    commentMinor: "at the risk of being caught!",
+  },
+  {
+    company: "Google",
+    field: "Data Engineering",
+    position: "Data Entry Associate",
+    name: "Kemi Parker",
+    image: "/images/testifiers/kemi_wusu.jpg",
+    captionOne: "I highly recommend blews",
+    captionTwoA: "for",
+    captionTwoB: "all occasions",
+    commentMajor:
+      "Blews styled me for our company's end-of-year party and I ended up winning the best-dressed award for the night!",
+    commentMinor: "Simple, elegant and so demure!",
+  },
+  {
+    company: "Microsoft",
+    field: "Cloud Security",
+    position: "Cloud Security technician",
+    name: "Sandra Prince-Wusu",
+    image: "/images/testifiers/sandra_wusu.jpg",
+    captionOne: "Blews is the African culture",
+    captionTwoA: "",
+    captionTwoB: "at the heart of Microsoft",
+    commentMajor:
+      "Blews to the world! I really can't stress enough the role Blews plays in my overall branding and in the perception of",
+    commentMinor: "African styles at Microsoft!",
+  },
+  {
+    company: "Microsoft",
+    field: "Microsoft Azure",
+    position: "Microsoft Azure Specialist",
+    name: "Olivia Agboinou-Wusu",
+    image: "/images/testifiers/ty3.jpg",
+    captionOne: "Excellence is the colour!",
+    captionTwoA: "Blews is",
+    captionTwoB: "the artist 💕💕!",
+    commentMajor:
+      "Blews to the world! I really can't stress enough the role Blews plays in my overall branding and in the perception of",
+    commentMinor: "African styles at Microsoft!",
+  },
+];

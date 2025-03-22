@@ -92,7 +92,9 @@ export default function Navbar() {
             ? "bg-transparent text-lightRose1"
             : isHomePage && scrolled
               ? "bg-lightRose1 text-darkRose1"
-              : !isHomePage && !scrolled ? "bg-lightRose1 text-darkRose1":""
+              : !isHomePage && !scrolled
+                ? "bg-lightRose1 text-darkRose1"
+                : ""
         }`}
       >
         <div>
@@ -104,7 +106,7 @@ export default function Navbar() {
         </div>
         <div>
           <ul
-            className={`flex space-x-5 md:text-lg lg:text-xl -ml-12 ${isHomePage && scrolled ? "text-darkRose2" : !isHomePage ? "text-darkRose2" : ""}`}
+            className={`flex md:space-x-3 lg:space-x-5 md:text-lg lg:text-xl -ml-12 ${isHomePage && scrolled ? "text-darkRose2" : !isHomePage ? "text-darkRose2" : ""}`}
           >
             <li>
               <Link
@@ -157,12 +159,14 @@ export default function Navbar() {
                         src={session?.user?.image}
                         alt="profile image"
                         layout="fill"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
                       <Image
                         src="/images/avatar-2.jpg"
                         alt="profile image"
                         layout="fill"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     )}
                   </div>

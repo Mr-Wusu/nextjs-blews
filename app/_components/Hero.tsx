@@ -17,7 +17,12 @@ export default async function Hero() {
       <div className="h-[450px] w-full relative sm:hidden">
         <div className="absolute w-full h-full bg-gradient-to-r from-darkRose1 to-darkRose1 z-10 top-0 opacity-[.50] left-0" />
         <div className="absolute w-full h-full z-5 top-0 left-0">
-          <Image fill src={heroImage2} alt="The Hero image" />
+          <Image
+            fill
+            src={heroImage2}
+            alt="The Hero image"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
         <div className="flex gap-3 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center z-20">
           <h1 className="h1-custom-font text-3xl font-extrabold w-max capitalize text-transparent bg-clip-text bg-gradient-to-r from-lightRose1 to-rose200">
@@ -34,6 +39,7 @@ export default async function Hero() {
             fill
             src={heroImage2}
             alt="The Hero image"
+            sizes="100%"
           />
         </div>
         <div className="flex gap-3 h-[35rem] left-0 right-0 bottom-0 absolute md:w-[43.7rem] md:mx-auto md+:w-[52.2rem] lg:w-[59rem] lg:mx-auto lg+:w-[64.125rem] xl:w-[72.25rem] z-30">
