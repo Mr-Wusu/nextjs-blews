@@ -44,7 +44,7 @@ export default function About() {
       <div className={`${styles.about}`}>
         <div className={styles.heading}>
           <FaBullseye className={styles.bull} />
-          <h3 className="font-semibold text-darkRose2">
+          <h3 className="font-semibold text-darkRose2 font-nunito">
             Our promise to you at blews stitches
           </h3>
         </div>
@@ -100,7 +100,7 @@ export default function About() {
         </Swiper>
       </div>
 
-      <div className="hidden md:flex md:flex-col md:gap-4 py-11 px-9 ">
+      <div className="hidden md:flex md:flex-col md:gap-4 pt-11 px-9 ">
         <div className="flex mx-auto gap-5 items-center">
           <FaBullseye className="text-2xl text-rose-950" />
           <h3 className="text-xl font-bold text-rose-900 capitalize">

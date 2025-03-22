@@ -12,7 +12,10 @@ export default {
     extend: {
       screens: {
         "md+": "940px",
-        "lg+": "1140px",        
+        "lg+": "1140px",
+      },
+      fontFamily: {
+        nunito: ["Nunito", "sans-serif"],
       },
       colors: {
         rose100: "#fecdd3",

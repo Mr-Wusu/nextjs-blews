@@ -33,7 +33,7 @@ export default function Cloth({ cloth }: ClothProps) {
         type: "spring",
         stiffness: 100,
       }}
-      className="relative radius flex flex-col w-[245px] mx-auto h-[24rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black"
+      className="relative radius flex flex-col w-[15.3125rem] md:w-[17rem] mx-auto h-[26rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black"
     >
       {isAdmin && (
         <RiFileEditFill
@@ -56,7 +56,7 @@ export default function Cloth({ cloth }: ClothProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
-      <figcaption className="flex flex-col py-3 px-4 gap-2 text-[15px]">
+      <figcaption className="flex flex-col py-3 px-4 gap-2 text-[0.9375rem] md:text-[1.025rem]">
         <h3 className="">Description</h3>
         <p className="">{cloth.description}</p>
         <div className="flex justify-between items-center pr-2">
