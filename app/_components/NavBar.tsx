@@ -94,7 +94,7 @@ export default function Navbar() {
               ? "bg-lightRose1 text-darkRose1"
               : !isHomePage && !scrolled
                 ? "bg-lightRose1 text-darkRose1"
-                : ""
+                : "bg-lightRose1 text-darkRose1"
         }`}
       >
         <div>

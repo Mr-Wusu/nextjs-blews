@@ -1,7 +1,7 @@
 const testimonies = [
   {
     fullName: "Prince Wusu",
-    image: "/images/testifiers/testifier-1.jpg",
+    image: ["/images/testifiers/testifier-1.jpg", ""],
     alt: "Testifier-1",
     quote:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus a nihil sint minima tempore officiis culpa quos. Deleniti, ab soluta!",
@@ -10,7 +10,7 @@ const testimonies = [
   },
   {
     fullName: "Femi Wusu",
-    image: "/images/testifiers/testifier-2.jpg",
+    image: ["/images/testifiers/testifier-2.jpg", ""],
     alt: "Testifier-2",
     quote:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus a nihil sint minima tempore officiis culpa quos.  soluta!",
@@ -19,7 +19,7 @@ const testimonies = [
   },
   {
     fullName: "Kemi Wusu",
-    image: "/images/testifiers/testifier-3.jpg",
+    image: ["/images/testifiers/testifier-3.jpg", ""],
     alt: "Testifier-3",
     quote:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil sint minima tempore officiis culpa quos. Deleniti, ab soluta!",
@@ -28,7 +28,7 @@ const testimonies = [
   },
   {
     fullName: "Sandra Prince-Wusu",
-    image: "/images/testifiers/ty3.jpg",
+    image: ["/images/testifiers/ty3.jpg", ""],
     alt: "Testifier-4",
     quote:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus a nihil sint minima tempore officiis culpa quos. Deleniti, ab soluta!",

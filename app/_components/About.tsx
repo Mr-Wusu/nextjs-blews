@@ -19,7 +19,7 @@ import Card from "./Card";
 
 interface Testimony {
   fullName: string;
-  image: string;
+  image: string[];
   alt: string;
   quote: string;
   skill: string;
@@ -78,7 +78,7 @@ export default function About() {
                 <div className="relative w-[72px] h-[72px] overflow-hidden">
                   <Image
                     className="object-cover rounded-full"
-                    src={testimony.image}
+                    src={testimony.image[0]}
                     alt={testimony.alt}
                     fill
                     sizes="100%"
@@ -100,15 +100,15 @@ export default function About() {
         </Swiper>
       </div>
 
-      <div className="hidden md:flex md:flex-col md:gap-4 pt-11 px-9 ">
+      <div className="hidden md:flex md:flex-col md:gap-4 pt-11 lg:pt-14 px-9 lg:pb-8">
         <div className="flex mx-auto gap-5 items-center">
           <FaBullseye className="text-2xl text-rose-950" />
-          <h3 className="text-xl font-bold text-rose-900 capitalize">
+          <h3 className="text-xl lg:text-2xl font-bold text-rose-900 capitalize">
             Our promise to you at{" "}
             <span className={`${styles.logo}`}>blews stitches</span>
           </h3>
         </div>
-        <p className="text-lg text-darkRose2 mb-3 lg:px-8">
+        <p className="text-lg text-darkRose2 mb-3 lg:px-20">
           You have come to a place where what you order is what you get. Stay at
           the comfort of your home and get that killer dress tailored for your
           body size and uniqueness. We are keen on the inches - on specificity,

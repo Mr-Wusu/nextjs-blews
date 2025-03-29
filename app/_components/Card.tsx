@@ -6,7 +6,7 @@ interface CardProps {
     field: string;
     position: string;
     name: string;
-    image: string;
+    image: string[];
     captionOne: string;
     captionTwoA: string;
     captionTwoB: string;
@@ -17,7 +17,7 @@ interface CardProps {
 
 export default function Card({ card }: CardProps) {
   return (
-    <article className="flex flex-col lg:flex-row lg:gap-0 items-center gap-[1.35rem] w-[23rem] lg:w-fit min-h-fit lg:h-[27rem] border rounded-[.9rem] mx-auto overflow-hidden mb-10 ">
+    <article className="flex flex-col lg:flex-row lg:gap-0 items-center gap-[1.35rem] w-[23rem] lg:w-fit min-h-fit lg:h-[27rem] border border-darkRose2 rounded-[.9rem] mx-auto overflow-hidden mb-10 shadow-lg">
       <div className="md:hidden lg:flex absolute right-[8.9125rem] w-[21.5rem] top-[.07rem] text-center text-lightRose1 px-1 py-1 bg-rose-500 flex flex-col rounded-tr-[0.7rem]">
         <p className="font-bold">{card.name}</p>
         <p className="text-sm">{card.position}</p>
@@ -28,12 +28,13 @@ export default function Card({ card }: CardProps) {
       </div>
       <div className="flex flex-nowrap relative lg:hidden">
         <div className="h-48 w-48 bg-rose-200 rounded-full" />
-        <div className="h-48 w-48 bg-rose-200 rounded-full overflow-hidden relative">
+        <div className="h-48 w-48 bg-rose-200 rounded-full  relative">
           <Image
-            src={card.image}
+            src={card.image[1]}
             alt={`${card.position} photo`}
-            className="object-cover"
-            fill
+            className="object-cover rounded-b-full h-[14.4rem] absolute -top-[40px]"
+            width="192"
+            height="246"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
@@ -64,7 +65,7 @@ export default function Card({ card }: CardProps) {
       <div className="relative h-full w-[17rem] bg-rose-300">
         <Image
           className="object-cover"
-          src={card.image}
+          src={card.image[0]}
           alt={`${card.position}s Photo`}
           fill
         />
