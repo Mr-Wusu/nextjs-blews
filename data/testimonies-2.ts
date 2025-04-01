@@ -6,7 +6,7 @@ export const testimony = [
     name: "Prince Wusu",
     image: [
       "/images/testifiers/testifier-2.jpg",
-      "/images/testifiers/no_background.png",
+      "/images/testifiers/Hello.png",
     ],
     captionOne: "Services showing",
     captionTwoA: "endemic",
@@ -21,8 +21,8 @@ export const testimony = [
     position: "Data Entry Associate",
     name: "Kemi Parker",
     image: [
-      "/images/testifiers/kemi_wusu.jpg",
-      "/images/testifiers/kemi_trans_bg.png",
+      "/images/testifiers/fb_profile_trans_bg.jpg",
+      "/images/testifiers/fb_profile_trans_bg.png",
     ],
     captionOne: "I highly recommend blews",
     captionTwoA: "for",
