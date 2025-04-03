@@ -41,17 +41,15 @@ import Card from "./Card";
 export default function About() {
   return (
     <>
-      
-
       <div className="flex flex-col md:gap-4 pt-11 lg:pt-14 px-9 lg:pb-8">
         <div className="flex mx-auto gap-5 items-center">
           <FaBullseye className="text-2xl text-rose-950" />
-          <h3 className="text-xl lg:text-2xl font-bold text-rose-900 capitalize">
+          <h3 className="text-[1.1rem] md:text-xl lg:text-2xl font-bold text-rose-900 capitalize">
             Our promise to you at{" "}
-            <span className={`${styles.logo}`}>blews stitches</span>
+            <span className={`${styles.logo}`}>blews&apos; stitches</span>
           </h3>
         </div>
-        <p className="text-lg text-darkRose2 mb-3 lg:px-20">
+        <p className="leading-7  text-justify md:text-left md:text-lg lg:text-xl text-darkRose2  lg:px-20 mb-6">
           You have come to a place where what you order is what you get. Stay at
           the comfort of your home and get that killer dress tailored for your
           body size and uniqueness. We are keen on the inches - on specificity,
@@ -68,7 +66,7 @@ export default function About() {
           spaceBetween={20}
           slidesPerView={1}
           onSlideChange={() => console.log("slide change")}
-          className="max-w-[37rem] lg:max-w-[56rem]"
+          className="max-w-[27rem] md:max-w-[37rem] lg:max-w-[56rem] mx-auto"
         >
           {testimony.map((card, i) => (
             <SwiperSlide key={i + 1}>

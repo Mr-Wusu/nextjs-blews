@@ -99,7 +99,7 @@
     .next {
       position: absolute;
       z-index: 70;
-      width: 32px ;
+      width: 32px;
       height: 32px;
       background-color: vars.$rose100;
       border-radius: 50%;
@@ -111,7 +111,6 @@
         background-color: vars.$darkRose1;
         color: vars.$lightRose1;
       }
-
     }
     .prev {
       left: 0;
@@ -124,12 +123,20 @@
 
 .logo {
   font-family: MyCustomFont, sans-serif;
-  background-color: #be123c;
-  color: white;
-  padding: 0.4rem 1rem;
+  padding: 0 0.5rem;
+  margin-left: -0.42rem;
   font-weight: 500;
-  clip-path: polygon(10% 0%, 100% 0, 90% 100%, 0% 100%);
-  border-radius: 0.6rem;
+  font-size: 1.2rem;
+  
+
+  @media screen and (min-width: 768px) {
+    background-color: #be123c;
+    color: white;
+    margin-left: 0rem;
+    padding: 0.4rem 1rem;
+    clip-path: polygon(10% 0%, 100% 0, 90% 100%, 0% 100%);
+    border-radius: 0.6rem;
+  }
 }
 
 .prev,

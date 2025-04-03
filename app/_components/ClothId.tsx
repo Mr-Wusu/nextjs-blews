@@ -12,6 +12,7 @@ export default function ClothId({
   slug: string;
   className: string;
   bg: string;
+  clothContainer: string;
 }) {
   const router = useRouter();
   const cloth = clothes.find((cloth) => cloth._id.toString() === slug);
@@ -25,8 +26,8 @@ export default function ClothId({
   }
 
   return (
-    <div className={`h-full flex flex-col gap-4 ${bg} overflow-hidden`}>
-      <div className="relative w-full h-[300px] overflow-hidden">
+    <div className={`h-full flex flex-col gap-4 overflow-hidden ${bg}`}>
+      <div className="relative w-full h-[18.75rem] overflow-hidden ${clothContainer}">
         <Image
           fill
           className="object-cover"

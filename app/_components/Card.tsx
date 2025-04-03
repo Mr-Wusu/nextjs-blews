@@ -88,7 +88,7 @@ export default function Card({ card }: CardProps) {
             <div className="h-4 w-4 rounded-full bg-rose-400" />
             <div className="h-5 w-5 rounded-full bg-rose-400" />
           </div>
-          <p className="w-[18rem] text-justify text-[1.1rem] mx-auto md:text-[1.25rem]">
+          <p className="w-[18rem] text-justify text-[1.1rem] mx-auto lg:text-[1.165rem]">
             {`${card.commentMajor} `}
             <span className="font-bold">{card.commentMinor}</span>
           </p>

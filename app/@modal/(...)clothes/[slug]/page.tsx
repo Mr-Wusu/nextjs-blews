@@ -8,10 +8,11 @@ export default async function Page({
 }) {
   const slug = (await params).slug;
   return (
-    <ModalRoot className="h-[85%] w-[90%] bg-rose-200">
+    <ModalRoot className="h-fit w-[70vw] md:w-[46vw]">
       <ClothId
         className="px-5 pb-none"
-        bg="bg-rose-200 border-2 border-darkRose2 rounded-[.7rem] overflow-hidden"
+        bg="border-2 border-darkRose2 rounded-[.7rem] overflow-hidden pb-7"
+        clothContainer=""
         slug={slug}
       />
     </ModalRoot>

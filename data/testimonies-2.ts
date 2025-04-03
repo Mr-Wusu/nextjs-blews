@@ -18,11 +18,11 @@ export const testimony = [
   {
     company: "Google",
     field: "Data Engineering",
-    position: "Data Entry Associate",
-    name: "Kemi Parker",
+    position: "Data Specialist",
+    name: "Prince Wusu",
     image: [
-      "/images/testifiers/fb_profile_trans_bg.jpg",
-      "/images/testifiers/fb_profile_trans_bg.png",
+      "/images/testifiers/prince_o.jpg",
+      "/images/testifiers/prince_boy.png",
     ],
     captionOne: "I highly recommend blews",
     captionTwoA: "for",
@@ -37,7 +37,7 @@ export const testimony = [
     position: "Cloud Security technician",
     name: "Sandra Prince-Wusu",
     image: [
-      "/images/testifiers/sandra_wusu.png",
+      "/images/testifiers/sandra_headtie.jpg",
       "/images/testifiers/sandra_wusu.png",
     ],
     captionOne: "Blews is the African culture",
