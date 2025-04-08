@@ -3,8 +3,9 @@ import "@/styles/globals.css";
 import Footer from "./_components/Footer";
 import Navbar from "./_components/NavBar";
 import { ScrollProvider } from "@/contexts/scrollContext";
-import { SessionProvider } from "next-auth/react";
+
 import { HomePageProvider } from "@/contexts/HomePageContext";
+import ConvexClerkProvider from "@/contexts/ConvexClerkProvider";
 
 export const metadata: Metadata = {
   title: "Home | Blews Stitches",
@@ -20,13 +21,12 @@ export default async function RootLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <SessionProvider>
-      <HomePageProvider>
-        <html lang="en">
-          <body>
+    <HomePageProvider>
+      <html lang="en">
+        <body>
+          <ConvexClerkProvider>
             <ScrollProvider>
               <Navbar />
-
               <div className="bg-lightRose1 text-darkRose2">
                 {modal}
                 {children}
@@ -34,9 +34,9 @@ export default async function RootLayout({
               <Footer />
               <div id="root-modal" />
             </ScrollProvider>
-          </body>
-        </html>
-      </HomePageProvider>
-    </SessionProvider>
+          </ConvexClerkProvider>
+        </body>
+      </html>
+    </HomePageProvider>
   );
 }

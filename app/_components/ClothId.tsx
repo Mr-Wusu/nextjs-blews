@@ -8,6 +8,7 @@ export default function ClothId({
   slug,
   className,
   bg,
+  clothContainer,
 }: {
   slug: string;
   className: string;
@@ -26,8 +27,12 @@ export default function ClothId({
   }
 
   return (
-    <div className={`h-full flex flex-col gap-4 overflow-hidden ${bg}`}>
-      <div className="relative w-full h-[18.75rem] overflow-hidden ${clothContainer}">
+    <div
+      className={`h-full flex flex-col gap-4 overflow-hidden border-[2px] md:mt-16 md:pb-6 md:w-[30rem] border-rose-600 rounded-[0.7rem] ${bg}`}
+    >
+      <div
+        className={`relative w-full h-[18.75rem] md:h-[25rem]  overflow-hidden ${clothContainer}`}
+      >
         <Image
           fill
           className="object-cover"
@@ -36,11 +41,11 @@ export default function ClothId({
           alt={cloth.alt}
         />
       </div>
-      <div className={`flex flex-col mb- px-3 ${className}`}>
+      <div className={`flex flex-col mb- px-3 md:px-5 ${className}`}>
         <h1>Cloth Id: {cloth._id}</h1>
-        <div className="flex flex-col mt-2">
-          <p className="font-semibold">Name: {cloth.alt}</p>
-          <p>
+        <div className="flex flex-col mt-2 md:text-[1.1rem]">
+          <p className="font-semibold ">Name: {cloth.alt}</p>
+          <p className="text-justify">
             Description:{" "}
             {`${cloth.description} ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.`}
           </p>
@@ -48,7 +53,7 @@ export default function ClothId({
       </div>
       <div className="flex gap-7 w-4/5 ml-auto items-center ">
         <button
-          className="border-2 h-fit leading-none border-rose-500 rounded-[.3rem] px-3 py-[6px] mb-[-10px] flex hover:bg-gradient-to-l hover:from-rose-400 hover:to-rose-100 transition-all duration-300 ease-linear tracking-wide"
+          className="border-2 h-fit leading-none border-rose-500 rounded-[.3rem] px-3 py-[6px] flex hover:bg-gradient-to-l hover:from-rose-400 hover:to-rose-100 transition-all duration-300 ease-linear tracking-wide"
           onClick={handleClick}
         >
           &larr; Back

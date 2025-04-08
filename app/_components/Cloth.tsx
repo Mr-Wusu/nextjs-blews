@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { MdDelete } from "react-icons/md";
@@ -20,8 +20,8 @@ interface ClothProps {
 }
 
 export default function Cloth({ cloth }: ClothProps) {
-  const { data } = useSession();
-  const isAdmin = data?.user?.email === "wusu_prince@yahoo.com";
+  // const { data } = useSession();
+  const isAdmin = true
 
   return (
     <motion.figure

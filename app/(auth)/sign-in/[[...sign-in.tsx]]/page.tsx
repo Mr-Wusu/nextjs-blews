@@ -1,4 +1,5 @@
-import LoginForm from "@/app/_components/LoginForm";
+// import LoginForm from "@/app/_components/LoginForm";
+import { SignIn } from "@clerk/nextjs";
 
 export const metadata = {
   title: "Sign in | Blews Stitches",
@@ -6,10 +7,11 @@ export const metadata = {
     "Sign in to the Blews Stitches platform to access your account and manage your orders.",
 };
 
-export default function SignIn() {
+export default function Page() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <LoginForm />
+      {/* <LoginForm /> */}
+      <SignIn/>
     </div>
   );
 }

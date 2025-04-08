@@ -66,7 +66,7 @@ export default function About() {
           spaceBetween={20}
           slidesPerView={1}
           onSlideChange={() => console.log("slide change")}
-          className="max-w-[27rem] md:max-w-[37rem] lg:max-w-[56rem] mx-auto"
+          className="max-w-[27rem] sm+:max-w-[31rem] md:max-w-[37rem] lg:max-w-[56rem] mx-auto"
         >
           {testimony.map((card, i) => (
             <SwiperSlide key={i + 1}>

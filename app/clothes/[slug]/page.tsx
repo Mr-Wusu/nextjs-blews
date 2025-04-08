@@ -9,7 +9,7 @@ export default async function Page({
   const slug = (await params).slug;
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4">
-      <ClothId slug={slug}/>
+      <ClothId slug={slug} className="" bg="" clothContainer=""/>
     </div>
   );
 }

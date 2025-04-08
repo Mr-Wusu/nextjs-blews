@@ -1,30 +1,31 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
-import ScrollContext from "@/contexts/scrollContext";
-import { CgSearch } from "react-icons/cg";
 
-import MenuAndProfile from "./MenuAndProfile";
-import { useHomePage } from "@/contexts/HomePageContext";
-import Dashboard from "./Dashboard";
-import UserProfile from "./UserProfile";
-
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  useAuth,
+  useOrganization,
+  useUser,
+} from "@clerk/nextjs";
 import Link from "next/link";
+
+import ScrollContext from "@/contexts/scrollContext";
+import { useHomePage } from "@/contexts/HomePageContext";
 import { Button } from "./Button";
-import Image from "next/image";
-import { IoIosClose } from "react-icons/io";
 
 export default function Navbar() {
-  const { data: session } = useSession();
   const { isHomePage, setIsHomePage } = useHomePage();
-  const [isProfileOpen, setProfileOpen] = useState(false);
-  const [isSignedOut, setIsSignedOut] = useState(true);
-
-  const [isAdmin, setIsAdmin] = useState(false);
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
-
+  const { user } = useUser();
+  // Get authentication state and user ID
+  const { isSignedIn } = useAuth();
+  // Get organization data (including role)
+  const { membership } = useOrganization();
+  const isAdmin = membership?.role === "org:admin";
   useEffect(() => {
     if (pathname !== "/") {
       setIsHomePage(false);
@@ -32,30 +33,6 @@ export default function Navbar() {
       setIsHomePage(true);
     }
   }, [pathname, setIsHomePage]);
-
-  useEffect(() => {
-    if (session) {
-      setIsSignedOut(false);
-      setIsAdmin(
-        session.user?.email === "wusu_prince@yahoo.com" ||
-          session.user?.email === "test.paws1234@gmail.com"
-      );
-    } else {
-      setIsSignedOut(true);
-      setIsAdmin(false);
-    }
-    return () => {
-      // Cleanup: Reset state when session changes or component unmounts
-      setIsSignedOut(false);
-
-      setIsAdmin(false);
-    };
-  }, [session]);
-
-  function handleProfileOpen(e: React.MouseEvent<HTMLButtonElement>): void {
-    e.stopPropagation();
-    setProfileOpen(false);
-  }
 
   return (
     <>
@@ -72,19 +49,14 @@ export default function Navbar() {
                   : "text-rose-800 shadow-md "
         }`}
       >
-        <MenuAndProfile />
+        {/* <MenuAndProfile /> */}
+        {/* Use another display for menu and profile on mobile display */}
         <h2 className={`h2-custom-font text-xl ml-[-5rem]`}>
           Blews&apos; Stitches
         </h2>
-        {isSignedOut ? (
-          <button>
-            <CgSearch className="text-2xl" />
-          </button>
-        ) : isAdmin ? (
-          <Dashboard />
-        ) : (
-          <UserProfile />
-        )}
+        <div className="">
+          {/* Mobile UI for non-signedIn users, signedIn regular users and signedIn Admin users */}
+        </div>
       </nav>
       <nav
         className={`hidden md:flex justify-between items-center h-16 px-4 fixed w-full z-50  shadow-md ${
@@ -143,82 +115,12 @@ export default function Navbar() {
           </ul>
         </div>
         <div>
-          {isSignedOut ? (
-            <div className="flex space-x-4 text-xl">
-              <Link href="/api/auth/signin">
-                <Button className="mt-0 text-[1.125rem]">Sign In</Button>
-              </Link>
-            </div>
-          ) : (
-            <div>
-              {isAdmin ? (
-                <div onClick={() => setProfileOpen(true)} className="relative">
-                  <div className="h-9 w-9 relative rounded-full overflow-hidden cursor-pointer">
-                    {session?.user?.image ? (
-                      <Image
-                        src={session?.user?.image}
-                        alt="profile image"
-                        layout="fill"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <Image
-                        src="/images/avatar-2.jpg"
-                        alt="profile image"
-                        layout="fill"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    )}
-                  </div>
-                  <div
-                    className={`absolute flex flex-col gap-2 bg-lightRose1 text-darkRose2 shadow-lg rounded-[.7rem] p-4 transition-all duration-300 top-[50px] -right-[15rem] opacity-0 ${isProfileOpen ? "opacity-100 top-[50px] right-[1rem]" : ""}`}
-                  >
-                    <button
-                      className="absolute bg-rose-700 top-0 right-0 rounded-tr-[.7rem] rounded-bl-[0.7rem] text-lightRose1 z-50 cursor-pointer"
-                      onClick={(e) => {
-                        handleProfileOpen(e);
-                      }}
-                    >
-                      <IoIosClose className="text-2xl" />
-                    </button>
-                    <div>
-                      <p>{session?.user?.name}</p>
-                      <p>{session?.user?.email}</p>
-                    </div>
-                    <div className="h-[1px] w-full bg-rose-800" />
-                    <div className="flex flex-col gap-[.5rem] py-3">
-                      <Link
-                        className="w-max px-1 border-b border-transparent hover:border-rose-800 transition-all duration-300 cursor-pointer"
-                        href="/dashboard/cloth-orders"
-                      >
-                        <button onClick={(e) => handleProfileOpen(e)}>
-                          Cloth Orders
-                        </button>
-                      </Link>
-                      <Link
-                        className="border-b border-transparent w-max px-1 hover:border-rose-800 transition-all duration-300 cursor-pointer"
-                        href="/dashboard/upload-cloth"
-                      >
-                        <button onClick={(e) => handleProfileOpen(e)}>
-                          Upload Cloth
-                        </button>
-                      </Link>
-                      <Link className="ml-auto" href="/auth/signout">
-                        <Button
-                          className="mt-2 "
-                          onClick={(e) => handleProfileOpen(e)}
-                        >
-                          Sign Out
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div></div>
-              )}
-            </div>
-          )}
+          <SignedOut>
+            <Button className="h-fit">
+              <SignInButton />
+            </Button>
+          </SignedOut>
+          <SignedIn></SignedIn>
         </div>
       </nav>
     </>
