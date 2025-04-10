@@ -1,7 +1,7 @@
-import { mutation, internalMutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
+import { internalMutation, query } from "./_generated/server";
 
-// User(s)
+// Mutations
 export const createUser = internalMutation({
   args: {
     name: v.string(),
@@ -36,22 +36,13 @@ export const deleteUser = internalMutation({
   },
 });
 
+// Queries
 
-// Cloth(es)
-export const uploadCloth = mutation({
-  args: {
-    alt: v.string(),
-    description: v.string(),
-    price: v.string(),
-    image: v.string(),
-  },
-  handler: async (ctx, args) => {
-    console.log("This TypeScript function is running on the server.");
-    await ctx.db.insert("clothes", {
-      alt: args.alt,
-      body: args.description,
-      price: args.price,
-      image: args.image,
-    });
+export const getUsers = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("users").collect();
   },
 });
+
+

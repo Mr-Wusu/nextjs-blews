@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "img.clerk.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "platform-lookaside.fbsbx.com",
         port: "",
         pathname: "/platform/profilepic/**",

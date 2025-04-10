@@ -7,20 +7,20 @@ import { Webhook } from "svix";
 const handleClerkWebhook = httpAction(async (ctx, request) => {
   const event = await validateRequest(request);
   if (!event) {
-    return new Response("Invalid request", { status: 400 });
+    return new Response("Error occured", {
+      status: 400,
+    });
   }
   switch (event.type) {
-    case "user.created":
-      await ctx.runMutation(internal.mutations.createUser, {
+    case "user.created": // intentional fallthrough
+      await ctx.runMutation(internal.users.createUser, {
         clerkId: event.data.id,
         email: event.data.email_addresses[0].email_address,
         imageUrl: event.data.image_url,
-        name: event.data.first_name! as string,
+        name: event.data.first_name! + " " + event.data.last_name!,
       });
-      break;
-
     case "user.deleted":
-      await ctx.runMutation(internal.mutations.deleteUser, {
+      await ctx.runMutation(internal.users.deleteUser, {
         clerkId: event.data.id as string,
       });
       break;
@@ -31,26 +31,31 @@ const handleClerkWebhook = httpAction(async (ctx, request) => {
 });
 
 const http = httpRouter();
+
 http.route({
   path: "/clerk",
   method: "POST",
   handler: handleClerkWebhook,
 });
 
-async function validateRequest(
+const validateRequest = async (
   req: Request
-): Promise<WebhookEvent | undefined> {
-
-    // TODO Update Clerk Webhook Secret
+): Promise<WebhookEvent | undefined> => {
+  // key note : add the webhook secret variable to the environment variables field in convex dashboard setting
   const webhookSecret = process.env.CLERK_WEBHOOK_SECRET!;
-  if (!webhookSecret) throw new Error("CLERK_WEBHOOK_SECRET is not defined");
+  if (!webhookSecret) {
+    throw new Error("CLERK_WEBHOOK_SECRET is not defined");
+  }
   const payloadString = await req.text();
   const headerPayload = req.headers;
   const svixHeaders = {
-    "svix-id": req.headers.get("svix-id")!,
-    "svix-timestamp": req.headers.get("svix-timestamp")!,
-    "svix-signature": req.headers.get("svix-signature")!,
+    "svix-id": headerPayload.get("svix-id")!,
+    "svix-timestamp": headerPayload.get("svix-timestamp")!,
+    "svix-signature": headerPayload.get("svix-signature")!,
   };
-}
+  const wh = new Webhook(webhookSecret);
+  const event = wh.verify(payloadString, svixHeaders);
+  return event as unknown as WebhookEvent;
+};
 
 export default http;

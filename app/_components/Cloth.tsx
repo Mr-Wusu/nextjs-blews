@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useOrganization } from "@clerk/nextjs";
 import { MdDelete } from "react-icons/md";
 import { RiFileEditFill } from "react-icons/ri";
 import * as motion from "motion/react-client";
-
 
 interface Clothing {
   _id: number;
@@ -20,8 +20,8 @@ interface ClothProps {
 }
 
 export default function Cloth({ cloth }: ClothProps) {
-  // const { data } = useSession();
-  const isAdmin = true
+  const { membership } = useOrganization();
+  const isAdmin = membership?.role === "org:admin";
 
   return (
     <motion.figure

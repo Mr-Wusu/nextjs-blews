@@ -9,16 +9,22 @@ const convex = new ConvexReactClient(
 );
 
 const ConvexClerkProvider = ({ children }: { children: ReactNode }) => (
-  <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY as string} appearance={{
-    layout: { socialButtonsVariant: "iconButton", logoImageUrl: "/images/appPhotos/photo-8.jpg" },
-    variables: {
-      colorBackground: "#F8E1E1",
-      colorText: "white", 
-      colorPrimary: "#C94A4A",
-      colorInputBackground: "#F8E1E1",        
-      colorInputText: "white",                
-    }
-  }}>
+  <ClerkProvider
+    publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY as string}
+    appearance={{
+      layout: {
+        socialButtonsVariant: "iconButton",
+        logoImageUrl: "/images/appPhotos/photo-8-transparent.png",
+      },
+      variables: {
+        colorBackground: "#F8E1E1",
+        colorText: "#4c0519",
+        colorPrimary: "#4c0519",
+        colorInputBackground: "#4c0519",
+        colorInputText: "#4c0519",
+      },
+    }}
+  >
     <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
       {children}
     </ConvexProviderWithClerk>

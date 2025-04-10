@@ -11,7 +11,7 @@ export default async function Page({
     <ModalRoot className="h-fit w-[70vw] md:w-[58vw]  ">
       <ClothId
         className="px-5 pb-none"
-        bg="border-2 border-darkRose2 overflow-hidden pb-5 md:mt-0 md:w-full"
+        bg="border-2 border-darkRose2 overflow-hidden pb-5 md:-mt-[0px] md:w-full"
         clothContainer=""
         slug={slug}
       />

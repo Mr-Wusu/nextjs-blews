@@ -17,7 +17,7 @@ interface CardProps {
 
 export default function Card({ card }: CardProps) {
   return (
-    <article className="flex flex-col lg:flex-row lg:gap-0 items-center gap-[1.35rem] w-[57vw] sm:w-[23rem] lg:w-fit min-h-fit lg:h-[27rem] border border-darkRose2 rounded-[.9rem] mx-auto overflow-hidden mb-10 shadow-lg">
+    <article className="flex flex-col lg:flex-row lg:gap-0 items-center gap-[1.35rem] w-[57vw] sm:w-[23rem] lg:w-fit min-h-fit lg:h-[27rem] border border-darkRose2 rounded-[.9rem] mx-auto overflow-hidden mb-10 shadow-md shadow-gray-700">
       <div className="hidden lg:flex absolute right-[8.9125rem] w-[21.5rem] top-[.07rem] text-center text-lightRose1 px-1 py-1 bg-rose-500 flex-col rounded-tr-[0.7rem]">
         <p className="font-bold">{card.name}</p>
         <p className="text-sm">{card.position}</p>

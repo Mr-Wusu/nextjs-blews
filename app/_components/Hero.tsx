@@ -70,8 +70,8 @@ export default async function Hero() {
               </h4>
             </div>
           </div>
-          <div className="sm:hidden md:block overflow-hidden flex z-40 absolute custom_shadow_lg rounded-[.7rem] md:h-[21rem] md:w-[17rem] md:right-0 md:border md:border-lightRose2 md:border-opacity-50 md:bottom-[4rem] md+:w-[21.875rem] md+:h-[27.5rem] md+:bottom-[2.5rem] md+:rounded-[0.7rem] md+:border-0 lg:w-[25rem] lg:h-[25rem] lg:right-0 lg+:w-[31rem] lg+:h-[24.25rem] xl:top-[6.05rem] xl:w-[34.05rem] xl:h-[24.95rem] 2xl:w-[38.75rem]   ">
-            <div className="absolute w-full h-full bg-gradient-to-r from-darkRose1 to-darkRose1 z-40 top-0 opacity-[.25] left-0" />
+          <div className="sm:hidden md:block overflow-hidden flex z-40 absolute rounded-[.7rem] md:h-[21rem] md:w-[17rem] md:right-0 md:border md:border-lightRose2 md:border-opacity-50 md:bottom-[4rem] md+:w-[21.875rem] md+:h-[27.5rem] md+:bottom-[2.5rem] md+:rounded-[0.7rem] md+:border-0 lg:w-[25rem] lg:h-[25rem] lg:right-0 lg+:w-[31rem] lg+:h-[24.25rem] xl:top-[6.05rem] xl:w-[34.05rem] xl:h-[24.95rem] 2xl:w-[38.75rem] shadow-md shadow-black  ">
+            <div className="absolute w-full h-full bg-gradient-to-r from-darkRose1 to-darkRose1 z-40 top-0 opacity-[.25] left-0 " />
             <Image
               className="object-cover"
               fill
