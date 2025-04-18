@@ -39,14 +39,13 @@ body {
 
 .swiper-pagination-bullet {
   background-color: #881337 !important;
-   height : .6rem !important;
-    width : .6rem !important;
-    @media screen and (min-width: 768px) {
-    height: .8rem !important;
-    width: .8rem !important;
-    margin-right: .8rem !important;
+  height: 0.6rem !important;
+  width: 0.6rem !important;
+  @media screen and (min-width: 768px) {
+    height: 0.8rem !important;
+    width: 0.8rem !important;
+    margin-right: 0.8rem !important;
   }
-  
 }
 .swiper-pagination-bullet-active {
   background-color: #fb7185 !important;
@@ -86,7 +85,49 @@ dialog {
 }
 
 .custom_shadow_lg {
-  box-shadow: 0 10px -15px -3px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 10px -15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+.profile-open {
+  animation: slide-in-l 0.3s ease-out;
+}
+
+.menu-open {
+  animation: slide-in-r 0.3s ease-out;
+}
+/* ANIMATIONS */
+
+@keyframes slide-in-l {
+  0% {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(-1.5rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-r {
+  0% {
+    transform: translateX(-110%);
+    opacity: 0;
+
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(1rem);
+  }
+  100% {
+    transform: translateX(0);
+
+  }
+}

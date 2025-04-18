@@ -18,12 +18,16 @@ interface ProfileOpenProps {
     emailAddresses: { emailAddress: string }[];
   };
   isAdmin: boolean;
+  btn: string;
+  nameFont: string;
 }
 
 export default function ProfileOpen({
   setIsProfileOpen,
   user,
   isAdmin,
+  btn, 
+  nameFont
 }: ProfileOpenProps) {
   function toggleModal(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -32,7 +36,7 @@ export default function ProfileOpen({
 
   return (
     <div>
-      <div className="w-fit absolute right-0 mt-2 bg-white shadow-lg rounded-[.5rem] p-4 z-50 flex flex-col items-start gap-3">
+      <div className="w-fit absolute right-0 mt-2 bg-white shadow-lg rounded-[.5rem] p-4 z-50 flex flex-col items-start gap-3 profile-open">
         <div
           className="h-5 w-5 rounded-full bg-rose-500 absolute top-[-.575rem] right-[-.6rem] cursor-pointer grid place-content-center"
           onClick={toggleModal}
@@ -41,7 +45,7 @@ export default function ProfileOpen({
         </div>
 
         <div className="text-darkRose2 text-nowrap">
-          <p>
+          <p className={`${nameFont} md+:text-base`}>
             {user?.firstName} {user?.lastName}
             <span className="text-rose-900 ml-1 text-sm">
               {isAdmin ? "(Admin)" : ""}
@@ -55,7 +59,7 @@ export default function ProfileOpen({
             <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
               <TiShoppingCart />
               <Link
-                className="text-[0.89rem]"
+                className={`${nameFont} text-[0.89rem]`}
                 href="/user/my-orders"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -70,7 +74,7 @@ export default function ProfileOpen({
                 <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
                   <TiCogOutline />
                   <Link
-                    className="text-[0.89rem]"
+                    className={`${nameFont} text-[0.89rem]`}
                     href="/users/settings"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -87,7 +91,7 @@ export default function ProfileOpen({
                 <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
                   <TiCloudStorageOutline />
                   <Link
-                    className="text-[0.89rem]"
+                    className={`${nameFont} text-[0.89rem]`}
                     href="/dashboard/upload-cloth"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -100,7 +104,7 @@ export default function ProfileOpen({
                 <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
                   <TiCogOutline />
                   <Link
-                    className="text-[0.89rem]"
+                    className={`${nameFont} text-[0.89rem]`}
                     href="/dashboard/cloth-orders"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -117,8 +121,8 @@ export default function ProfileOpen({
         <div className="w-full h-[2px] bg-darkRose2" />
         <div className="pt-2 ml-auto">
           <SignedIn>
-            <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
-              <SignOutButton />
+            <div className={`${btn} h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center `}>
+              <SignOutButton  />
             </div>
           </SignedIn>
         </div>

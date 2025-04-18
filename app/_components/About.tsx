@@ -50,11 +50,14 @@ export default function About() {
           </h3>
         </div>
         <p className="leading-7  text-justify md:text-left md:text-lg lg:text-xl text-darkRose2  lg:px-20 mb-6">
-          You have come to a place where what you order is what you get. Stay at
-          the comfort of your home and get that killer dress tailored for your
-          body size and uniqueness. We are keen on the inches - on specificity,
-          on perfection - and on timely delivery. Take our word for it, but
-          there is more... Take our clients&lsquo; words also!
+          You have come to a place where style meets comfort. Stay anywhere and
+          get that killer dress tailored for your body size and uniqueness. We
+          are keen on the inches - on specificity, on perfection - and on timely
+          delivery. Take our word for it, but there is more... Take our
+          clients&lsquo; words also!
+          {/* Welcome to Blews Stitches, where style meets comfort. We curate the finest
+          clothing pieces to help you express your unique style and personality.
+          */}
         </p>
         <Swiper
           modules={[Pagination, Navigation]}
@@ -69,7 +72,7 @@ export default function About() {
           className="max-w-[27rem] sm+:max-w-[31rem] md:max-w-[37rem] lg:max-w-[56rem] mx-auto "
         >
           {testimony.map((card, i) => (
-            <SwiperSlide  key={i + 1}>
+            <SwiperSlide key={i + 1}>
               <Card card={card} />
             </SwiperSlide>
           ))}

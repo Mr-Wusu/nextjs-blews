@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   SignedOut,
   SignInButton,
-  useAuth,
+
   useOrganization,
   useUser,
   useClerk,
@@ -17,6 +17,8 @@ import Image from "next/image";
 import ScrollContext from "@/contexts/scrollContext";
 import { useHomePage } from "@/contexts/HomePageContext";
 import ProfileOpen from "./ProfileOpen";
+import { useConvexAuth } from "convex/react";
+import SideNav from "./SideNav";
 
 export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -24,10 +26,13 @@ export default function Navbar() {
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
   const { setActive } = useClerk();
-  const { isLoaded, isSignedIn, user } = useUser();
-  const auth = useAuth();
+  const {  user } = useUser();
+    const {isLoading, isAuthenticated} = useConvexAuth()
   const { membership, organization } = useOrganization();
   const isAdmin = membership?.role === "org:admin";
+
+
+  
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -38,8 +43,8 @@ export default function Navbar() {
   }, [pathname, setIsHomePage]);
 
   useEffect(() => {
-    if (isSignedIn && user && !organization) {
-      user.getOrganizationMemberships().then((memberships) => {
+    if (isAuthenticated && organization) {
+      user?.getOrganizationMemberships().then((memberships) => {
         if (memberships.data.length > 0) {
           const adminMembership = memberships.data.find(
             (m: OrganizationMembershipResource) => m.role === "org:admin"
@@ -49,23 +54,52 @@ export default function Navbar() {
         }
       });
     }
-  }, [isSignedIn, user, organization, setActive]);
+  }, [ user, organization, isAuthenticated, setActive]);
 
   // if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <>
       <nav
-        className={`md:hidden justify-between items-center p-3 fixed w-full z-50 flex ${
+        className={`md:hidden justify-between items-center p-3 fixed w-full z-50 flex shadow-sm shadow-black/30 ${
           isHomePage && !scrolled
             ? "bg-transparent text-lightRose1"
-            : "bg-lightRose1 text-rose-800 shadow-md"
+            : "bg-lightRose1 text-rose-800 "
         }`}
       >
-        <h2 className="h2-custom-font text-xl ml-[-5rem]">
+        <SideNav />
+        <h2 className="h2-custom-font sm+:text-[1.2rem]">
           Blews&apos; Stitches
         </h2>
-        <div>{/* Mobile UI placeholder */}</div>
+        {!isLoading && !isAuthenticated ? (
+          <SignedOut>
+            <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
+              <SignInButton>Sign In</SignInButton>
+            </div>
+          </SignedOut>
+        ) : isLoading ? (
+          <ClipLoader color="#e11d48" loading={true} size={25} />
+        ) : (
+          <div className="relative h-9 w-9 rounded-full bg-yellow-300 text-red-600">
+            <Image
+              src={user?.imageUrl || "/default-avatar.png"}
+              alt={`${user?.firstName || "User"}'s profile picture`}
+              width={40} // Adjusted to match h-10 w-10
+              height={40}
+              className="rounded-full object-cover cursor-pointer"
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+            />
+            {isProfileOpen && user && (
+              <ProfileOpen
+                setIsProfileOpen={setIsProfileOpen}
+                user={user}
+                isAdmin={isAdmin}
+                btn="w-[5rem] text-[.895rem] "
+                nameFont="text-[.875rem]"
+              />
+            )}
+          </div>
+        )}
       </nav>
       <nav
         className={`hidden md:flex justify-between items-center h-16 px-4 fixed w-full z-50 shadow-md ${
@@ -140,16 +174,17 @@ export default function Navbar() {
           </ul>
         </div>
         <div>
-          {!isLoaded && <ClipLoader color="#e11d48" loading={true} size={40} />}
-          {!auth.isSignedIn ? (
+          {!isLoading && !isAuthenticated ? (
             <SignedOut>
               <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
                 <SignInButton />
               </div>
             </SignedOut>
+          ) : isLoading ? (
+            <ClipLoader color="#e11d48" loading={true} size={40} />
           ) : (
             <div
-              className="h-fit relative"
+              className="h-fit relative "
               onClick={() => setIsProfileOpen((prev) => !prev)}
             >
               <div className="relative h-10 w-10 rounded-full">
@@ -166,6 +201,8 @@ export default function Navbar() {
                   setIsProfileOpen={setIsProfileOpen}
                   user={user}
                   isAdmin={isAdmin}
+                  btn=""
+                  nameFont=""
                 />
               )}
             </div>
