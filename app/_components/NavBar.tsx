@@ -73,7 +73,7 @@ export default function Navbar() {
         </h2>
         {!isLoading && !isAuthenticated ? (
           <SignedOut>
-            <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
+            <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[5rem] text-[.875rem] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
               <SignInButton>Sign In</SignInButton>
             </div>
           </SignedOut>
