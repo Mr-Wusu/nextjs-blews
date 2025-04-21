@@ -2,16 +2,8 @@
 import { useContext, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { usePathname } from "next/navigation";
-import {
-  SignedOut,
-  SignInButton,
+import { SignedOut, SignInButton, useUser } from "@clerk/nextjs";
 
-  useOrganization,
-  useUser,
-  useClerk,
-} from "@clerk/nextjs";
-
-import { OrganizationMembershipResource } from "@clerk/types";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollContext from "@/contexts/scrollContext";
@@ -22,17 +14,21 @@ import SideNav from "./SideNav";
 
 export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { isHomePage, setIsHomePage } = useHomePage();
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
-  const { setActive } = useClerk();
-  const {  user } = useUser();
-    const {isLoading, isAuthenticated} = useConvexAuth()
-  const { membership, organization } = useOrganization();
-  const isAdmin = membership?.role === "org:admin";
 
+  const { user } = useUser();
+  const { isLoading, isAuthenticated } = useConvexAuth();
 
-  
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (user.publicMetadata.isAdmin === true) {
+        setIsAdmin(true);
+      }
+    }
+  }, [user, isAuthenticated]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -41,22 +37,6 @@ export default function Navbar() {
       setIsHomePage(true);
     }
   }, [pathname, setIsHomePage]);
-
-  useEffect(() => {
-    if (isAuthenticated && organization) {
-      user?.getOrganizationMemberships().then((memberships) => {
-        if (memberships.data.length > 0) {
-          const adminMembership = memberships.data.find(
-            (m: OrganizationMembershipResource) => m.role === "org:admin"
-          );
-          const orgToActivate = adminMembership || memberships.data[0];
-          setActive({ organization: orgToActivate.organization.id });
-        }
-      });
-    }
-  }, [ user, organization, isAuthenticated, setActive]);
-
-  // if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <>

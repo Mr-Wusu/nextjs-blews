@@ -1,7 +1,7 @@
 export const testimony = [
   {
     company: "Globacom Nig Ltd",
-    field: "Web Developer",
+    field: "Web Development",
     position: "Senior Frontend Developer",
     name: "Prince Wusu",
     image: [

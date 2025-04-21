@@ -28,10 +28,10 @@ export default function ClothId({
 
   return (
     <div
-      className={`h-full flex flex-col gap-4 overflow-hidden border-[2px] md:mt-16 md:pb-6 md:w-[30rem] border-rose-600 rounded-[0.7rem] ${bg}`}
+      className={`flex bg-rose-100 w-[22.55rem] flex-col gap-4 pb-5 overflow-hidden border-[2px] mt-14 md:pb-6 md:w-[27rem] border-rose-600 rounded-[0.7rem] ${bg}`}
     >
       <div
-        className={`relative w-full h-[18.75rem] md:h-[25rem]  overflow-hidden ${clothContainer}`}
+        className={`relative w-full h-[21rem]   md:h-[23rem] overflow-hidden ${clothContainer}`}
       >
         <Image
           fill
@@ -41,10 +41,10 @@ export default function ClothId({
           alt={cloth.alt}
         />
       </div>
-      <div className={`flex flex-col mb- px-3 md:px-5 ${className}`}>
+      <div className={`flex flex-col mb- px-5 md:px-5 ${className}`}>
         <h1>Cloth Id: {cloth._id}</h1>
         <div className="flex flex-col mt-2 md:text-[1.1rem]">
-          <p className="font-semibold ">Name: {cloth.alt}</p>
+          <p className="font-semibold leading-5 mb-2">Name: {cloth.alt}</p>
           <p className="text-justify">
             Description:{" "}
             {`${cloth.description} ipsum dolor sit amet, consectetur adipiscing elit. Ut ac porttitor metus, et consequat eros.`}

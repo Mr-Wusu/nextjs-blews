@@ -1,5 +1,5 @@
 "use client";
-import { ClerkProvider, useAuth } from "@clerk/clerk-react";
+import { ClerkProvider, useAuth } from "@clerk/nextjs";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { ReactNode } from "react";
@@ -17,10 +17,10 @@ const ConvexClerkProvider = ({ children }: { children: ReactNode }) => (
         logoImageUrl: "/images/appPhotos/photo-8-transparent.png",
       },
       variables: {
-        colorBackground: "#F8E1E1",
-        colorText: "#4c0519",
-        colorPrimary: "#4c0519",
-        colorInputBackground: "#4c0519",
+        colorBackground: "#e11d48",
+        colorText: "#fff1f2",
+        colorPrimary: "#be123c",
+        colorInputBackground: "#fda4af",
         colorInputText: "#4c0519",
       },
     }}

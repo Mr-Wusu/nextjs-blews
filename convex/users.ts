@@ -1,4 +1,4 @@
-import { ConvexError, v } from "convex/values";
+import { v } from "convex/values";
 import { internalMutation, query } from "./_generated/server";
 
 // Mutations
@@ -29,7 +29,8 @@ export const deleteUser = internalMutation({
       .unique();
 
     if (!user) {
-      throw new ConvexError("User not found");
+      console.warn(`User with clerkId ${args.clerkId} not found for deletion`);
+      return; // Silently return instead of throwing
     }
 
     await ctx.db.delete(user._id);

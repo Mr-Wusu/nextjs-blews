@@ -10,6 +10,7 @@ This is an application for getting dresses and fashion you desire tailored inch-
 
 <!-- Screen sizes -->
 <!--
+sm+ 35.5rem (568px)
 sm	40rem (640px) 
 md	48rem (768px) 
 md+ 58.75rem (940px)
@@ -18,3 +19,4 @@ lg+ 71.25rem (1140px)
 xl	80rem (1280px)
 2xl	96rem (1536px)
 -->
+
