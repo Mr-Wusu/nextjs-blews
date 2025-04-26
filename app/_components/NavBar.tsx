@@ -2,7 +2,15 @@
 import { useContext, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { usePathname } from "next/navigation";
-import { SignedOut, SignInButton, useUser } from "@clerk/nextjs";
+import {
+  SignedOut,
+  SignInButton,
+  useUser,
+  useOrganizationList,
+
+} from "@clerk/nextjs";
+
+
 
 import Link from "next/link";
 import Image from "next/image";
@@ -21,14 +29,27 @@ export default function Navbar() {
 
   const { user } = useUser();
   const { isLoading, isAuthenticated } = useConvexAuth();
+  const { userMemberships } = useOrganizationList({
+    userMemberships: { infinite: false },
+  });
+
+  
 
   useEffect(() => {
-    if (isAuthenticated && user) {
-      if (user.publicMetadata.isAdmin === true) {
-        setIsAdmin(true);
-      }
+    console.log("User:", user);
+    console.log("IsAuthenticated:", isAuthenticated);
+    console.log("Memberships:", userMemberships?.data);
+    if (isAuthenticated && user && userMemberships?.data?.length) {
+      const adminMembership = userMemberships.data.find(
+        (m) => m.role === "org:admin" // Adjust to "admin" if needed
+      );
+      setIsAdmin(!!adminMembership);
+      console.log("IsAdmin set to:", !!adminMembership);
+    } else {
+      setIsAdmin(false);
+      console.log("No memberships or not authenticated, isAdmin: false");
     }
-  }, [user, isAuthenticated]);
+  }, [user, isAuthenticated, userMemberships]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -64,7 +85,7 @@ export default function Navbar() {
             <Image
               src={user?.imageUrl || "/default-avatar.png"}
               alt={`${user?.firstName || "User"}'s profile picture`}
-              width={40} // Adjusted to match h-10 w-10
+              width={40}
               height={40}
               className="rounded-full object-cover cursor-pointer"
               onClick={() => setIsProfileOpen((prev) => !prev)}
@@ -164,14 +185,14 @@ export default function Navbar() {
             <ClipLoader color="#e11d48" loading={true} size={40} />
           ) : (
             <div
-              className="h-fit relative "
+              className="h-fit relative"
               onClick={() => setIsProfileOpen((prev) => !prev)}
             >
               <div className="relative h-10 w-10 rounded-full">
                 <Image
                   src={user?.imageUrl || "/default-avatar.png"}
                   alt={`${user?.firstName || "User"}'s profile picture`}
-                  width={40} // Adjusted to match h-10 w-10
+                  width={40}
                   height={40}
                   className="rounded-full object-cover cursor-pointer"
                 />

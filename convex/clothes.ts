@@ -8,6 +8,7 @@ export const uploadCloth = mutation({
     description: v.string(),
     price: v.string(),
     image: v.string(),
+    storageId: v.id("_storage"),
   },
   handler: async (ctx, args) => {
     console.log("This TypeScript function is running on the server.");

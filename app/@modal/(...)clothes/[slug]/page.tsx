@@ -8,10 +8,10 @@ export default async function Page({
 }) {
   const slug = (await params).slug;
   return (
-    <ModalRoot className="h-[] ">
+    <ModalRoot className=" ">
       <ClothId
         className="px-5 pb-none"
-        bg="border-2 border-darkRose2 overflow-hidden pb-5 mt-0 md:w-full"
+        bg="border-2 border-darkRose2 overflow-hidden pb-5 mt-0 md:w-full md:mt-0"
         clothContainer=""
         slug={slug}
       />

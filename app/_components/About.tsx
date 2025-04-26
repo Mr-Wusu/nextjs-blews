@@ -17,28 +17,9 @@ import { testimony } from "@/data/testimonies-2";
 // import Image from "next/image";
 import Card from "./Card";
 
-// interface Testimony {
-//   fullName: string;
-//   image: string[];
-//   alt: string;
-//   quote: string;
-//   skill: string;
-//   link: string;
-// }
-
-// function trimQuotes(testimonies: Testimony[]): Testimony[] {
-//   return testimonies.map((testimony) => {
-//     const words = testimony.quote.split(" ");
-//     if (words.length > 16) {
-//       testimony.quote = words.slice(0, 16).join(" ") + " ...";
-//     }
-//     return testimony;
-//   });
-// }
-
-// const trimmedTestimonies = trimQuotes(testimonies);
 
 export default function About() {
+  
   return (
     <>
       <div className="flex flex-col md:gap-4 pt-11 lg:pt-14 px-9 lg:pb-8">
