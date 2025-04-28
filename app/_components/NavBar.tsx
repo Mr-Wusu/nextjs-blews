@@ -1,55 +1,20 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners";
+import { useContext, useEffect } from "react";
+
 import { usePathname } from "next/navigation";
-import {
-  SignedOut,
-  SignInButton,
-  useUser,
-  useOrganizationList,
-
-} from "@clerk/nextjs";
-
-
 
 import Link from "next/link";
-import Image from "next/image";
+
 import ScrollContext from "@/contexts/scrollContext";
 import { useHomePage } from "@/contexts/HomePageContext";
-import ProfileOpen from "./ProfileOpen";
-import { useConvexAuth } from "convex/react";
+
 import SideNav from "./SideNav";
+import User from "./User";
 
 export default function Navbar() {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const { isHomePage, setIsHomePage } = useHomePage();
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
-
-  const { user } = useUser();
-  const { isLoading, isAuthenticated } = useConvexAuth();
-  const { userMemberships } = useOrganizationList({
-    userMemberships: { infinite: false },
-  });
-
-  
-
-  useEffect(() => {
-    console.log("User:", user);
-    console.log("IsAuthenticated:", isAuthenticated);
-    console.log("Memberships:", userMemberships?.data);
-    if (isAuthenticated && user && userMemberships?.data?.length) {
-      const adminMembership = userMemberships.data.find(
-        (m) => m.role === "org:admin" // Adjust to "admin" if needed
-      );
-      setIsAdmin(!!adminMembership);
-      console.log("IsAdmin set to:", !!adminMembership);
-    } else {
-      setIsAdmin(false);
-      console.log("No memberships or not authenticated, isAdmin: false");
-    }
-  }, [user, isAuthenticated, userMemberships]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -72,35 +37,13 @@ export default function Navbar() {
         <h2 className="h2-custom-font sm+:text-[1.2rem]">
           Blews&apos; Stitches
         </h2>
-        {!isLoading && !isAuthenticated ? (
-          <SignedOut>
-            <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[5rem] text-[.875rem] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
-              <SignInButton>Sign In</SignInButton>
-            </div>
-          </SignedOut>
-        ) : isLoading ? (
-          <ClipLoader color="#e11d48" loading={true} size={25} />
-        ) : (
-          <div className="relative h-9 w-9 rounded-full bg-yellow-300 text-red-600">
-            <Image
-              src={user?.imageUrl || "/default-avatar.png"}
-              alt={`${user?.firstName || "User"}'s profile picture`}
-              width={40}
-              height={40}
-              className="rounded-full object-cover cursor-pointer"
-              onClick={() => setIsProfileOpen((prev) => !prev)}
-            />
-            {isProfileOpen && user && (
-              <ProfileOpen
-                setIsProfileOpen={setIsProfileOpen}
-                user={user}
-                isAdmin={isAdmin}
-                btn="w-[5rem] text-[.895rem] "
-                nameFont="text-[.875rem]"
-              />
-            )}
-          </div>
-        )}
+        <User
+          userObj={{
+            clip: { size: 25 },
+            btnWidth: "5rem",
+            imageContainer: { height: "2.25rem", width: "2.25rem" },
+          }}
+        />
       </nav>
       <nav
         className={`hidden md:flex justify-between items-center h-16 px-4 fixed w-full z-50 shadow-md ${
@@ -174,41 +117,13 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <div>
-          {!isLoading && !isAuthenticated ? (
-            <SignedOut>
-              <div className="h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center">
-                <SignInButton />
-              </div>
-            </SignedOut>
-          ) : isLoading ? (
-            <ClipLoader color="#e11d48" loading={true} size={40} />
-          ) : (
-            <div
-              className="h-fit relative"
-              onClick={() => setIsProfileOpen((prev) => !prev)}
-            >
-              <div className="relative h-10 w-10 rounded-full">
-                <Image
-                  src={user?.imageUrl || "/default-avatar.png"}
-                  alt={`${user?.firstName || "User"}'s profile picture`}
-                  width={40}
-                  height={40}
-                  className="rounded-full object-cover cursor-pointer"
-                />
-              </div>
-              {isProfileOpen && user && (
-                <ProfileOpen
-                  setIsProfileOpen={setIsProfileOpen}
-                  user={user}
-                  isAdmin={isAdmin}
-                  btn=""
-                  nameFont=""
-                />
-              )}
-            </div>
-          )}
-        </div>
+        <User
+          userObj={{
+            clip: { size: 40 },
+            btnWidth: "6.25rem",
+            imageContainer: { height: "2.5rem", width: "2.5rem" },
+          }}
+        />
       </nav>
     </>
   );
