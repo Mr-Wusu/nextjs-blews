@@ -1,8 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
-import clothes from "@/data/clothings";
+// import clothes from "@/data/clothings";
 import { Button } from "@/app/_components/Button";
 import Image from "next/image";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function ClothId({
   slug,
@@ -15,8 +17,9 @@ export default function ClothId({
   bg: string;
   clothContainer: string;
 }) {
+   const clothes = useQuery(api.clothes.getClothes);
   const router = useRouter();
-  const cloth = clothes.find((cloth) => cloth._id.toString() === slug);
+  const cloth = clothes?.find((cloth) => cloth._id.toString() === slug);
 
   function handleClick() {
     router.back();
@@ -37,7 +40,7 @@ export default function ClothId({
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          src={cloth.image}
+          src={cloth.imageUrl || "/placeholder-image.jpg"}
           alt={cloth.alt}
         />
       </div>

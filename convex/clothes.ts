@@ -76,11 +76,13 @@ export const getClothes = query({
     handler: async (ctx) => {
         const clothes = await ctx.db.query("clothes").collect();
         return Promise.all(
-            clothes.map(async (cloth) => ({
-                ...cloth,
-                imageUrl: await ctx.storage.getUrl(cloth.image),
-                storageId: cloth.image, //  Include the storageId here
-            }))
+          clothes.map(async (cloth) => ({
+            ...cloth,
+            imageUrl: cloth.image
+              ? await ctx.storage.getUrl(cloth.image)
+              : "/placeholder-image.jpg", // Ensure imageUrl is a URL
+            storageId: cloth.image, //  Include the storageId here
+          }))
         );
     },
 });

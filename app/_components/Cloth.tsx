@@ -12,6 +12,7 @@ import { useState, useRef } from "react"; // Import useState and useRef
 import { useMutation } from "convex/react"; // Import useMutation
 import { api } from "@/convex/_generated/api"; // Import api
 import { Button } from "./Button";
+import { PulseLoader } from "react-spinners";
 
 interface Clothing {
   _id: Id<"clothes">;
@@ -30,7 +31,8 @@ export default function Cloth({ cloth }: ClothProps) {
   const { membership } = useOrganization();
   const isAdmin = membership?.role === "org:admin";
 
-  const [isEditing, setIsEditing] = useState(false); // State to control edit mode
+  const [isEditing, setIsEditing] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false); // State to control edit mode
   const [newImage, setNewImage] = useState<File | null>(null); // State for the new image file
   const formRef = useRef<HTMLFormElement>(null);
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
@@ -65,8 +67,8 @@ export default function Cloth({ cloth }: ClothProps) {
       const { storageId } = await result.json();
       newStorageId = storageId;
     }
+    setIsUpdating(true);
 
-   
     try {
       await updateClothMutation({
         _id: cloth._id,
@@ -77,9 +79,10 @@ export default function Cloth({ cloth }: ClothProps) {
         oldImageStorageId: cloth.storageId,
       });
       setIsEditing(false);
-
+       setIsUpdating(false);
     } catch (error) {
       console.error("Error updating cloth:", error);
+       setIsUpdating(false);
     }
   }
 
@@ -135,11 +138,15 @@ export default function Cloth({ cloth }: ClothProps) {
             name="alt"
             defaultValue={cloth.alt}
           />
-          <Button
-            type="submit"
-            className="  py-2 px-4 mt-2 w-full"
-          >
-            Save
+          <Button type="submit" className="  py-2 px-4 mt-2 w-full">
+            {isUpdating ? (
+              <div className="flex gap-2 items-center justify-center">
+                <p>Updating</p>
+                <PulseLoader color="#fecdd3" loading={true} size={8} />
+              </div>
+            ) : (
+              "Update cloth"
+            )}
           </Button>
           <button
             type="button"
