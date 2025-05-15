@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "./_components/Button";
+
 interface ErrorPageProps {
   error: Error;
   reset: () => void;
@@ -7,10 +9,10 @@ interface ErrorPageProps {
 
 export default function Error({ error, reset }: ErrorPageProps) {
   return (
-    <div>
-      <h1>Eeyah! Something bad has happened!</h1>
-      <p>{error.message}</p>
-      <button onClick={reset}>Reset</button>
+    <div className="min-h-screen flex flex-col justify-center items-center px-8 gap-3">
+      <h1 className="text-darkRose1 text-2xl">Eeyah! Something bad has happened!</h1>
+      <p className="lg:text-lg px-6">{error.message}</p>
+      <Button onClick={reset}>Reset</Button>
     </div>
   );
 }

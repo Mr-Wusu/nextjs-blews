@@ -1,25 +1,22 @@
+"use client";
 import { GiClothes } from "react-icons/gi";
 import Cloth from "./Cloth";
-import clothes from "@/data/clothings";
+// import clothes from "@/data/clothings";
 import Link from "next/link";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import {MoonLoader} from "react-spinners";
 
-// interface ClothType {
-//   _id: string;
-//   description: string;
-//   price: number;
-//   image: string;
-//   alt: string;
-// }
 
-export default async function Clothes() {
-  // const response = await fetch("http://localhost:3000/api/clothes");
-  // if (!response.ok) {
-  //   const errorText = response.text();
-  //   console.error("Error fetching clothes:", errorText);
-  //   return;
-  // }
-  // const clothesData: ClothType[] = await response.json();
-  // console.log(clothesData);
+
+export default function Clothes() {
+  const clothes = useQuery(api.clothes.getClothes);
+  
+  if (clothes === undefined)
+      return <div className="flex justify-center items-center h-[50vh]">
+        <MoonLoader color="#E11D48" size={50} />
+      </div>
+  if (clothes.length === 0) return <div>We are restocking, bringing you awesome new designs. New arrivals 😄😎!</div>
 
   return (
     <section className="flex flex-col gap-6 bg-lightRose1 px-6 pt-11 pb-9 ">

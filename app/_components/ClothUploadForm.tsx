@@ -2,34 +2,57 @@
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Button } from "./Button";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import {PulseLoader } from "react-spinners";
 
 export default function ClothUploadForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const saveCloth = useMutation(api.clothes.uploadCloth);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!formRef.current) return;
     const formData = new FormData(formRef.current);
 
+    const selectedImage = formData.get("image") as File;
+    const description = formData.get("description") as string;
+    const alt = formData.get("alt") as string;  
+    const price = formData.get("price") as string;
+    const parsedPrice = parseFloat(price);
+
+    if(!selectedImage || !description || !alt || isNaN(parsedPrice)) {
+      return toast.error("Please fill in the fields correctly"!);
+    }
+
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/clothes/upload-cloth", {
+      // Step 1: Get upload URL
+      const postUrl = await generateUploadUrl();
+
+      // Step 2: Upload the image
+      const result = await fetch(postUrl, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": selectedImage.type },
+        body: selectedImage,
+      });
+      const { storageId } = await result.json();
+
+      // Step 3: Save card data
+      await saveCloth({      
+        description,
+        price: parseFloat(price),
+        alt,
+        image: storageId,
       });
 
-      if (response.ok) {
-        toast.success("Cloth uploaded successfully");
-        // Clear form data
-        if (formRef.current) {
-          formRef.current.reset();
-        }
-      } else {
-        toast("Failed to upload cloth", { icon: "❌" });
-        console.error("Failed to upload cloth");
-      }
+      toast.success("Cloth uploaded successfully!");
+      formRef.current.reset(); // Reset the form after successful upload
+      
     } catch (error) {
       console.error("Error uploading cloth", error);
     } finally {
@@ -65,7 +88,14 @@ export default function ClothUploadForm() {
         />
         <input className="text-sm" type="file" name="image" required />
         <Button type="submit" className="min-w-fit px-2 mt-4">
-          {isSubmitting ? "Uploading..." : "Upload cloth"}
+          {isSubmitting ? (
+            <div className="flex gap-2 items-center justify-center">
+              <p>Uploading</p>
+              <PulseLoader color="#fecdd3" loading={true} size={8} />
+            </div>
+          ) : (
+            "Upload cloth"
+          )}
         </Button>
       </form>
       <Toaster />
