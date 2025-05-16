@@ -13,6 +13,7 @@ import { useMutation } from "convex/react"; // Import useMutation
 import { api } from "@/convex/_generated/api"; // Import api
 import { Button } from "./Button";
 import { PulseLoader } from "react-spinners";
+import ConfirmDelete from "./ConfirmDelete";
 
 interface Clothing {
   _id: Id<"clothes">;
@@ -33,6 +34,7 @@ export default function Cloth({ cloth }: ClothProps) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false); // State to control edit mode
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false); // State for delete confirmation
   const [newImage, setNewImage] = useState<File | null>(null); // State for the new image file
   const formRef = useRef<HTMLFormElement>(null);
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
@@ -79,13 +81,13 @@ export default function Cloth({ cloth }: ClothProps) {
         oldImageStorageId: cloth.storageId,
       });
       setIsEditing(false);
-       setIsUpdating(false);
+      setIsUpdating(false);
     } catch (error) {
       console.error("Error updating cloth:", error);
-       setIsUpdating(false);
+      setIsUpdating(false);
     }
   }
-
+  console.log(openConfirmDelete);
   return (
     <motion.figure
       initial={{ opacity: 0, y: 100 }}
@@ -107,7 +109,14 @@ export default function Cloth({ cloth }: ClothProps) {
       {isAdmin && (
         <MdDelete
           className="absolute z-10 text-rose-700 text-3xl top-2 right-2 hover:text-rose-600 transition-text duration-300 ease-in-out cursor-pointer"
-          onClick={() => console.log("Deleted!")}
+          onClick={() => setOpenConfirmDelete(true)}
+        />
+      )}
+      {openConfirmDelete && (
+        <ConfirmDelete
+          _id={cloth._id}
+          storageId={cloth.storageId}
+          setOpenConfirmDelete={setOpenConfirmDelete}
         />
       )}
 

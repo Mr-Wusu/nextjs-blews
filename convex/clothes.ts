@@ -67,6 +67,17 @@ export const updateCloth = mutation({
     },
 });
 
+export const deleteCloth = mutation({
+    args: {
+        _id: v.id("clothes"),
+        storageId: v.id("_storage"),
+    },
+    handler: async (ctx, args) => {
+        const { _id, storageId } = args;
+        await ctx.db.delete(_id);
+        await ctx.storage.delete(storageId);
+    },
+});
 
 
 // Queries
