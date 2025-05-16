@@ -38,7 +38,7 @@ export default function ModalRoot({
 
   return createPortal(
     <dialog
-      className={`${className} overflow-hidden rounded-[.7rem]`}
+      className={`${className} overflow-hidden rounded-[.7rem] z-50`}
       ref={modalRef}
       onClose={handleCloseModal}
     >
