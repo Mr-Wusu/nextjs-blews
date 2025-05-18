@@ -65,6 +65,7 @@ export default function ProfileOpen({
                   e.stopPropagation();
                   setIsProfileOpen(false); // Simplified to close directly
                 }}
+                scroll={false}
               >
                 Cart
               </Link>
@@ -80,6 +81,7 @@ export default function ProfileOpen({
                       e.stopPropagation();
                       setIsProfileOpen(false);
                     }}
+                    scroll={false}
                   >
                     Settings
                   </Link>
@@ -97,6 +99,7 @@ export default function ProfileOpen({
                       e.stopPropagation();
                       setIsProfileOpen(false);
                     }}
+                    scroll={false} // Prevents scrolling to the top of the page
                   >
                     Upload Cloth
                   </Link>
@@ -110,6 +113,7 @@ export default function ProfileOpen({
                       e.stopPropagation();
                       setIsProfileOpen(false);
                     }}
+                    scroll={false}
                   >
                     Cloth Orders
                   </Link>
@@ -121,8 +125,10 @@ export default function ProfileOpen({
         <div className="w-full h-[2px] bg-darkRose2" />
         <div className="pt-2 ml-auto">
           <SignedIn>
-            <div className={`${btn} h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center `}>
-              <SignOutButton  />
+            <div
+              className={`${btn} h-fit bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 w-[100px] text-lightRose1 py-1 tracking-wide rounded self-center transition-bg duration-300 ease-in-out grid place-content-center `}
+            >
+              <SignOutButton />
             </div>
           </SignedIn>
         </div>

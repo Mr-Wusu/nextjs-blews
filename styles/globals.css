@@ -39,8 +39,8 @@ body {
 
 .swiper-pagination-bullet {
   background-color: #881337 !important;
-  height: 0.6rem !important;
-  width: 0.6rem !important;
+  height: 1.1rem !important;
+  width: 1.1rem !important;
   @media screen and (min-width: 768px) {
     height: 0.8rem !important;
     width: 0.8rem !important;

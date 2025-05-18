@@ -1,6 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+
 const isSignedInRoute = createRouteMatcher(["/clothes/:item+"]);
 const isAdminRoute = createRouteMatcher(["/dashboard(.*)"]);
 
@@ -9,7 +10,7 @@ export default clerkMiddleware(async (auth, req) => {
 
   console.log("Request URL:", req.url);
   console.log("User ID:", userId);
-  console.log("Session Claims:", sessionClaims);
+
 
   if (isAdminRoute(req)) {
     if (!userId) {

@@ -6,9 +6,10 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const slug = (await params).slug;
+  const { slug } = await params;
+
   return (
-    <ModalRoot className=" ">
+    <ModalRoot slug={slug}>
       <ClothId
         className="px-5 pb-none"
         bg="border-2 border-darkRose2 overflow-hidden pb-5 mt-0 md:w-full md:mt-0"

@@ -5,13 +5,17 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoClose } from "react-icons/io5";
 
+interface ModalRootProps {
+  children: React.ReactNode;
+  className?: string;
+  slug?: string; // Add slug as an optional prop
+}
+
 export default function ModalRoot({
   children,
   className,
-}: Readonly<{
-  children: React.ReactNode;
-  className?: string;
-}>) {
+  slug
+}:  ModalRootProps) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const [modalUpload, setModalUpload] = useState<HTMLElement | null>(null);
   const router = useRouter();
@@ -25,7 +29,7 @@ export default function ModalRoot({
     if (rootModal && modalRef.current && !modalRef.current.open) {
       modalRef.current.showModal();
     }
-  }, []);
+  }, [slug]);
 
   function handleCloseModal() {
     if (modalRef.current) {

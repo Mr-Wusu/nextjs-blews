@@ -6,6 +6,7 @@ import { ScrollProvider } from "@/contexts/scrollContext";
 
 import { HomePageProvider } from "@/contexts/HomePageContext";
 import ConvexClerkProvider from "@/contexts/ConvexClerkProvider";
+import { ClothesProvider } from "@/contexts/ClothesContext";
 
 export const metadata: Metadata = {
   title: "Home | Blews Stitches",
@@ -26,13 +27,15 @@ export default async function RootLayout({
         <body>
           <ConvexClerkProvider>
             <ScrollProvider>
-              <Navbar />
-              <div className="bg-lightRose1 text-darkRose2">
-                {modal}
-                {children}
-              </div>
-              <Footer />
-              <div id="root-modal" />
+              <ClothesProvider>
+                <Navbar />
+                <div className="bg-lightRose1 text-darkRose2">
+                  {modal}
+                  {children}
+                </div>
+                <Footer />
+                <div id="root-modal" />
+              </ClothesProvider>
             </ScrollProvider>
           </ConvexClerkProvider>
         </body>

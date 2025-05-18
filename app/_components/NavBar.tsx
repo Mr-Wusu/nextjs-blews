@@ -34,7 +34,7 @@ export default function Navbar() {
         }`}
       >
         <SideNav />
-        <h2 className="h2-custom-font sm+:text-[1.2rem]">
+        <h2 className="h2-custom-font text-[1.2rem]">
           Blews&apos; Stitches
         </h2>
         <User

@@ -1,16 +1,15 @@
 "use client";
 import { GiClothes } from "react-icons/gi";
 import Cloth from "./Cloth";
-// import clothes from "@/data/clothings";
 import Link from "next/link";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import {MoonLoader} from "react-spinners";
+import { useClothes } from "@/contexts/ClothesContext";
 
 
 
 export default function Clothes() {
-  const clothes = useQuery(api.clothes.getClothes);
+  // const clothes = useQuery(api.clothes.getClothes);
+  const {clothes} = useClothes()
   
   if (clothes === undefined)
       return <div className="flex justify-center items-center h-[50vh]">
@@ -21,8 +20,8 @@ export default function Clothes() {
   return (
     <section className="flex flex-col gap-6 bg-lightRose1 px-6 pt-11 pb-9 ">
       <div className="flex gap-[1rem] md:gap-3 lg:gap-5 items-center mx-auto">
-        <GiClothes className="text-[1.6rem] text-rose-950" />
-        <h3 className="capitalize text-[1.125rem] md:text-xl lg:text-2xl font-semibold lg:font-bold text-rose-800 font-nunito lg:pb-5">
+        <GiClothes className="text-3xl text-rose-900" />
+        <h3 className="capitalize text-[1.125rem] md:text-xl lg:text-2xl font-semibold lg:font-bold leading-6  text-rose-800 font-nunito lg:pb-5">
           A glance at some of our clothes
         </h3>
       </div>

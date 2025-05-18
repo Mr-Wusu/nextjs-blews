@@ -17,12 +17,12 @@ interface CardProps {
 
 export default function Card({ card }: CardProps) {
   return (
-    <article className="flex flex-col lg:flex-row lg:gap-0 items-center gap-[1.35rem] w-[57vw] sm:w-[23rem] lg:w-fit min-h-fit lg:h-[27rem] border border-darkRose2 rounded-[.9rem] mx-auto overflow-hidden mb-10 shadow-md shadow-gray-700">
-      <div className="hidden lg:flex absolute right-[8.9125rem] w-[21.5rem] top-[.07rem] text-center text-lightRose1 px-1 py-1 bg-rose-500 flex-col rounded-tr-[0.7rem]">
+    <article className="flex flex-col lg:flex-row lg:gap-0 items-center gap-[.85rem] w-[68vw] sm:w-[23rem] lg:w-fit min-h-fit lg:h-[27rem] border border-darkRose2 rounded-[.9rem] mx-auto overflow-hidden mb-10 shadow-md shadow-gray-700">
+      <div className="hidden lg:flex absolute right-[8.9125rem] w-[21.5rem] top-[.07rem] text-center text-lightRose1 px-1 bg-rose-500 flex-col rounded-tr-[0.7rem]">
         <p className="font-bold">{card.name}</p>
         <p className="text-sm">{card.position}</p>
       </div>
-      <div className="flex flex-col gap-0 items-center justify-center pt-6 lg:hidden mb-2">
+      <div className="flex flex-col gap-0 items-center justify-center pt-6 lg:hidden mb-3">
         <h3 className="text-sm">{card.company}</h3>
         <h2 className="capitalize font-bold">{card.field}</h2>
       </div>
@@ -44,7 +44,7 @@ export default function Card({ card }: CardProps) {
           <p className="text-[0.585rem] md:text-[0.6875rem] leading-[1]">{card.position}</p>
         </div>
       </div>
-      <div className="pb-8 flex flex-col gap-2 lg:hidden">
+      <div className="pb-4 flex flex-col gap-2 lg:hidden">
         <h1 className="px-[0.725rem] text-[1.1rem] md:text-[1.3rem] text-darkRose1 text-center font-bold leading-[1.2]">
           {`${card.captionOne} `}
           <span className="text-rose-700">

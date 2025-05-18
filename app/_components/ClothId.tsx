@@ -3,8 +3,8 @@ import { useRouter } from "next/navigation";
 // import clothes from "@/data/clothings";
 import { Button } from "@/app/_components/Button";
 import Image from "next/image";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+
+import { useClothes } from "@/contexts/ClothesContext";
 
 export default function ClothId({
   slug,
@@ -17,7 +17,8 @@ export default function ClothId({
   bg: string;
   clothContainer: string;
 }) {
-   const clothes = useQuery(api.clothes.getClothes);
+  const { clothes } = useClothes();
+  
   const router = useRouter();
   const cloth = clothes?.find((cloth) => cloth._id.toString() === slug);
 
