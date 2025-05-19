@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function UploadCloth() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen flex flex-col items-center justify-center px-1">
       <h2 className="text-darkRose2 px-4 text-lg md+:mb-7 lg:mb-5">
         <span className="text-rose-600 mr-2">Caveat:</span>This page comes with
         admin priviledge of uploading content for users of the application, to

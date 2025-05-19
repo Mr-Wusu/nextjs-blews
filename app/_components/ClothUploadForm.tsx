@@ -63,7 +63,7 @@ export default function ClothUploadForm() {
   return (
     <>
       <form
-        className="flex flex-col gap-4 px-5 py-6"
+        className="flex flex-col gap-4 px-4 py-6"
         ref={formRef}
         onSubmit={handleSubmit}
       >

@@ -5,11 +5,10 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-
   const slug = (await params).slug;
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4">
-      <ClothId slug={slug} className="" bg="" clothContainer=""/>
+    <div className=" flex flex-col items-center justify-center px-4 ">
+      <ClothId slug={slug} className="" bg="rounded-none" clothContainer="" />
     </div>
   );
 }
