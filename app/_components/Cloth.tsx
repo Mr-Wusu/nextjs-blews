@@ -187,7 +187,7 @@ export default function Cloth({ cloth }: ClothProps) {
               <Link
                 className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-600 hover:to-rose-300 active:scale-95 text-lightRose1 py-1 px-2 tracking-wide rounded self-center transition-bg duration-300 ease-in-out"
                 href={`/clothes/${cloth._id}`}
-                scroll={false}
+                // scroll={false}
               >
                 Sew me
               </Link>

@@ -32,10 +32,10 @@ export default function ClothId({
 
   return (
     <div
-      className={`flex bg-rose-100 w-[22.55rem] flex-col gap-4 pb-5 overflow-hidden border-[2px] mt-14 md:pb-6 md:w-[27rem] border-rose-600 rounded-[0.7rem] ${bg}`}
+      className={`flex bg-rose-100 w-full flex-col gap-4 pb-5 overflow-hidden mt-14 md:pb-6  ${bg}`}
     >
       <div
-        className={`relative w-full h-[21rem]   md:h-[23rem] overflow-hidden ${clothContainer}`}
+        className={`relative w-full h-[21rem]   md:h-[34rem] overflow-hidden ${clothContainer}`}
       >
         <Image
           fill
@@ -45,7 +45,7 @@ export default function ClothId({
           alt={cloth.alt}
         />
       </div>
-      <div className={`flex flex-col mb- px-5 md:px-5 ${className}`}>
+      <div className={`flex flex-col gap-3 px-5 md:px-10 md:pt-5 md:text-lg md:w-5/6 mx-auto ${className}`}>
         <h1>Cloth Id: {cloth._id}</h1>
         <div className="flex flex-col mt-2 md:text-[1.1rem]">
           <p className="font-semibold leading-5 mb-2">Name: {cloth.alt}</p>
@@ -55,7 +55,7 @@ export default function ClothId({
           </p>
         </div>
       </div>
-      <div className="flex gap-7 w-4/5 ml-auto items-center ">
+      <div className="flex gap-7 w-4/5 ml-auto md:ml-[6.5rem] md+:ml-[7.4rem] items-center py-4">
         <button
           className="border-2 h-fit leading-none border-rose-500 rounded-[.3rem] px-3 py-[6px] flex hover:bg-gradient-to-l hover:from-rose-400 hover:to-rose-100 transition-all duration-300 ease-linear tracking-wide"
           onClick={handleClick}

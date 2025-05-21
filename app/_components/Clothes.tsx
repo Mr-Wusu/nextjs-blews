@@ -33,6 +33,7 @@ export default function Clothes() {
       <Link
         className=" w-max font-semibold text-darkRose2 mt-2 border-b-2 border-solid border-transparent hover:border-darkRose1 p-1 transition-all  duration-300 active:scale-90 focus:border-darkRose1 focus:border-2 md:text-base lg:text-lg"
         href="/clothes"
+        
       >
         Browse our collection &rarr;
       </Link>

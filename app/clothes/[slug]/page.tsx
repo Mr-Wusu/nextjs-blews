@@ -7,7 +7,7 @@ export default async function Page({
 }) {
   const slug = (await params).slug;
   return (
-    <div className=" flex flex-col items-center justify-center px-4 ">
+    <div className=" flex flex-col items-center justify-center  ">
       <ClothId slug={slug} className="" bg="rounded-none" clothContainer="" />
     </div>
   );
