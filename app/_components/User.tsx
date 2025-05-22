@@ -82,13 +82,22 @@ function User({ userObj }: UserProps) {
             />
           </div>
           {isProfileOpen && user && (
-            <ProfileOpen
-              setIsProfileOpen={setIsProfileOpen}
-              user={user}
-              isAdmin={isAdmin}
-              btn=""
-              nameFont=""
-            />
+            <>
+              <div
+                className="w-screen h-screen opacity-30 bg-black fixed top-0 right-0 left-0 bottom-0 z-40"
+                onClick={() => {
+                  console.log("Overlay clicked");
+                  setIsProfileOpen(false);
+                }}
+              />
+              <ProfileOpen
+                setIsProfileOpen={setIsProfileOpen}
+                user={user}
+                isAdmin={isAdmin}
+                btn=""
+                nameFont=""
+              />
+            </>
           )}
         </div>
       )}

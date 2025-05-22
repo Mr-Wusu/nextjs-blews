@@ -1,9 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-// import clothes from "@/data/clothings";
 import { Button } from "@/app/_components/Button";
 import Image from "next/image";
-
 import { useClothes } from "@/contexts/ClothesContext";
 
 export default function ClothId({

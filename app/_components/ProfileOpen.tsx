@@ -35,7 +35,7 @@ export default function ProfileOpen({
   }
 
   return (
-    <div>
+
       <div className="w-fit absolute right-3 mt-5 bg-white shadow-lg rounded-[.5rem] p-4 z-50 flex flex-col items-start gap-3 profile-open">
         <div
           className="h-6 w-6 rounded-full bg-rose-500 absolute top-[-.795rem] right-[-.8rem] cursor-pointer grid place-content-center"
@@ -133,6 +133,6 @@ export default function ProfileOpen({
           </SignedIn>
         </div>
       </div>
-    </div>
+
   );
 }

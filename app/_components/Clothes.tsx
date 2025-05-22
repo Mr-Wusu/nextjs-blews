@@ -15,7 +15,7 @@ export default function Clothes() {
       return <div className="flex justify-center items-center h-[50vh]">
         <MoonLoader color="#E11D48" size={50} />
       </div>
-  if (clothes.length === 0) return <div>We are restocking, bringing you awesome new designs. New arrivals 😄😎!</div>
+  if (clothes.length === 0) return <div className="mx-auto w-4/5 text-lg py-7 ">We are restocking, bringing you awesome new designs. New arrivals 😄😎!</div>
 
   return (
     <section className="flex flex-col gap-6 bg-lightRose1 px-6 pt-11 pb-9 ">
