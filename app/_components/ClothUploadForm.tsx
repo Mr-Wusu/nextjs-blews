@@ -51,7 +51,13 @@ export default function ClothUploadForm() {
       });
 
       toast.success("Cloth uploaded successfully!");
-      formRef.current.reset(); // Reset the form after successful upload
+      formRef.current?.reset(); // Reset the form after successful submission
+      // if (formRef.current) {
+      //   formRef.current.description.value = ""; 
+      //   formRef.current.alt.value = ""; 
+      //   formRef.current.price.value = ""; 
+      // }
+
       
     } catch (error) {
       console.error("Error uploading cloth", error);

@@ -49,6 +49,7 @@ export default function Cloth({ cloth }: ClothProps) {
 
   async function handleUpdateCloth(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
     if (!formRef.current) return;
     const formData = new FormData(formRef.current);
 
@@ -69,8 +70,8 @@ export default function Cloth({ cloth }: ClothProps) {
       const { storageId } = await result.json();
       newStorageId = storageId;
     }
+    
     setIsUpdating(true);
-
     try {
       await updateClothMutation({
         _id: cloth._id,

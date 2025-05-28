@@ -1,4 +1,4 @@
-import { v} from "convex/values";
+import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { Id } from "@/convex/_generated/dataModel";
 
@@ -32,68 +32,66 @@ export const deleteFile = mutation({
 
 // In clothes.ts
 export const updateCloth = mutation({
-    args: {
-        _id: v.id("clothes"),
-        alt: v.optional(v.string()),
-        description: v.optional(v.string()),
-        price: v.optional(v.number()),
-        image: v.optional(v.id("_storage")),
-        oldImageStorageId: v.optional(v.id("_storage")), // Add this
-    },
-    handler: async (ctx, args) => {
-        const { _id, oldImageStorageId, image, ...rest } = args;
+  args: {
+    _id: v.id("clothes"),
+    alt: v.optional(v.string()),
+    description: v.optional(v.string()),
+    price: v.optional(v.number()),
+    image: v.optional(v.id("_storage")),
+    oldImageStorageId: v.optional(v.id("_storage")), // Add this
+  },
+  handler: async (ctx, args) => {
+    const { _id, oldImageStorageId, image, ...rest } = args;
 
-        const updates: {
-            alt?: string;
-            description?: string;
-            price?: number;
-            image?: Id<"_storage">;
-        } = { ...rest };
+    const updates: {
+      alt?: string;
+      description?: string;
+      price?: number;
+      image?: Id<"_storage">;
+    } = { ...rest };
 
-        if (image) {
-            updates.image = image;
+    if (image) {
+      if (oldImageStorageId) {
+        try {
+          await ctx.storage.delete(oldImageStorageId);
+        } catch (error) {
+          console.error("Error deleting old image:", error);
+          //  Handle the error appropriately (e.g., log it, but don't crash the update)
         }
+      }
+      updates.image = image;
+    }
 
-        await ctx.db.patch(_id, updates);
-
-        if (oldImageStorageId) {
-            try {
-                await ctx.storage.delete(oldImageStorageId);
-            } catch (error) {
-                console.error("Error deleting old image:", error);
-                //  Handle the error appropriately (e.g., log it, but don't crash the update)
-            }
-        }
-    },
+    await ctx.db.patch(_id, updates);
+  },
 });
 
 export const deleteCloth = mutation({
-    args: {
-        _id: v.id("clothes"),
-        storageId: v.id("_storage"),
-    },
-    handler: async (ctx, args) => {
-        const { _id, storageId } = args;
-        await ctx.db.delete(_id);
-        await ctx.storage.delete(storageId);
-    },
+  args: {
+    _id: v.id("clothes"),
+    storageId: v.id("_storage"), 
+  },
+  handler: async (ctx, args) => {
+    const { _id, storageId } = args;
+    await ctx.db.delete(_id);
+    await ctx.storage.delete(storageId);
+  },
 });
-
 
 // Queries
 
 export const getClothes = query({
-    args: {},
-    handler: async (ctx) => {
-        const clothes = await ctx.db.query("clothes").collect();
-        return Promise.all(
-          clothes.map(async (cloth) => ({
-            ...cloth,
-            imageUrl: cloth.image
-              ? await ctx.storage.getUrl(cloth.image)
-              : "/placeholder-image.jpg", // Ensure imageUrl is a URL
-            storageId: cloth.image, //  Include the storageId here
-          }))
-        );
-    },
+  args: {},
+  handler: async (ctx) => {
+    const clothes = await ctx.db.query("clothes").collect();
+    return Promise.all(
+      clothes.map(async (cloth) => ({
+        ...cloth,
+        imageUrl: cloth.image
+          ? await ctx.storage.getUrl(cloth.image)
+          : "/placeholder-image.jpg", // Ensure imageUrl is a URL
+        storageId: cloth.image, //  Include the storageId here
+      }))
+    );
+  },
 });
