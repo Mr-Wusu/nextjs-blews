@@ -1,4 +1,3 @@
-// In Cloth.tsx
 "use client";
 
 import Image from "next/image";
@@ -7,10 +6,10 @@ import { useOrganization } from "@clerk/nextjs";
 import { Id } from "@/convex/_generated/dataModel";
 import { MdDelete } from "react-icons/md";
 import { RiFileEditFill } from "react-icons/ri";
-import * as motion from "motion/react-client";
-import { useState, useRef } from "react"; // Import useState and useRef
-import { useMutation } from "convex/react"; // Import useMutation
-import { api } from "@/convex/_generated/api"; // Import api
+// import * as motion from "motion/react-client";
+import { useState, useRef, useEffect } from "react";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { Button } from "./Button";
 import { PulseLoader } from "react-spinners";
 import ConfirmDelete from "./ConfirmDelete";
@@ -21,7 +20,7 @@ interface Clothing {
   alt: string;
   description: string;
   price: number;
-  storageId: Id<"_storage">; // Add storageId to the interface
+  storageId: Id<"_storage">;
 }
 
 interface ClothProps {
@@ -29,16 +28,47 @@ interface ClothProps {
 }
 
 export default function Cloth({ cloth }: ClothProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [newImage, setNewImage] = useState<File | null>(null);
+
+  const formRef = useRef<HTMLFormElement>(null);
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const updateClothMutation = useMutation(api.clothes.updateCloth);
+  const [isScrolling, setIsScrolling] = useState(false);
   const { membership } = useOrganization();
   const isAdmin = membership?.role === "org:admin";
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false); // State to control edit mode
-  const [openConfirmDelete, setOpenConfirmDelete] = useState(false); // State for delete confirmation
-  const [newImage, setNewImage] = useState<File | null>(null); // State for the new image file
-  const formRef = useRef<HTMLFormElement>(null);
-  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
-  const updateClothMutation = useMutation(api.clothes.updateCloth); // Get the updateCloth mutation
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    let lastScrollY = window.scrollY; // Store initial scroll position
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Check if scrolling downwards
+      if (currentScrollY > lastScrollY) {
+        setIsScrolling(true); // Set to true only when scrolling down
+      }
+
+      // Clear any existing timer
+      clearTimeout(timer);
+      // Set new timer to reset isScrolling after 1 second
+      timer = setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000);
+
+      // Update last scroll position
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer); // Clean up timer on unmount
+    };
+  }, []);
 
   async function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -49,7 +79,7 @@ export default function Cloth({ cloth }: ClothProps) {
 
   async function handleUpdateCloth(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
+
     if (!formRef.current) return;
     const formData = new FormData(formRef.current);
 
@@ -70,7 +100,7 @@ export default function Cloth({ cloth }: ClothProps) {
       const { storageId } = await result.json();
       newStorageId = storageId;
     }
-    
+
     setIsUpdating(true);
     try {
       await updateClothMutation({
@@ -90,16 +120,8 @@ export default function Cloth({ cloth }: ClothProps) {
   }
   console.log(openConfirmDelete);
   return (
-    <motion.figure
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.2,
-        delay: 0.5,
-        type: "spring",
-        stiffness: 100,
-      }}
-      className="relative radius flex flex-col w-[15.3125rem] md:w-[17rem] mx-auto h-[26rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black"
+    <figure
+      className={`relative radius flex flex-col w-[15.3125rem] md:w-[17rem] mx-auto h-[26rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black ${isScrolling ? "slide-up" : ""}`}
     >
       {isAdmin && !isEditing && (
         <RiFileEditFill
@@ -196,6 +218,6 @@ export default function Cloth({ cloth }: ClothProps) {
           </figcaption>
         </>
       )}
-    </motion.figure>
+    </figure>
   );
 }

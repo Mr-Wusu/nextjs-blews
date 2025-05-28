@@ -22,6 +22,7 @@ export default async function Hero() {
             src={heroImage2}
             alt="The Hero image"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={true}
           />
         </div>
         <div className="flex gap-3 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center z-20">
@@ -40,6 +41,7 @@ export default async function Hero() {
             src={heroImage2}
             alt="The Hero image"
             sizes="100%"
+            priority={true}
           />
         </div>
         <div className="flex gap-3 h-[35rem] left-0 right-0 bottom-0 absolute md:w-[43.7rem] md:mx-auto md+:w-[52.2rem] lg:w-[59rem] lg:mx-auto lg+:w-[64.125rem] xl:w-[72.25rem] z-30">
@@ -60,6 +62,8 @@ export default async function Hero() {
                       fill
                       src={image}
                       alt="The Hero image"
+                      priority={true}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                 ))}
@@ -77,6 +81,7 @@ export default async function Hero() {
               fill
               src={heroImage1}
               alt="mini hero image"
+              priority={true}
             />
           </div>
         </div>

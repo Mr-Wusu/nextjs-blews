@@ -97,6 +97,11 @@ dialog {
 .menu-open {
   animation: slide-in-r 0.3s ease-out;
 }
+
+.slide-up {
+  animation: slide-up 0.7s ease-in;
+}
+
 /* ANIMATIONS */
 
 @keyframes slide-in-l {
@@ -114,11 +119,11 @@ dialog {
     transform: translateX(0);
   }
 }
+
 @keyframes slide-in-r {
   0% {
     transform: translateX(-110%);
     opacity: 0;
-
   }
   30% {
     opacity: 1;
@@ -128,6 +133,19 @@ dialog {
   }
   100% {
     transform: translateX(0);
+  }
+}
 
+@keyframes slide-up {
+  0% {
+    transform: translateY(8%);
+
+  }
+  90% {
+    transform: translateY(-2%);
+
+  }
+  100% {
+    transform: translateY(0);
   }
 }

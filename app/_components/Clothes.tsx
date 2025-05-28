@@ -7,9 +7,12 @@ import { useClothes } from "@/contexts/ClothesContext";
 
 
 
+
 export default function Clothes() {
-  // const clothes = useQuery(api.clothes.getClothes);
+
   const {clothes} = useClothes()
+
+
   
   if (clothes === undefined)
       return <div className="flex justify-center items-center h-[50vh]">
@@ -25,7 +28,11 @@ export default function Clothes() {
           A glance at some of our clothes
         </h3>
       </div>
-      <div className="flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-0 px-8 md:w-[45rem] md:mx-auto lg:grid-cols-3 lg:w-full">
+      <div
+        className={
+          `flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-0 px-8 md:w-[45rem] md:mx-auto lg:grid-cols-3 lg:w-full `
+        }
+      >
         {clothes.map((cloth) => (
           <Cloth key={cloth._id} cloth={cloth} />
         ))}
@@ -33,7 +40,6 @@ export default function Clothes() {
       <Link
         className=" w-max font-semibold text-darkRose2 mt-2 border-b-2 border-solid border-transparent hover:border-darkRose1 p-1 transition-all  duration-300 active:scale-90 focus:border-darkRose1 focus:border-2 md:text-base lg:text-lg"
         href="/clothes"
-        
       >
         Browse our collection &rarr;
       </Link>
