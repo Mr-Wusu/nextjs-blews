@@ -138,13 +138,9 @@ dialog {
 
 @keyframes slide-up {
   0% {
-    transform: translateY(8%);
-
+    transform: translateY(10%);
   }
-  90% {
-    transform: translateY(-2%);
 
-  }
   100% {
     transform: translateY(0);
   }
