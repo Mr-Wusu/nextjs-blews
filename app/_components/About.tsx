@@ -30,7 +30,7 @@ export default function About() {
             <span className={`${styles.logo}`}>blews&apos; stitches</span>
           </h3>
         </div>
-        <p className="leading-7  text-justify md:text-left md:text-lg lg:text-xl text-darkRose2  lg:px-20 mb-6">
+        <p className="leading-7  text-justify md:text-left text-[1.0975rem] md:text-lg lg:text-xl text-darkRose2  lg:px-20 mb-6">
           You have come to a place where style meets comfort. Stay anywhere and
           get that killer dress tailored for your body size and uniqueness. We
           are keen on the inches - on specificity, on perfection - and on timely

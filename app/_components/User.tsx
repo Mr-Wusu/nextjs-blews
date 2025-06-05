@@ -75,7 +75,7 @@ function User({ userObj }: UserProps) {
           >
             <Image
               src={user?.imageUrl || "/default-avatar.png"}
-              alt={`${user?.firstName || "User"}'s profile picture`}
+              alt={`${user?.firstName || "User"}`}
               width={40}
               height={40}
               className="rounded-full object-cover cursor-pointer"

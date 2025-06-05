@@ -17,11 +17,20 @@ const ConvexClerkProvider = ({ children }: { children: ReactNode }) => (
         logoImageUrl: "/images/appPhotos/photo-8-transparent.png",
       },
       variables: {
-        colorBackground: "#e11d48",
-        colorText: "#fff1f2",
+        colorBackground: "#fff1f2",
+        colorText: "#881337",
         colorPrimary: "#be123c",
         colorInputBackground: "#fda4af",
         colorInputText: "#4c0519",
+      },
+      elements: {
+        rootBox: {
+          height: "500px", // Set desired height
+          maxHeight: "80vh", // Optional: limit max height
+        },
+        card: {
+          height: "450px", // Alternative: target the card container
+        },
       },
     }}
   >
