@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function OurCEO() {
   return (
-    <div className="bg-rose-100">
+    <section className="bg-rose-100">
       <div className="sm:hidden text-lg px-4 text-center pt-9 pb-8">
         <h2 className="text-3xl pb-2 font-semibold">
           Meet Our <span className="text-rose-700 ">Inspiring</span> CEO
@@ -44,7 +44,53 @@ export default function OurCEO() {
           </p>
         </div>
       </div>
-      <div className="hidden sm:flex">I am not for phone screen</div>
-    </div>
+      <div className="hidden sm:flex flex-col items-center justify-center gap-5 pb-16">
+        <header className="flex flex-col gap-3 pb-3 items-center justify-center px-24 pt-8  text-center">
+          <h1 className="text-4xl leading-[3rem] ">
+            Meet Our <span className="text-rose-700 ">Inspiring</span> CEO
+          </h1>
+          <p className="text-lg w-4/6">
+            {" "}
+            At the heart of{" "}
+            <span className="text-rose-700 h2-custom-font">
+              Blews&apos; Stitches
+            </span>{" "}
+            is our visionary leader, Blessing Wusu, whose passion for fashion
+            and commitment to individuality drive our brand forward. With over
+            15 years of experience in the fashion industry, Blessing founded{" "}
+            <span className="text-rose-700 h2-custom-font">
+              Blews&apos; Stitches
+            </span>{" "}
+            to redefine style as a form of self-expression and empowerment.
+          </p>
+        </header>
+        <div className="flex gap-8 px-24">
+          <div className="relative h-[24rem] w-[36.25rem] rounded-[.9rem] overflow-hidden shadow-md shadow-black">
+            <Image
+              src="/images/testifiers/Our_CEO.jpg"
+              alt="CEO's photo"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover object-top"
+              fill
+            />
+          </div>
+          <p className="w-[45%] leading-8 text-xl">
+            His innovative approach blends bold creativity with a deep respect
+            for quality and sustainability, ensuring every piece tells a story.
+            Blessing&apos;s vision is to create a brand that celebrates{" "}
+            <span className="underline">diversity</span> and inspires{" "}
+            <span className="underline">confidence</span> through fashion. Under
+            his leadership, our company has grown into a community where
+            creativity thrives, and every individual is encouraged to embrace
+            their unique style. His dedication to ethical practices and
+            thoughtful design shapes our mission to craft fashion that not only{" "}
+            <span className="underline">looks</span> good but{" "}
+            <span className="underline">feels</span> meaningful. His energy and
+            vision continue to inspire us to push boundaries and create
+            collections that empower you to shine.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }

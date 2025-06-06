@@ -1,5 +1,7 @@
 import Image from "next/image";
 import OurCEO from "../_components/OurCEO";
+import OurServices from "../_components/OurServices";
+import CTA from "../_components/CTA";
 
 export default function AboutUs() {
   return (
@@ -40,10 +42,7 @@ export default function AboutUs() {
             <span className="underline">feel</span> their best, offering pieces
             that are as versatile and unique as the people who wear them. From
             everyday essentials to standout statements, we focus on quality,
-            detail, and thoughtful design. Sustainability and ethical production
-            are at the heart of what we do. We believe fashion should not only
-            look good but do good — for the planet, for people, and for the
-            future. Welcome to a brand where confidence is crafted, and style
+            detail, and thoughtful design.   Welcome to a brand where confidence is crafted, and style
             has a story. <br /> A trial of our service(s) is a step towards
             discovering your personal style. We believe that fashion is a
             vibrant self-expression journey!
@@ -104,6 +103,8 @@ export default function AboutUs() {
         </div>
       </div>
       <OurCEO />
+      <OurServices/>
+      <CTA />
     </div>
   );
 }
