@@ -3,7 +3,7 @@ import { GiClothes } from "react-icons/gi";
 import { MdSchool } from "react-icons/md";
 export default function OurServices() {
   return (
-    <section className="pt-10 pb-12 px-4 text-center">
+    <section className="pt-10 sm:pt-5 pb-12 px-4 text-center">
       <div className="sm:hidden flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl leading-10 font-semibold">
@@ -63,7 +63,64 @@ export default function OurServices() {
           </div>
         </div>
       </div>
-      <div className="hidden sm:flex"></div>
+      <div className="hidden sm:grid grid-cols-4 grid-rows-[repeat(9,minmax(0,1fr))] gap-x-12 px-12 h-[46.375rem]">
+        <header className="col-span-full flex flex-col gap-3 pb-3 items-center justify-center pt-8  text-center row-start-1 row-end-3">
+          <h1 className="text-4xl leading-[3rem] ">
+            See Our <span className="text-rose-700">Core</span> Services
+          </h1>
+          <p className="text-lg w-4/6">
+            At the heart of our business is a passion for fashion and
+            creativity. We specialize in delivering high-quality, personalized
+            fashion solutions that cater to your unique style and needs. Explore
+            our core services below
+          </p>
+        </header>
+        <article className="flex flex-col gap-2 col-start-1 col-end-3 row-[3/-1] justify-center">
+          <div className="flex gap-4 justify-center">
+            <GiClothes className="text-2xl text-darkRose1" />
+            <h2 className="text-xl font-semibold text-darkRose1 text-center">
+              Custom Clothing Design
+            </h2>
+          </div>
+          <p className="text-lg leading-8">
+            We create unique, tailor-made clothing that reflects your personal
+            style and fits you perfectly. From concept to creation, we ensure
+            every piece is crafted with care and precision.
+          </p>
+          <div className="w-5/6 h-[22rem] rounded-[.6rem] relative overflow-hidden shadow-md shadow-black self-center">
+            <Image
+              src="/images/appPhotos/photo-8.jpg"
+              alt="photo showing a fashion designer making sketches"
+              className="object-cover "
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              fill
+            />
+          </div>
+        </article>
+        <article className="flex flex-col gap-2 col-start-3 col-end-5 row-[3/-1] justify-center">
+          <div className="flex gap-4 justify-center">
+            <MdSchool className="text-2xl text-darkRose1" />
+            <h2 className="text-xl font-semibold text-darkRose1 text-center">
+              Training Fashion Designers
+            </h2>
+          </div>
+          <p className="text-lg leading-8">
+            We empower aspiring fashion designers with hands-on training and
+            expert guidance. From sketching to sewing, our program hones your
+            creative skills and technical precision, shaping you into{" "}
+            <a href=""> </a>
+          </p>
+          <div className="w-5/6 h-[22rem] rounded-[.6rem] relative overflow-hidden shadow-md shadow-black self-center">
+            <Image
+              src="/images/appPhotos/photo-6.jpg"
+              alt="photo showing a fashion designer making sketches"
+              className="object-cover "
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              fill
+            />
+          </div>
+        </article>
+      </div>
     </section>
   );
 }
