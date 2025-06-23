@@ -18,7 +18,7 @@ export default function OurServices() {
         </div>
         <div className="flex flex-col gap-7 ">
           <div className="flex flex-col gap-2">
-            <div className="flex gap-4 mt-2 w-3/4 justify-center mx-auto">
+            <div className="flex gap-4 mt-2 justify-center ">
               <GiClothes className="text-2xl text-darkRose1" />
               <h2 className="text-xl font-semibold text-darkRose1 text-center">
                 Custom Clothing Design
@@ -40,7 +40,7 @@ export default function OurServices() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <div className="flex gap-4 w-3/4 justify-center mx-auto mt-2">
+            <div className="flex gap-4 justify-center mt-2">
               <MdSchool className="text-2xl text-darkRose1" />
               <h2 className="text-xl font-semibold text-darkRose1 text-center">
                 Training Fashion Designers
