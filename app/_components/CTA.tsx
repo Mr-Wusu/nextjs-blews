@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function CTA() {
   return (
-    <section className="px-4 py-8 bg-rose-100  ">
+    <section className="px-7 pt-10 pb-14 bg-rose-100  ">
       <div className="md:w-3/4 text-center md:mx-auto">
         <h2 className="text-3xl font-semibold mb-4">
           Discover Your <span className="text-rose-700">Unique Style</span>{" "}

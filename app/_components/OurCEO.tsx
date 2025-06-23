@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function OurCEO() {
   return (
-    <section className="bg-rose-100">
+    <section className="bg-rose-100 sm+:px-4 ">
       <div className="sm:hidden text-lg px-4 text-center pt-9 pb-8">
         <h2 className="text-3xl pb-2 font-semibold">
           Meet Our <span className="text-rose-700 ">Inspiring</span> CEO
@@ -23,7 +23,7 @@ export default function OurCEO() {
             innovative approach blends bold creativity with a deep respect for
             quality and sustainability, ensuring every piece tells a story.
           </p>
-          <div className="w-full h-[15.5rem] rounded-[.6rem] relative overflow-hidden shadow-md shadow-black mb-4">
+          <div className="w-full max-w-[25rem] h-[15.5rem] rounded-[.6rem] relative overflow-hidden shadow-md shadow-black mb-4">
             <Image
               src="/images/testifiers/Our_CEO.jpg"
               alt="CEO's photo"
@@ -44,7 +44,7 @@ export default function OurCEO() {
           </p>
         </div>
       </div>
-      <div className="hidden sm:flex flex-col items-center justify-center gap-5 pb-16">
+      <div className="hidden md:flex flex-col items-center justify-center gap-5 pb-16">
         <header className="flex flex-col gap-3 pb-3 items-center justify-center px-24 pt-8  text-center">
           <h1 className="text-4xl leading-[3rem] ">
             Meet Our <span className="text-rose-700 ">Inspiring</span> CEO
@@ -74,7 +74,7 @@ export default function OurCEO() {
               fill
             />
           </div>
-          <p className="w-[45%] leading-8 text-xl">
+          <p className="w-[45%] leading-8 text-xl text-justify">
             His innovative approach blends bold creativity with a deep respect
             for quality and sustainability, ensuring every piece tells a story.
             Blessing&apos;s vision is to create a brand that celebrates{" "}

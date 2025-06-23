@@ -1,12 +1,12 @@
 export default function FooterForm() {
   return (
     <form className="flex flex-col gap-2">
-      <div className="flex flex-col gap-1">
+      {/* <div className="flex flex-col gap-1">
         <label className="text-sm font-bold tracking-wide ">
           Paste link here:
         </label>
         <input className="w-[85%] text-[#4c0519] rounded-[.4rem] p-[0.3rem] text-sm outline-none border-2 border-transparent focus:border-[#881337]" />
-      </div>
+      </div> */}
       <div className="flex flex-col gap-1">
         <label className="text-sm font-bold tracking-wide ">
           Upload image here:

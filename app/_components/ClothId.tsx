@@ -16,7 +16,7 @@ export default function ClothId({
   clothContainer: string;
 }) {
   const { clothes } = useClothes();
-  
+
   const router = useRouter();
   const cloth = clothes?.find((cloth) => cloth._id.toString() === slug);
 
@@ -43,7 +43,9 @@ export default function ClothId({
           alt={cloth.alt}
         />
       </div>
-      <div className={`flex flex-col gap-3 px-5 md:px-10 md:pt-5 md:text-lg md:w-5/6 mx-auto ${className}`}>
+      <div
+        className={`flex flex-col gap-3 px-5 md:px-10 md:pt-5 md:text-lg md:w-5/6 mx-auto ${className}`}
+      >
         <h1>Cloth Id: {cloth._id}</h1>
         <div className="flex flex-col mt-2 md:text-[1.1rem]">
           <p className="font-semibold leading-5 mb-2">Name: {cloth.alt}</p>
