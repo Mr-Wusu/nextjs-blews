@@ -37,18 +37,13 @@ function User({ userObj }: UserProps) {
   });
 
   useEffect(() => {
-    console.log("User:", user);
-    console.log("IsAuthenticated:", isAuthenticated);
-    console.log("Memberships:", userMemberships?.data);
     if (isAuthenticated && user && userMemberships?.data?.length) {
       const adminMembership = userMemberships.data.find(
         (m) => m.role === "org:admin" // Adjust to "admin" if needed
       );
       setIsAdmin(!!adminMembership);
-      console.log("IsAdmin set to:", !!adminMembership);
     } else {
       setIsAdmin(false);
-      console.log("No memberships or not authenticated, isAdmin: false");
     }
   }, [user, isAuthenticated, userMemberships]);
   return (
@@ -86,7 +81,6 @@ function User({ userObj }: UserProps) {
               <div
                 className="w-screen h-screen opacity-30 bg-black fixed top-0 right-0 left-0 bottom-0 z-40"
                 onClick={() => {
-                  console.log("Overlay clicked");
                   setIsProfileOpen(false);
                 }}
               />

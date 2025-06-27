@@ -118,7 +118,7 @@ export default function Cloth({ cloth }: ClothProps) {
       setIsUpdating(false);
     }
   }
-  console.log(openConfirmDelete);
+
   return (
     <figure
       className={`relative radius flex flex-col w-[15.3125rem] md:w-[17rem] mx-auto h-[26rem] overflow-hidden border border-darkRose2 shadow-sm shadow-black ${isScrolling ? "slide-up" : ""}`}

@@ -4,96 +4,54 @@ import { internal } from "./_generated/api";
 import type { WebhookEvent } from "@clerk/backend";
 import { Webhook } from "svix";
 
-const handleClerkWebhook = httpAction(async (ctx, request) => {
-  const event = await validateRequest(request);
-  if (!event) {
-    console.error("Invalid webhook request");
-    return new Response("Invalid request", { status: 400 });
-  }
-
-  console.log(`Received webhook event: ${event.type}`, {
-    clerkId: event.data.id,
-  });
-
-  try {
-    switch (event.type) {
-      case "user.created":
-        const firstName = event.data.first_name || "";
-        const lastName = event.data.last_name || "";
-        await ctx.runMutation(internal.users.createUser, {
-          clerkId: event.data.id,
-          email: event.data.email_addresses[0]?.email_address || "",
-          imageUrl: event.data.image_url || "",
-          name: `${firstName} ${lastName}`.trim() || "Unknown User",
-        });
-        break;
-      case "user.deleted":
-        await ctx.runMutation(internal.users.deleteUser, {
-          clerkId: event.data.id as string,
-        });
-        break;
-      default:
-        console.warn(`Unhandled webhook event type: ${event.type}`);
-    }
-  } catch (error) {
-    console.error(`Error processing webhook event ${event.type}:`, error);
-    // Return 200 to prevent Clerk from retrying, as the error is logged
-    return new Response(null, { status: 200 });
-  }
-
-  return new Response(null, { status: 200 });
-});
-
 const http = httpRouter();
 
 http.route({
-  path: "/clerk",
+  path: "/clerk-users-webhook",
   method: "POST",
-  handler: handleClerkWebhook,
+  handler: httpAction(async (ctx, request) => {
+    const event = await validateRequest(request);
+    console.log("Received Clerk webhook event", event?.type, event?.data);
+    
+    if (!event) {
+      return new Response("Error occured", { status: 400 });
+    }
+    switch (event.type) {
+      case "user.created":
+      // intentional fallthrough
+      case "user.updated":
+        await ctx.runMutation(internal.users.upsertFromClerk, {
+          data: event.data,
+        });
+        break;
+
+      case "user.deleted": {
+        const clerkUserId = event.data.id!;
+        await ctx.runMutation(internal.users.deleteFromClerk, { clerkUserId });
+        break;
+      }
+      default:
+        console.log("Ignored Clerk webhook event", event.type);
+    }
+
+    return new Response(null, { status: 200 });
+  }),
 });
 
-const validateRequest = async (
-  req: Request
-): Promise<WebhookEvent | undefined> => {
-  const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
-  if (!webhookSecret) {
-    console.error("CLERK_WEBHOOK_SECRET is not defined");
-    throw new Error("CLERK_WEBHOOK_SECRET is not defined");
-  }
-
+async function validateRequest(req: Request): Promise<WebhookEvent | null> {
   const payloadString = await req.text();
-  const headerPayload = req.headers;
   const svixHeaders = {
-    "svix-id": headerPayload.get("svix-id") || "",
-    "svix-timestamp": headerPayload.get("svix-timestamp") || "",
-    "svix-signature": headerPayload.get("svix-signature") || "",
+    "svix-id": req.headers.get("svix-id")!,
+    "svix-timestamp": req.headers.get("svix-timestamp")!,
+    "svix-signature": req.headers.get("svix-signature")!,
   };
-
-  // Check for missing headers
-  if (
-    !svixHeaders["svix-id"] ||
-    !svixHeaders["svix-timestamp"] ||
-    !svixHeaders["svix-signature"]
-  ) {
-    console.error("Missing Svix headers", svixHeaders);
-    return undefined;
-  }
-
+  const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);
   try {
-    const wh = new Webhook(webhookSecret);
-    const event = wh.verify(
-      payloadString,
-      svixHeaders
-    ) as unknown as WebhookEvent;
-    if (!event.data.id) {
-      console.error("Webhook event missing clerkId", event);
-      return undefined;
-    }
-    return event;
+    return wh.verify(payloadString, svixHeaders) as unknown as WebhookEvent;
   } catch (error) {
-    console.error("Error verifying webhook signature:", error);
-    return undefined;
+    console.error("Error verifying webhook event", error);
+    return null;
   }
-};
+}
 
 export default http;
