@@ -11,7 +11,6 @@ export const uploadCloth = mutation({
     image: v.id("_storage"),
   },
   handler: async (ctx, args) => {
-    console.log("This TypeScript function is running on the server.");
     await ctx.db.insert("clothes", {
       alt: args.alt,
       description: args.description,
@@ -69,7 +68,7 @@ export const updateCloth = mutation({
 export const deleteCloth = mutation({
   args: {
     _id: v.id("clothes"),
-    storageId: v.id("_storage"), 
+    storageId: v.id("_storage"),
   },
   handler: async (ctx, args) => {
     const { _id, storageId } = args;

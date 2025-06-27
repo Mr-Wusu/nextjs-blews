@@ -35,6 +35,8 @@ function User({ userObj }: UserProps) {
   const { userMemberships } = useOrganizationList({
     userMemberships: { infinite: false },
   });
+  // Check if the user is an admin in any organization
+ 
 
   useEffect(() => {
     if (isAuthenticated && user && userMemberships?.data?.length) {
