@@ -6,4 +6,5 @@ export interface SuggestionType {
   email: string;
   requestedOn: string;
   status: "pending" | "accepted" | "rejected";
+  requesterPhoto: string;
 }

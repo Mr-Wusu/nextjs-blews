@@ -62,6 +62,7 @@ export default function FooterForm() {
             type="file"
             name="image"
             required
+            accept="image/*"
           />
         </div>
         <div className="flex flex-col gap-1">

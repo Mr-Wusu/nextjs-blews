@@ -10,6 +10,7 @@ const suggestions: SuggestionType[] = [
     requestedOn: "2023-10-01",
     status: "pending",
     email: "john.doe@yahoo.com",
+    requesterPhoto: "/images/otherPhotos/happymale.webp",
   },
   {
     id: 2,
@@ -21,6 +22,8 @@ const suggestions: SuggestionType[] = [
     requestedOn: "2025-04-03",
     status: "pending",
     email: "james.brown@yahoo.com",
+    requesterPhoto:
+      "/images/otherPhotos/african-man-smiling-seamstress-sewing-man-stylish.webp",
   },
   {
     id: 3,
@@ -31,6 +34,7 @@ const suggestions: SuggestionType[] = [
     requestedOn: "2024-10-01",
     status: "pending",
     email: "felix.smith@yahoo.com",
+    requesterPhoto: "/images/otherPhotos/african-woman-designing-clothes.webp",
   },
   {
     id: 4,
@@ -42,6 +46,8 @@ const suggestions: SuggestionType[] = [
     requestedOn: "2024-05-25",
     status: "pending",
     email: "peter.johnson@yahoo.com",
+    requesterPhoto:
+      "/images/otherPhotos/authentic-ethnic-africa-america-sellerwoman-working-shop-authentic-ethnic-africa-sellerwoman.webp",
   },
 ];
 

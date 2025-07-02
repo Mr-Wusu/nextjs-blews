@@ -17,6 +17,7 @@ export default defineSchema({
     alt: v.string(),
     image: v.id("_storage"), // Stores the image in Convex storage
   }),
+
   cart: defineTable({
     orderedBy: v.id("users"),
     items: v.array(
@@ -38,8 +39,9 @@ export default defineSchema({
   allOrders: defineTable({
     orderId: v.id("cart"),
   }),
-  specialRequests: defineTable({
-    image: v.id("_storage"), // Stores the image in Convex storage
+
+  specialRequest: defineTable({
+    image: v.id("_storage"), 
     description: v.string(),
     requestedBy: v.id("users"),
     status: v.union(
@@ -47,5 +49,7 @@ export default defineSchema({
       v.literal("approved"),
       v.literal("rejected")
     ),
-  }).index("byRequestedBy", ["requestedBy"]).index("byStatus", ["status"]),
+  })
+    .index("byRequestedBy", ["requestedBy"])
+    .index("byStatus", ["status"]),
 });
