@@ -1,9 +1,12 @@
-import { mutation, query, QueryCtx } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v, ConvexError } from "convex/values";
-import { getCurrentUserOrThrow } from "./users";
+import { getCurrentUserOrThrow, requireAdmin } from "./users";
 import { Doc, Id } from "./_generated/dataModel";
 
-type EnrichedSpecialRequest = Omit<Doc<"specialRequest">, "requestedBy" | "image"> & {
+type EnrichedSpecialRequest = Omit<
+  Doc<"specialRequests">,
+  "requestedBy" | "image"
+> & {
   image: string; // This will be the image URL, not the storage ID
   description: string;
   status: "pending" | "approved" | "rejected";
@@ -27,7 +30,7 @@ export const create = mutation({
         "Unauthorized! You must be logged in to create a special request. 😒"
       );
     }
-    await ctx.db.insert("specialRequest", {
+    await ctx.db.insert("specialRequests", {
       image: args.image,
       description: args.description,
       requestedBy: user._id,
@@ -38,11 +41,14 @@ export const create = mutation({
 
 export const getEnrichedSpecialRequest = query({
   args: {
-    requestId: v.id("specialRequest"),
+    requestId: v.id("specialRequests"),
   },
   handler: async (ctx, args): Promise<EnrichedSpecialRequest> => {
     // Get the current user
     const user = await getCurrentUserOrThrow(ctx);
+    if (!user) {
+      throw new ConvexError("Unauthorized! You must be logged in to view this special request.");
+    }
 
     // Fetch the special request
     const specialRequest = await ctx.db.get(args.requestId);
@@ -92,9 +98,10 @@ export const getMyEnrichedSpecialRequests = query({
     // Get the current user
     const user = await getCurrentUserOrThrow(ctx);
 
+
     // Fetch all special requests for the user using the index
     const specialRequests = await ctx.db
-      .query("specialRequest")
+      .query("specialRequests")
       .withIndex("byRequestedBy", (q) => q.eq("requestedBy", user._id))
       .collect();
 
@@ -132,3 +139,62 @@ export const getMyEnrichedSpecialRequests = query({
     return enrichedRequests;
   },
 });
+
+export const getAllEnrichedSpecialRequests = query({
+  args: {},
+  handler: async (ctx): Promise<EnrichedSpecialRequest[]> => {
+    // 1. Authorize the user as an admin first.
+    // If the user is not an admin, this will throw an error and stop execution.
+    await requireAdmin(ctx);
+
+    // 2. Fetch all special requests from the database.
+    const specialRequests = await ctx.db.query("specialRequests").collect();
+
+    // 3. Enrich the requests with user details and image URLs.
+    // This logic is similar to your getMyEnrichedSpecialRequests function.
+    const enrichedRequests = await Promise.all(
+      specialRequests.map(async (request) => {
+        // Fetch the user who made the request
+        const requestUser = await ctx.db.get(request.requestedBy);
+        if (!requestUser) {
+          // It's good practice to handle cases where a user might have been deleted
+          throw new ConvexError(`User not found for request ${request._id}`);
+        }
+
+        // Fetch the image URL from storage
+        const imageUrl = await ctx.storage.getUrl(request.image);
+        if (!imageUrl) {
+          throw new ConvexError(`Image not found for request ${request._id}`);
+        }
+
+        // Construct the enriched object
+        return {
+          _id: request._id,
+          _creationTime: request._creationTime,
+          image: imageUrl,
+          description: request.description,
+          status: request.status,
+          requestedBy: {
+            _id: requestUser._id,
+            name: requestUser.name,
+            email: requestUser.email,
+            imageUrl: requestUser.imageUrl,
+          },
+        };
+      })
+    );
+
+    return enrichedRequests;
+  },
+});
+
+export const getUserIdentity = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new ConvexError("Not authenticated: No user identity found.");
+    }
+    return identity;
+  },  
+})

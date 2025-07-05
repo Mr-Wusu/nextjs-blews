@@ -1,10 +1,10 @@
 "use client";
-import { SuggestionType } from "@/types/types";
+import { EnrichedSpecialRequest } from "@/types/types";
 import Image from "next/image";
 import { Button } from "./Button";
 import { MdDelete } from "react-icons/md";
 
-function Suggestion({ suggestion }: { suggestion: SuggestionType }) {
+function Suggestion({ suggestion }: { suggestion: EnrichedSpecialRequest }) {
   function handleDelete(id: string) {
     // Implement the delete functionality here
     console.log(`Delete suggestion with id: ${id}`);
@@ -15,7 +15,7 @@ function Suggestion({ suggestion }: { suggestion: SuggestionType }) {
       <MdDelete
         className="absolute top-2 right-2 z-10 text-3xl text-rose-700 hover:text-rose-600 transition-all duration-200 cursor-pointer"
         onClick={() => {
-          handleDelete(suggestion.id.toString());
+          handleDelete(suggestion._id.toString());
         }}
       />
 
@@ -23,7 +23,7 @@ function Suggestion({ suggestion }: { suggestion: SuggestionType }) {
         <Image
           className=" object-cover"
           src={suggestion.image}
-          alt={suggestion.id.toString()}
+          alt={suggestion._id.toString()}
           fill
         />
       </div>
@@ -34,14 +34,16 @@ function Suggestion({ suggestion }: { suggestion: SuggestionType }) {
             <div className="relative h-9 w-9 rounded-full overflow-hidden">
               <Image
                 className="object-cover"
-                src={suggestion.requesterPhoto}
-                alt={suggestion.requestedBy}
+                src={suggestion.image}
+                alt={`${suggestion.requestedBy.name}'s profile picture`}
                 fill
               />
             </div>
             <div className="flex flex-col">
-              <p className="text-sm leading-3">{suggestion.requestedBy}</p>
-              <p className="text-sm text-gray-600">{suggestion.email}</p>
+              <p className="text-sm leading-3">{suggestion.requestedBy.name}</p>
+              <p className="text-sm text-gray-600 break-words">
+                {suggestion.requestedBy.email}
+              </p>
             </div>
           </div>
         </div>

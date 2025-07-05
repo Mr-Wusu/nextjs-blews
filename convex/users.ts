@@ -1,6 +1,6 @@
 import { internalMutation, query, QueryCtx } from "./_generated/server";
 import { UserJSON } from "@clerk/backend";
-import { v, Validator } from "convex/values";
+import { ConvexError, v, Validator } from "convex/values";
 
 async function userByExternalId(ctx: QueryCtx, externalId: string) {
   return await ctx.db
@@ -34,12 +34,13 @@ export const upsertFromClerk = internalMutation({
   args: { data: v.any() as Validator<UserJSON> }, // no runtime validation, trust Clerk
   async handler(ctx, { data }) {
     console.log("Upserting user from Clerk", data.id);
-    
+
     const userAttributes = {
       name: `${data.first_name} ${data.last_name}`,
       email: data.email_addresses[0]?.email_address || "",
       imageUrl: data.image_url || "",
       externalId: data.id,
+      tokenIdentifier: data.public_metadata?.tokenIdentifier || "",
     };
 
     const user = await userByExternalId(ctx, data.id);
@@ -66,5 +67,18 @@ export const deleteFromClerk = internalMutation({
   },
 });
 
+export async function requireAdmin(ctx: QueryCtx) {
+  const identity = await ctx.auth.getUserIdentity();
+  if (!identity) {
+    throw new ConvexError("Unauthorized: You must be logged in.");
+  }
 
-
+  // The org_role is coming from your Clerk sessionsClaims
+  if (identity.org_role !== "org:admin") {
+    throw new ConvexError(
+      "Not authorized: This action is restricted to admins only."
+    );
+  }
+  // You can optionally return the identity if you need it in the calling function
+  return identity;
+}

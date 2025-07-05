@@ -7,6 +7,7 @@ export default defineSchema({
     email: v.string(),
     imageUrl: v.string(),
     externalId: v.string(), // Clerk's user ID
+
   })
     .index("byExternalId", ["externalId"])
     .index("byName", ["name"]),
@@ -18,7 +19,7 @@ export default defineSchema({
     image: v.id("_storage"), // Stores the image in Convex storage
   }),
 
-  cart: defineTable({
+  carts: defineTable({
     orderedBy: v.id("users"),
     items: v.array(
       v.object({
@@ -37,11 +38,11 @@ export default defineSchema({
     totalPrice: v.number(),
   }).index("byOrderedBy", ["orderedBy"]),
   allOrders: defineTable({
-    orderId: v.id("cart"),
+    orderId: v.id("carts"),
   }),
 
-  specialRequest: defineTable({
-    image: v.id("_storage"), 
+  specialRequests: defineTable({
+    image: v.id("_storage"),
     description: v.string(),
     requestedBy: v.id("users"),
     status: v.union(

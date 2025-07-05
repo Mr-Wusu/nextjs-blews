@@ -8,10 +8,13 @@ import { useClothes } from "@/contexts/ClothesContext";
 
 
 
+
 export default function Clothes() {
 
+  
+  
+  
   const {clothes} = useClothes()
-
 
   
   if (clothes === undefined)
