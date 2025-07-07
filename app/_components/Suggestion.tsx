@@ -28,20 +28,23 @@ function Suggestion({ suggestion }: { suggestion: EnrichedSpecialRequest }) {
         />
       </div>
       <div className="flex flex-col gap-1 px-4 pt-2 pb-4 w-[20rem]">
-        <div className="flex gap-4">
-          <h3 className="text-rose-500 text-sm leading-4">Suggested by:</h3>
-          <div className="semibold text-darkRose1 flex  items-center gap-2">
+        <div className="flex gap-2">
+          <h3 className="text-rose-500 text-[.85rem] leading-4">Suggested by:</h3>
+          <div className="semibold text-darkRose1 flex  items-center gap-2 ">
             <div className="relative h-9 w-9 rounded-full overflow-hidden">
               <Image
                 className="object-cover"
-                src={suggestion.image}
+                src={suggestion.requestedBy.imageUrl}
                 alt={`${suggestion.requestedBy.name}'s profile picture`}
                 fill
+                sizes="36px"
               />
             </div>
             <div className="flex flex-col">
-              <p className="text-sm leading-3">{suggestion.requestedBy.name}</p>
-              <p className="text-sm text-gray-600 break-words">
+              <p className="text-[.85rem] leading-4">
+                {suggestion.requestedBy.name}
+              </p>
+              <p className="text-[.75rem] leading-3" style={{ wordBreak: "break-word" }}>
                 {suggestion.requestedBy.email}
               </p>
             </div>
