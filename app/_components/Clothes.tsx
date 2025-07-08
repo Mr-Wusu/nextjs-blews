@@ -15,12 +15,15 @@ export default function Clothes() {
   
   
   const {clothes} = useClothes()
+  const reversedClothes = clothes?.slice().reverse();
 
   
-  if (clothes === undefined)
-      return <div className="flex justify-center items-center h-[50vh]">
+  if (reversedClothes === undefined)
+    return (
+      <div className="flex justify-center items-center h-[50vh]">
         <MoonLoader color="#E11D48" size={50} />
       </div>
+    );
   if (clothes.length === 0) return <div className="mx-auto w-4/5 text-lg py-7 ">We are restocking, bringing you awesome new designs. New arrivals 😄😎!</div>
 
   return (
@@ -32,11 +35,9 @@ export default function Clothes() {
         </h3>
       </div>
       <div
-        className={
-          `flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-0 px-8 md:w-[45rem] md:mx-auto lg:grid-cols-3 lg:w-full `
-        }
+        className={`flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-0 px-8 md:w-[45rem] md:mx-auto lg:grid-cols-3 lg:w-full `}
       >
-        {clothes.map((cloth) => (
+        {reversedClothes.map((cloth) => (
           <Cloth key={cloth._id} cloth={cloth} />
         ))}
       </div>

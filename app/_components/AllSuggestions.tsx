@@ -13,6 +13,7 @@ export default function AllSuggestions() {
     api.specialRequests.getAllEnrichedSpecialRequests
   );
 
+  const reversedSuggestions = suggestions?.slice().reverse();
   const identity = useQuery(api.specialRequests.getUserIdentity);
   console.log(identity);
 
@@ -32,7 +33,7 @@ export default function AllSuggestions() {
     );
   }
 
-  if (suggestions === undefined) {
+  if (reversedSuggestions === undefined) {
     return (
       <div className="h-full flex items-center mt-10">Loading suggestions</div>
     );
@@ -44,8 +45,8 @@ export default function AllSuggestions() {
       </div>
     );
   return (
-    <div className="flex flex-col gap-y-14">
-      {suggestions.map((suggestion: EnrichedSpecialRequest) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 px-4">
+      {reversedSuggestions.map((suggestion: EnrichedSpecialRequest) => (
         <Suggestion key={suggestion._id} suggestion={suggestion} />
       ))}
     </div>
