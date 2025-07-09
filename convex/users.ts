@@ -40,7 +40,6 @@ export const upsertFromClerk = internalMutation({
       email: data.email_addresses[0]?.email_address || "",
       imageUrl: data.image_url || "",
       externalId: data.id,
-      tokenIdentifier: data.public_metadata?.tokenIdentifier || "",
     };
 
     const user = await userByExternalId(ctx, data.id);
