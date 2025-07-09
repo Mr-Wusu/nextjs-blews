@@ -13,6 +13,9 @@ export default function ClothUploadForm() {
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const saveCloth = useMutation(api.clothes.uploadCloth);
 
+  console.log(typeof saveCloth, saveCloth);
+  
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!formRef.current) return;

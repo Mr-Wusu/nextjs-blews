@@ -24,6 +24,8 @@ export const ClothesProvider = ({ children }: { children: ReactNode }) => {
   const [clothes, setClothes] = useState<ClothingProps[]>([]);
 
   const data = useQuery(api.clothes.getClothes);
+  console.log(typeof data, data);
+  
 
  useEffect(() => {
    if (data) {

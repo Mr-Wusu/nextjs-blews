@@ -3,6 +3,7 @@ import { v, ConvexError } from "convex/values";
 import { getCurrentUserOrThrow, requireAdmin } from "./users";
 import { Doc, Id } from "./_generated/dataModel";
 
+
 type EnrichedSpecialRequest = Omit<
   Doc<"specialRequests">,
   "requestedBy" | "image"
@@ -197,4 +198,45 @@ export const getUserIdentity = query({
     }
     return identity;
   },  
+})
+
+export const updateSpecialRequestStatus = mutation({
+  args: { 
+    requestId: v.id("specialRequests"),
+    status: v.union(v.literal("approved"), v.literal("rejected")),
+  }, 
+  handler: async (ctx, args) => {
+    // Authorize the user as an admin
+    await requireAdmin(ctx);
+
+    // Fetch the special request to ensure it exists
+    const specialRequest = await ctx.db.get(args.requestId);
+    if (!specialRequest) {
+      throw new ConvexError("Special request not found.");
+    }
+
+    // Update the status of the special request
+    await ctx.db.patch(specialRequest._id, { status: args.status });
+  },
+});
+
+export const deleteSpecialRequest = mutation({
+  args: {
+    requestId: v.id("specialRequests"),
+  },
+  handler: async (ctx, args) => {
+    // Authorize the user as an admin
+    await requireAdmin(ctx);
+
+    // Fetch the special request to ensure it exists
+    const specialRequest = await ctx.db.get(args.requestId);
+    if (!specialRequest) {
+      throw new ConvexError("Special request not found.");
+    }
+
+
+    // Delete the special request document and file from storage
+    await ctx.db.delete(args.requestId);
+    await ctx.storage.delete(specialRequest.image);
+  },
 })
