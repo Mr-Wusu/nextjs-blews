@@ -201,7 +201,7 @@ export default function Cloth({ cloth }: ClothProps) {
           </div>
           <figcaption className="flex flex-col py-3 px-4 gap-2 text-[0.9375rem] md:text-[1.025rem]">
             <h3 className="">Description</h3>
-            <p className="">{cloth.description}</p>
+            <p className="text-pretty">{cloth.description}</p>
             <div className="flex justify-between items-center pr-2">
               <div className="flex flex-col ">
                 <p className="text-[15px]">Price:</p>

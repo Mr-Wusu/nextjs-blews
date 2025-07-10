@@ -3,13 +3,16 @@ import { GiClothes } from "react-icons/gi";
 import { MdSchool } from "react-icons/md";
 export default function OurServices() {
   return (
-    <section className="pt-10 sm:pt-5 pb-14 lg:pb-0 px-7 text-center sm:px-4">
-      <div className="md:hidden flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
+    <section className="sm:pt-14 md:pt-0  pb-14 md:mb-[5rem] lg:pb-0 px-7 text-center sm:px-4">
+      <div className="flex md:hidden flex-col gap-4">
+        <div className="flex flex-col gap-2 ">
           <h1 className="text-3xl leading-10 font-semibold">
             See Our <span className="text-rose-700">Core</span> Services
           </h1>
-          <p className="text-lg leading-8">
+          <p
+            className="
+           lg:text-lg leading-8"
+          >
             At the heart of our business is a passion for fashion and
             creativity. We specialize in delivering high-quality, personalized
             fashion solutions that cater to your unique style and needs. Explore
@@ -63,12 +66,12 @@ export default function OurServices() {
           </div>
         </div>
       </div>
-      <div className="hidden md:grid grid-cols-4 grid-rows-[repeat(9,minmax(0,1fr))] lg:grid-rows-[repeat(8,minmax(0,1fr))] gap-x-12 px-12 h-[46.375rem] gap-y-6">
-        <header className="col-span-full flex flex-col gap-3 pb-3 items-center justify-center pt-8  text-center row-start-1 row-end-3">
+      <div className="hidden md:grid grid-cols-4 grid-rows-[repeat(7,minmax(6.5rem,1fr))] md: lg:grid-rows-[repeat(8,minmax(0,1fr))] gap-x-12 px-12 h-[46.375rem] gap-y-6 md:mt-[-1rem]">
+        <header className="col-span-full flex flex-col gap-3 pb-3 md:pb-0 items-center justify-end pt-8  text-center row-start-1 row-end-3">
           <h1 className="text-4xl leading-[3rem] ">
             See Our <span className="text-rose-700">Core</span> Services
           </h1>
-          <p className="text-lg w-4/6">
+          <p className="text-lg w-5/6">
             At the heart of our business is a passion for fashion and
             creativity. We specialize in delivering high-quality, personalized
             fashion solutions that cater to your unique style and needs. Explore
@@ -90,7 +93,7 @@ export default function OurServices() {
             </p>
           </div>
 
-          <div className="w-5/6 h-[20rem] rounded-[.6rem] relative overflow-hidden shadow-md shadow-black self-center">
+          <div className="w-5/6 h-[20rem] rounded-[.6rem] relative overflow-hidden shadow-md shadow-black self-center flex">
             <Image
               src="/images/appPhotos/photo-8.jpg"
               alt="photo showing a fashion designer making sketches"
