@@ -54,7 +54,7 @@ function Suggestion({ suggestion }: { suggestion: EnrichedSpecialRequest }) {
 
   return (
     <>
-      <article className="bg-white rounded-[.5rem] flex flex-col gap-2 h-fit overflow-hidden shadow-md shadow-black/70 w-fit relative">
+      <article className="bg-white rounded-[.5rem] flex flex-col gap-2 h-fit overflow-hidden shadow-md shadow-black/70 w-fit relative mx-auto">
         <MdDelete
           className="absolute top-2 right-2 z-10 text-3xl text-rose-700 hover:text-rose-600 transition-all duration-200 cursor-pointer"
           onClick={() => setConfirmDelete(true)}
@@ -92,6 +92,7 @@ function Suggestion({ suggestion }: { suggestion: EnrichedSpecialRequest }) {
             src={suggestion.image}
             alt={suggestion._id.toString()}
             fill
+            priority
           />
         </div>
         <div className="flex flex-col gap-1 px-4 pt-2 pb-4 w-[20rem]">
@@ -158,7 +159,9 @@ function Suggestion({ suggestion }: { suggestion: EnrichedSpecialRequest }) {
             className={`h-10 w-full flex justify-center items-center  tracking-wider capitalize font-bold ${status === "rejected" ? "bg-rose-600 text-white" : status === "approved" ? "bg-rose-300 text-rose-800" : ""}`}
           >
             <p>{status}!</p>
-            <span className="text-white">{status === "approved" ? " 👌" : " 🙄"}</span>
+            <span className="text-white">
+              {status === "approved" ? " 👌" : " 🙄"}
+            </span>
           </div>
         )}
       </article>

@@ -4,7 +4,7 @@ import { MdSchool } from "react-icons/md";
 export default function OurServices() {
   return (
     <section className="sm:pt-14 md:pt-0  pb-14 md:mb-[5rem] lg:pb-0 px-7 text-center sm:px-4">
-      <div className="flex md:hidden flex-col gap-4">
+      <div className="flex md:hidden flex-col gap-4 pt-8 ">
         <div className="flex flex-col gap-2 ">
           <h1 className="text-3xl leading-10 font-semibold">
             See Our <span className="text-rose-700">Core</span> Services

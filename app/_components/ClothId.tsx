@@ -30,7 +30,7 @@ export default function ClothId({
 
   return (
     <div
-      className={`flex bg-rose-100 w-full max-w-[28rem] flex-col lg+:flex-row lg+:w-fit lg+:max-w-none lg+:mx-auto shadow-md shadow-black pb-5 overflow-hidden mt-14 lg+:mt-[5.5rem] md:pb-6 lg+:pb-0 lg+:mb-5 ${bg}`}
+      className={`flex bg-rose-100 w-full max-w-[28rem] flex-col lg+:flex-row lg+:w-fit lg+:max-w-none lg+:mx-auto md:shadow-md md:shadow-black pb-5 overflow-hidden mt-14 lg+:mt-[5.5rem] md:pb-6 lg+:pb-0 lg+:mb-5 ${bg}`}
     >
       <div
         className={`relative w-full h-[21rem] lg+:w-[26rem] md:h-[28rem] lg+:h-[34rem] overflow-hidden ${clothContainer}`}
@@ -44,7 +44,7 @@ export default function ClothId({
         />
       </div>
       <div
-        className={`flex flex-col gap-3 px-5 md:px-10 md:pt-5 md:text-lg md:w-5/6 mx-auto lg+:w-[25rem] lg+:items-center lg+:justify-center ${className}`}
+        className={`flex flex-col gap-3 px-5 md:px-10 pt-2 md:pt-5 md:text-lg md:w-5/6 mx-auto lg+:w-[25rem] lg+:items-center lg+:justify-center ${className}`}
       >
         <h1>Cloth Id: {cloth._id}</h1>
         <div className="flex flex-col mt-2 md:text-[1.1rem]">

@@ -70,10 +70,10 @@ export async function requireAdmin(ctx: QueryCtx) {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
     throw new ConvexError("Unauthorized: You must be logged in.");
-  }
-
-  // The org_role is coming from your Clerk sessionsClaims
-  if (identity.org_role !== "org:admin") {
+  } else if (
+    // The org_role is coming from your Clerk sessionsClaims
+    identity.org_role !== "org:admin"
+  ) {
     throw new ConvexError(
       "Not authorized: This action is restricted to admins only."
     );

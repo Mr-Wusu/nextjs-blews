@@ -56,20 +56,23 @@ export default function ProfileOpen({
       <div className="w-full h-[2px] bg-darkRose2" />
       <div className="">
         <ul className="flex flex-col gap-3 text-darkRose2 py-1 px-1 text-base">
-          <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
-            <TiShoppingCart />
-            <Link
-              className={`${nameFont} text-[0.89rem]`}
-              href="/user/my-orders"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsProfileOpen(false); // Simplified to close directly
-              }}
-              scroll={false}
-            >
-              Cart
-            </Link>
-          </li>
+          {!isAdmin && (
+            <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
+              <TiShoppingCart />
+              <Link
+                className={`${nameFont} text-[0.89rem]`}
+                href="/user/my-orders"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsProfileOpen(false); // Simplified to close directly
+                }}
+                scroll={false}
+              >
+                Cart
+              </Link>
+            </li>
+          )}
+
           {!isAdmin && (
             <>
               <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
@@ -119,7 +122,7 @@ export default function ProfileOpen({
                 </Link>
               </li>
               <li className="flex items-center gap-2 hover:text-darkRose1 px-1 hover:scale-110 transition-all duration-300 rounded-[.4rem]">
-                <GiThink  className="text-rose-900 ml-[0.155rem]"/>
+                <GiThink className="text-rose-900 ml-[0.155rem]" />
                 <Link
                   className={`${nameFont} text-[0.89rem]`}
                   href="/dashboard/customer-suggestions"

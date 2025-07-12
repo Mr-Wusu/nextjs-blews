@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function OurCEO() {
   return (
-    <section className="bg-rose-100 sm+:px-4 ">
+    <section className="bg-rose-100 sm+:px-4 -mb-1 md:mb-6">
       <div className="md:hidden text-lg px-4 text-center pt-9 pb-8">
         <h2 className="text-3xl pb-2 font-semibold">
           Meet Our <span className="text-rose-700 ">Inspiring</span> CEO
