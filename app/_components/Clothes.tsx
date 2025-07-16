@@ -17,6 +17,9 @@ export default function Clothes() {
   const {clothes} = useClothes()
   const reversedClothes = clothes?.slice().reverse();
 
+  console.log(clothes, reversedClothes);
+  
+
   
   if (reversedClothes === undefined)
     return (
@@ -35,7 +38,7 @@ export default function Clothes() {
         </h3>
       </div>
       <div
-        className={`flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-0 px-8 md:w-[45rem] md:mx-auto lg:grid-cols-3 lg:w-full `}
+        className={`flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-0 md:w-[45rem] mx-auto lg:grid-cols-3 lg:w-full lg:place-content-center `}
       >
         {reversedClothes.map((cloth) => (
           <Cloth key={cloth._id} cloth={cloth} />

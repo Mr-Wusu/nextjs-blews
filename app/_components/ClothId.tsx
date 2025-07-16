@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/app/_components/Button";
 import Image from "next/image";
 import { useClothes } from "@/contexts/ClothesContext";
+import {useAuth} from "@clerk/nextjs"
 
 export default function ClothId({
   slug,
@@ -16,6 +17,10 @@ export default function ClothId({
   clothContainer: string;
 }) {
   const { clothes } = useClothes();
+  const user = useAuth()
+  const isAdmin = user.orgRole === "org:admin"? true : false
+  console.log(user, isAdmin);
+  
 
   const router = useRouter();
   const cloth = clothes?.find((cloth) => cloth._id.toString() === slug);
@@ -61,9 +66,11 @@ export default function ClothId({
           >
             &larr; Back
           </button>
-          <Button className="tracking-wider px-2 w-fit" onClick={handleClick}>
-            Add to Cart
-          </Button>
+          {isAdmin === false && (
+            <Button className="tracking-wider px-2 w-fit" onClick={handleClick}>
+              Add to Cart
+            </Button>
+          )}
         </div>
       </div>
       <div className="flex gap-7 w-4/5 ml-auto md:ml-[6.5rem] md+:ml-[7.4rem] items-center py-4 lg+:hidden">
@@ -73,9 +80,11 @@ export default function ClothId({
         >
           &larr; Back
         </button>
-        <Button className="tracking-wider px-2 w-fit" onClick={handleClick}>
-          Add to Cart
-        </Button>
+        {isAdmin === false && (
+          <Button className="tracking-wider px-2 w-fit" onClick={handleClick}>
+            Add to Cart
+          </Button>
+        )}
       </div>
     </div>
   );

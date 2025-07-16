@@ -22,7 +22,7 @@ export default async function Hero() {
             src={heroImage2}
             alt="The Hero image"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={true}
+
           />
         </div>
         <div className="flex gap-3 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center z-20">
@@ -40,7 +40,7 @@ export default async function Hero() {
             fill
             src={heroImage2}
             alt="The Hero image"
-            sizes="100%"
+            sizes="(max-width: 768px) 100vw, 100vw"
             priority={true}
           />
         </div>

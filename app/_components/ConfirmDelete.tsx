@@ -37,7 +37,7 @@ export default function ConfirmDelete({
   }
 
   return (
-    <div className="absolute top-0 flex flex-col items-center justify-center w-full h-full bg-white bg-opacity-[.88] rounded-lg shadow-lg shadow-black p-6 z-50">
+    <div className="absolute top-0 flex flex-col items-center justify-center w-full h-full bg-white bg-opacity-[.88] rounded-[.7rem] shadow-lg shadow-black p-6 z-50">
       <h2 className="text-rose-800 font-semibold text-lg">
         Are you sure you want to delete this item?
       </h2>

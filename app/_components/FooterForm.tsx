@@ -2,17 +2,49 @@
 import { api } from "@/convex/_generated/api";
 import { useMutation } from "convex/react";
 import { useRef, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast, { Toast, Toaster } from "react-hot-toast";
 import { PulseLoader } from "react-spinners";
+import { useAuth } from "@clerk/nextjs";
+import { MdClose } from "react-icons/md";
 
 export default function FooterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const saveSpecialRequest = useMutation(api.specialRequests.create);
   const formRef = useRef<HTMLFormElement>(null);
+  const user = useAuth();
+
+  function showToastWithCloseButton(message: string) {
+    toast.custom((t: Toast) => (
+      <div
+        className={`${
+          t.visible ? "animate-enter" : "animate-leave"
+        } fixed top-4 right-1/2 translate-x-1/2 z-[9999] bg-white shadow-md border border-gray-200 rounded p-4 px-6 flex items-center justify-between gap-4 w-full max-w-sm transition-all duration-300`}
+      >
+        <span className="text-rose-900 font-semibold tracking-wide">
+          {message}
+        </span>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            toast.dismiss(t.id);
+          }}
+          className="text-gray-400 hover:text-gray-700 text-lg font-bold"
+        >
+          <MdClose className="bg-rose-600 text-white h-5 w-5 rounded-full p-1 cursor-pointer hover:bg-rose-500" />
+        </button>
+      </div>
+    ));
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (user.isSignedIn === false) {
+      showToastWithCloseButton("Sign in to send us a design");
+      return;
+    }
 
     setIsSubmitting(true);
     if (!formRef.current) {
