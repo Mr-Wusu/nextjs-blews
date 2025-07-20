@@ -44,36 +44,7 @@ export default function Cloth({ cloth }: ClothProps) {
   const isAdmin = membership?.role === "org:admin";
   console.log(user);
 
-  // useEffect(() => {
-  //   let timer: NodeJS.Timeout;
-  //   let lastScrollY = window.scrollY; // Store initial scroll position
-
-  //   const handleScroll = () => {
-  //     const currentScrollY = window.scrollY;
-
-  //     // Check if scrolling downwards
-  //     if (currentScrollY > lastScrollY) {
-  //       setIsScrolling(true); // Set to true only when scrolling down
-  //     }
-
-  //     // Clear any existing timer
-  //     clearTimeout(timer);
-  //     // Set new timer to reset isScrolling after 1 second
-  //     timer = setTimeout(() => {
-  //       setIsScrolling(false);
-  //     }, 1000);
-
-  //     // Update last scroll position
-  //     lastScrollY = currentScrollY;
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //     clearTimeout(timer); // Clean up timer on unmount
-  //   };
-  // }, []);
-
+ 
   function showToastWithCloseButton(message: string) {
     toast.custom((t: Toast) => (
       <div
@@ -244,7 +215,7 @@ export default function Cloth({ cloth }: ClothProps) {
                 Add to cart
               </Button>
               <Link
-                className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r py-2 px-3 tracking-wide rounded-[.27rem] text-lightRose2 font-semibold "
+                className="bg-gradient-to-r from-rose-700 to-rose-400 hover:bg-gradient-to-r hover:from-rose-400 hover:to-rose-700 transition-all duration-700 py-2 px-3 tracking-wide rounded-[.27rem] text-lightRose2 font-semibold "
                 href={`/clothes/${cloth._id}`}
               >
                 See details

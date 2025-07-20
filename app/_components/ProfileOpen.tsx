@@ -61,7 +61,7 @@ export default function ProfileOpen({
               <TiShoppingCart />
               <Link
                 className={`${nameFont} text-[0.89rem]`}
-                href="/user/my-orders"
+                href="/cart"
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsProfileOpen(false); // Simplified to close directly
