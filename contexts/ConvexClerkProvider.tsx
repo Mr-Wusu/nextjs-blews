@@ -26,7 +26,7 @@ const ConvexClerkProvider = ({ children }: { children: ReactNode }) => (
       elements: {
         rootBox: {
           height: "500px", // Set desired height
-          maxHeight: "80vh", // Optional: limit max height
+          maxHeight: "75vh", // Optional: limit max height
         },
         card: {
           height: "450px", // Alternative: target the card container

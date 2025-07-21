@@ -64,7 +64,7 @@ export default function ProfileOpen({
                 href="/cart"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsProfileOpen(false); // Simplified to close directly
+                  setIsProfileOpen(false); 
                 }}
                 scroll={false}
               >
