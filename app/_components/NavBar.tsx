@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useEffect } from "react";
-
+import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 
 import Link from "next/link";
@@ -10,11 +10,14 @@ import { useHomePage } from "@/contexts/HomePageContext";
 
 import SideNav from "./SideNav";
 import User from "./User";
+import { RootState } from "@/state/store";
 
 export default function Navbar() {
   const { isHomePage, setIsHomePage } = useHomePage();
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
+  const isAdmin = false;
+  const cart = useSelector((state:RootState)=> state.cart)
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -22,8 +25,10 @@ export default function Navbar() {
     } else {
       setIsHomePage(true);
     }
-  }, [pathname, setIsHomePage]);
+  }, [pathname, setIsHomePage]);   
+ 
 
+  const count = cart.reduce((total, item) => total + item.unit, 0);
   return (
     <>
       <nav
@@ -34,9 +39,7 @@ export default function Navbar() {
         }`}
       >
         <SideNav />
-        <h2 className="h2-custom-font text-[1.2rem]">
-          Blews&apos; Stitches
-        </h2>
+        <h2 className="h2-custom-font text-[1.2rem]">Blews&apos; Stitches</h2>
         <User
           userObj={{
             clip: { size: 25 },
@@ -105,14 +108,15 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                className={`cursor-pointer border-b-2 border-b-transparent hover:border-b-lightRose1 px-2 transition-all duration-300 rounded-[.4rem] ${
+                className={`relative cursor-pointer border-b-2 border-b-transparent hover:border-b-lightRose1 px-2 transition-all duration-300 rounded-[.4rem] ${
                   (isHomePage && scrolled) || !isHomePage
                     ? "hover:!border-b-darkRose2"
                     : ""
                 }`}
-                href="/measurements"
+                href={`${isAdmin ? "/orders" : "/cart"}`}
               >
-                Measurements
+                {isAdmin ? "Orders" : "Cart"}
+                <span className="h-4 w-4 rounded-full grid place-content-center bg-rose-500 text-white text-xs absolute top-0 -right-2">{count}</span>
               </Link>
             </li>
           </ul>
