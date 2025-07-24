@@ -3,7 +3,13 @@
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface ClothingProps {
   _id: Id<"clothes">;
@@ -18,21 +24,20 @@ interface ClothesContextProps {
   clothes: ClothingProps[];
 }
 
-const ClothesContext = createContext<ClothesContextProps | undefined>(undefined);
+const ClothesContext = createContext<ClothesContextProps | undefined>(
+  undefined
+);
 
 export const ClothesProvider = ({ children }: { children: ReactNode }) => {
   const [clothes, setClothes] = useState<ClothingProps[]>([]);
 
   const data = useQuery(api.clothes.getClothes);
-  console.log(typeof data, data);
-  
 
- useEffect(() => {
-   if (data) {
-     setClothes(data);
-   }
- }, [data]);
-
+  useEffect(() => {
+    if (data) {
+      setClothes(data);
+    }
+  }, [data]);
 
   return (
     <ClothesContext.Provider value={{ clothes }}>

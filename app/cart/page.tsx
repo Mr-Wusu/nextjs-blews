@@ -1,4 +1,5 @@
 // import Cart from "../_components/Cart";
+import BackToClothes from "../_components/BackToClothes";
 import CartList from "../_components/CartList";
 import CartSummary from "../_components/CartSummary";
 
@@ -15,6 +16,7 @@ export default function Clothes() {
       <div className="flex flex-col gap-7 items-center lg:flex-row-reverse lg:justify-center ">
         <CartSummary />
         <CartList />
+        <BackToClothes/>
       </div>
     </div>
   );

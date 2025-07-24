@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { decreaseUnit, increaseUnit } from "@/state/cart/cartSlice";
 import { useOrganization, useAuth } from "@clerk/nextjs";
 import { Id } from "@/convex/_generated/dataModel";
 import { MdDelete, MdClose } from "react-icons/md";
@@ -14,6 +16,7 @@ import { Button } from "./Button";
 import { PulseLoader } from "react-spinners";
 import ConfirmDelete from "./ConfirmDelete";
 import toast, { Toaster, Toast } from "react-hot-toast";
+import { RootState } from "@/state/store";
 
 interface Clothing {
   _id: Id<"clothes">;
@@ -39,12 +42,15 @@ export default function Cloth({ cloth }: ClothProps) {
   const updateClothMutation = useMutation(api.clothes.updateCloth);
 
   const [addToCart, setAddToCart] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
   const { membership } = useOrganization();
   const isAdmin = membership?.role === "org:admin";
-  console.log(user);
 
- 
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart);
+
+  const cartItem = cart.find((item) => item._id === cloth._id);
+  const count = cartItem?.unit;
+
   function showToastWithCloseButton(message: string) {
     toast.custom((t: Toast) => (
       <div
@@ -76,6 +82,15 @@ export default function Cloth({ cloth }: ClothProps) {
     if (user.orgRole === "org:admin")
       showToastWithCloseButton("Admin should not be doing this 😒!");
     setAddToCart(true);
+  };
+
+  const increaseHandler = () => {
+    dispatch(increaseUnit({ ...cloth }));
+  };
+  const decreaseHandler = () => {
+    if (typeof count === "number" && count >= 1) {
+      dispatch(decreaseUnit({ _id: cloth._id }));
+    }
   };
 
   async function imageChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -237,21 +252,13 @@ export default function Cloth({ cloth }: ClothProps) {
               <Button
                 type="button"
                 className="w-fit px-4 py-2 text-xl font-semibold"
-                onClick={() => {
-                  if (cartCount === 0) {
-                    setAddToCart(false);
-                  } else {
-                    setCartCount((prevCount) => prevCount - 1);
-                  }
-                }}
+                onClick={decreaseHandler}
               >
                 <FiMinus />
               </Button>
-              <p>{cartCount}</p>
+              <p>{count === undefined ? "0" : count}</p>
               <Button
-                onClick={() => {
-                  setCartCount((prev) => prev + 1);
-                }}
+                onClick={increaseHandler}
                 type="button"
                 className="w-fit px-4 text-xl font-semibold py-2"
               >
