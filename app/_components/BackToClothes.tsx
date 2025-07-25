@@ -8,7 +8,7 @@ export default function BackToClothes() {
     router.back()
   }
   return (
-    <Button className="w-fit p-2" onClick={backToClothesHandle}>
+    <Button className="w-fit p-2 mt-4 lg:mt-6" onClick={backToClothesHandle}>
       Back to clothes
     </Button>
   );

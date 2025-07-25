@@ -11,6 +11,8 @@ import {
 import { useConvexAuth } from "convex/react";
 import Image from "next/image";
 import ProfileOpen from "./ProfileOpen";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
 
 interface UserProps {
   userObj: {
@@ -35,8 +37,15 @@ function User({ userObj }: UserProps) {
   const { userMemberships } = useOrganizationList({
     userMemberships: { infinite: false },
   });
-  // Check if the user is an admin in any organization 
+  const cart = useSelector((state: RootState) => state.cart);
+  // const count = cart.reduce((total, item) => total + item.unit, 0);
 
+  function addTotal(array: { unit: number }[]) {
+    return array.reduce((total, item) => total + item.unit, 0);
+  }
+  const cartCount = addTotal(cart);
+
+  // Check if the user is an admin in any organization
   useEffect(() => {
     if (isAuthenticated && user && userMemberships?.data?.length) {
       const adminMembership = userMemberships.data.find(
@@ -66,6 +75,11 @@ function User({ userObj }: UserProps) {
           className="h-fit relative"
           onClick={() => setIsProfileOpen((prev) => !prev)}
         >
+          {cartCount > 0 && (
+            <span className="h-4 w-4 rounded-full grid place-content-center bg-rose-500 text-white text-xs absolute -top-1 -right-[0.3rem] z-50 md:hidden">
+              {cartCount}
+            </span>
+          )}
           <div
             className={`relative h-[${userObj.imageContainer.height}] w-[${userObj.imageContainer.width}] rounded-full`}
           >

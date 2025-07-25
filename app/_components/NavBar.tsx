@@ -116,7 +116,11 @@ export default function Navbar() {
                 href={`${isAdmin ? "/orders" : "/cart"}`}
               >
                 {isAdmin ? "Orders" : "Cart"}
-                <span className="h-4 w-4 rounded-full grid place-content-center bg-rose-500 text-white text-xs absolute top-0 -right-2">{count}</span>
+                {count > 0 && (
+                  <span className="h-4 w-4 rounded-full grid place-content-center bg-rose-500 text-white text-xs absolute top-0 -right-2">
+                    {count}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>

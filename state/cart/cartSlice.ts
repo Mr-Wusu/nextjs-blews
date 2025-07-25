@@ -43,8 +43,12 @@ const cartSlice = createSlice({
 
       console.log("This is an attempt at decreasing", state);
     },
+    removeItem(state, action) {
+      const {_id} = action.payload;
+      return state.filter((item) => item._id !== _id);
+    }
   },
 });
 
-export const { increaseUnit, decreaseUnit } = cartSlice.actions;
+export const { increaseUnit, decreaseUnit, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

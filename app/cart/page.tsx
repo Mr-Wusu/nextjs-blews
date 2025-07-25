@@ -12,12 +12,14 @@ export const metadata = {
 export default function Clothes() {
   return (
     <div className="min-h-screen pt-[5rem] pb-11 flex flex-col gap-3 ">
-      <h1 className="text-rose-600 self-center">This feature is currently under development!</h1>
+      <h1 className="text-rose-600 self-center">
+        This feature is currently under development!
+      </h1>
       <div className="flex flex-col gap-7 items-center lg:flex-row-reverse lg:justify-center ">
         <CartSummary />
         <CartList />
-        <BackToClothes/>
       </div>
+      <BackToClothes />
     </div>
   );
 }
