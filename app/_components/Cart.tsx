@@ -5,22 +5,18 @@ import { FiPlus, FiMinus, FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseUnit, increaseUnit, removeItem } from "@/state/cart/cartSlice";
 import { RootState } from "@/state/store";
+import { CartType } from "@/types/types";
 
-interface Cart {
-  _id: string;
-  imageUrl: string;
-  name: string;
-  unit: number;
-  unitPrice: number;
-}
+
 interface CartProps {
-  item: Cart;
+  item: CartType;
 }
 
 function Cart({ item }: CartProps) {
   const cart = useSelector((state: RootState) => state.cart);
 
   const cartItem = cart.find((cartItem) => cartItem._id === item._id);
+  
   const count = cartItem?.unit;
   const dispatch = useDispatch();
 

@@ -21,3 +21,11 @@ export interface EnrichedSpecialRequest {
     imageUrl: string;
   };
 }
+
+export interface CartType {
+  _id: string;
+  imageUrl: string;
+  name: string;
+  unit: number;
+  unitPrice: number;
+}
