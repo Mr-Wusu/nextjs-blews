@@ -11,12 +11,14 @@ import { useHomePage } from "@/contexts/HomePageContext";
 import SideNav from "./SideNav";
 import User from "./User";
 import { RootState } from "@/state/store";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Navbar() {
   const { isHomePage, setIsHomePage } = useHomePage();
   const { scrolled } = useContext(ScrollContext);
   const pathname = usePathname();
-  const isAdmin = false;
+   const user = useAuth();
+    const isAdmin = user.orgRole === "org:admin" ? true : false;
   const cart = useSelector((state:RootState)=> state.cart)
 
   useEffect(() => {

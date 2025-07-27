@@ -9,7 +9,6 @@ import { useState } from "react";
 import { decreaseUnit, increaseUnit, removeItem } from "@/state/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import { CartType } from "@/types/types";
 
 export default function ClothId({
   slug,
@@ -26,36 +25,34 @@ export default function ClothId({
   const { clothes } = useClothes();
   const user = useAuth();
   const isAdmin = user.orgRole === "org:admin" ? true : false;
-
+  const router = useRouter();
   const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
 
   const item = cart.find((item) => item._id === slug);
-
-  const router = useRouter();
   const cloth = clothes?.find((cloth) => cloth._id.toString() === slug);
 
-  const cartObject: CartType = {
-    _id: cloth?._id || "",
-    imageUrl: cloth?.imageUrl || "",
-    name: cloth?.alt || "",
-    unit: 1,
-    unitPrice: cloth?.price || 0,
-  };
-
-  function increaseHandler() {
-    if (!item) {
-      dispatch(increaseUnit({ cartObject }));
-    }
-    if (item && item.unit >= 1)
-      dispatch(increaseUnit({ ...cartObject, unit: item.unit + 1 }));
+  function handleIncrease() {
+    dispatch(
+      increaseUnit({
+        _id: cloth?._id,
+        alt: cloth?.alt,
+        imageUrl: cloth?.imageUrl,
+        description: cloth?.description,
+        price: cloth?.price,
+      })
+    );
   }
 
-  function decreaseHandler() {
-    if (item && typeof item.unit === "number" && item.unit > 1) {
+  function handlDecrease() {
+    if (item !== undefined && item.unit > 1) {
       dispatch(decreaseUnit({ _id: item._id }));
-    } else if (item) {
+    }
+    if (item !== undefined && item.unit === 1) {
       dispatch(removeItem({ _id: item._id }));
+      setIsCounter(false);
     }
   }
 
@@ -120,14 +117,14 @@ export default function ClothId({
               </Button>
             ) : (
               <div className="flex gap-3 items-center">
-                <Button className="w-fit px-2 py-2" onClick={decreaseHandler}>
+                <Button className="w-fit px-2 py-2" onClick={handlDecrease}>
                   <FaMinus />
                 </Button>
 
                 <p className="text-darkRose2">
                   {item === undefined ? 0 : item.unit}
                 </p>
-                <Button className="w-fit px-2 py-2" onClick={increaseHandler}>
+                <Button className="w-fit px-2 py-2" onClick={handleIncrease}>
                   <FaPlus />
                 </Button>
               </div>
@@ -151,12 +148,14 @@ export default function ClothId({
             </Button>
           ) : (
             <div className="flex gap-3 items-center">
-              <Button className="w-fit px-2 py-2" onClick={decreaseHandler}>
+              <Button className="w-fit px-2 py-2" onClick={handlDecrease}>
                 <FaMinus />
               </Button>
 
-              <p className="text-darkRose2">{item?.unit}</p>
-              <Button className="w-fit px-2 py-2" onClick={increaseHandler}>
+              <p className="text-darkRose2">
+                {item === undefined ? 0 : item.unit}
+              </p>
+              <Button className="w-fit px-2 py-2" onClick={handleIncrease}>
                 <FaPlus />
               </Button>
             </div>
