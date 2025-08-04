@@ -13,7 +13,7 @@ This is an application for getting dresses and fashion you desire tailored inch-
     - users when their orders are closed. (signifying service has been rendered).
     - users, after service has been rendered for review and possibly to give blews good rating.
 2.  creating a cart and conditionally adding content there based on certain interactions on UI.
-3. add platform for users' to submit fashion designs, have admin vet these dresses and at some point display ui.
+3. add platform for users' to submit fashion designs, have admin vet these dresses and at some point display in the ui.
 <!-- Screen sizes -->
 <!--
 sm+ 35.5rem (568px)
